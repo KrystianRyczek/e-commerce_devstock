@@ -4,6 +4,7 @@ import { useState } from "react";
 import NavLinksList from "./nav-links-list";
 import ShoppingCart from "./shopping-cart";
 import Avatar from "./avatar";
+import Setings from "./Setings";
 
 export default function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,11 +32,7 @@ export default function HamburgerMenu() {
           isOpen ? "is-open" : "hidden"
         } p-10 absolute -top-3 -left-10 w-80 h-screen bg-foreground z-999`}
       >
-        <div className="flex h-10 justify-between mb-5">
-          <div className="flex w-40">
-            <Avatar />
-            <ShoppingCart />
-          </div>
+        <div className="flex w-full h-10 justify-between mb-5">
           <button
             className="flex h-[30px] w-[30px] ml-auto text-hamburger-menu "
             onClick={clickOnHamburgerMenuHandler}
@@ -44,11 +41,15 @@ export default function HamburgerMenu() {
               <path
                 className="flex w-[26px] h-[26px] scale-150 mx-auto my-auto stroke-0 fill-hamburger-menu "
                 d="M10 8.586l-7.071-7.071-1.414 1.414 7.071 7.071-7.071 7.071 1.414 1.414 7.071-7.071 7.071 7.071 1.414-1.414-7.071-7.071 7.071-7.071-1.414-1.414-7.071 7.071z"
-              ></path>
+              />
             </svg>
           </button>
         </div>
-
+        <div className="flex w-full justify-between mb-5">
+          <ShoppingCart />
+          <Avatar />
+          <Setings />
+        </div>
         <NavLinksList
           className="flex flex-col gap-2"
           clickOnHamburgerMenuHandler={clickOnHamburgerMenuHandler}

@@ -1,6 +1,8 @@
 // @ts-ignore: missing type declarations for CSS side-effect import
 import "./globals.css";
 import MainNavigation from "@/components/main-header/main-header";
+import Footer from "@/components/footer/footer";
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,9 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <MainNavigation></MainNavigation>
-
+        <MainNavigation />
         {children}
+        <Footer />
       </body>
     </html>
   );

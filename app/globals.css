@@ -1,7 +1,5 @@
 @import "tailwindcss";
-
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-@import "tailwindcss";
 
 @theme {
   --breakpoint-mobile: 30rem;
@@ -16,6 +14,9 @@
   --color-nav-link-active: #f29145;
   --color-hamburger-menu: #fcfcfc;
   --color-line: #383b42;
+  --color-footer-backgroud: #222327;
+  --color-footer-text: #e7e7e7;
+  --color-footer-h: #fcfcfc;
 }
 @layer base {
   * {
@@ -30,7 +31,7 @@
     @apply bg-backgroud;
   }
   body {
-    @apply max-tablet:w-80 min-tablet:w-192 min-desktop:w-360 flex mx-auto bg-foreground;
+    @apply max-tablet:w-80 min-tablet:w-192 min-desktop:w-360 flex flex-col mx-auto bg-foreground;
   }
 }
 @layer components {

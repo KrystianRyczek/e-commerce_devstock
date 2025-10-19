@@ -9,15 +9,27 @@ export default function NavLinksList({
   className,
 }: NavLinksList) {
   return (
-    <ul onClick={clickOnHamburgerMenuHandler} className={className}>
+    <ul className={className}>
       <li>
-        <NavLink href="/" label={"Home"} />
+        <NavLink
+          href="/"
+          label={"Home"}
+          clickOnHamburgerMenuHandler={clickOnHamburgerMenuHandler}
+        />
       </li>
       <li>
-        <NavLink href="/product" label={"Product"} />
+        <NavLink
+          href="/product"
+          label={"Product"}
+          clickOnHamburgerMenuHandler={clickOnHamburgerMenuHandler}
+        />
       </li>
       <li>
-        <NavLink href="/contacts" label={"Contacts"} />
+        <NavLink
+          href="/contacts"
+          label={"Contacts"}
+          clickOnHamburgerMenuHandler={clickOnHamburgerMenuHandler}
+        />
       </li>
     </ul>
   );

@@ -5,9 +5,14 @@ import { usePathname } from "next/navigation";
 type NavLink = {
   href: string;
   label: string;
+  clickOnHamburgerMenuHandler?: () => void;
 };
 
-export default function NavLink({ href, label }: NavLink) {
+export default function NavLink({
+  href,
+  label,
+  clickOnHamburgerMenuHandler,
+}: NavLink) {
   const path = usePathname();
   return (
     <Link
@@ -21,6 +26,7 @@ export default function NavLink({ href, label }: NavLink) {
           : "link"
       }
       href={href}
+      onNavigate={clickOnHamburgerMenuHandler}
     >
       {label}
     </Link>
