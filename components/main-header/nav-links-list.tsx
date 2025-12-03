@@ -4,33 +4,30 @@ type NavLinksList = {
   clickOnHamburgerMenuHandler?: () => void;
   className: string;
 };
+type NavLinkItem = {
+  [key: string]: string;
+};
 export default function NavLinksList({
   clickOnHamburgerMenuHandler,
   className,
 }: NavLinksList) {
+  const navLinkArray: NavLinkItem[] = [
+    { href: "/", label: "Home" },
+    { href: "/product", label: "Product" },
+    { href: "/contacts", label: "Contacts" },
+  ];
   return (
     <ul className={className}>
-      <li>
-        <NavLink
-          href="/"
-          label={"Home"}
-          clickOnHamburgerMenuHandler={clickOnHamburgerMenuHandler}
-        />
-      </li>
-      <li>
-        <NavLink
-          href="/product"
-          label={"Product"}
-          clickOnHamburgerMenuHandler={clickOnHamburgerMenuHandler}
-        />
-      </li>
-      <li>
-        <NavLink
-          href="/contacts"
-          label={"Contacts"}
-          clickOnHamburgerMenuHandler={clickOnHamburgerMenuHandler}
-        />
-      </li>
+      {navLinkArray.map((link) => (
+        <li key={link.label}>
+          {" "}
+          <NavLink
+            href={link.href}
+            label={link.label}
+            clickOnHamburgerMenuHandler={clickOnHamburgerMenuHandler}
+          />
+        </li>
+      ))}
     </ul>
   );
 }

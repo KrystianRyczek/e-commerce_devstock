@@ -17,6 +17,19 @@
   --color-footer-backgroud: #222327;
   --color-footer-text: #e7e7e7;
   --color-footer-h: #fcfcfc;
+  --clolor-slide-show-backgroud: #222327;
+  --clolor-slide-show-h: #fcfcfc;
+  --clolor-slide-show-text: #e7e7e7;
+  --clolor-slide-show-button: #f29145;
+  --clolor-slide-show-arow: #262626;
+  --color-section-text: #fcfcfc;
+  --color-section-link: #f29145;
+  --color-brand-backgroud: #262626;
+  --color-brand-border: #616674;
+  --color-recomendation-backgroud: #262626;
+  --color-recomendation-text: #fcfcfc;
+  --color-recomendation-category-text: #fdedd7;
+  --color-recomendation-category-backgroud: #e5610a;
 }
 @layer base {
   * {

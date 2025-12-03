@@ -4,11 +4,10 @@ import { useState } from "react";
 import NavLinksList from "./nav-links-list";
 import ShoppingCart from "./shopping-cart";
 import Avatar from "./avatar";
-import Setings from "./Setings";
+import Setings from "./setings";
 
 export default function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
 
   const clickOnHamburgerMenuHandler = () => {
     setIsOpen((prevState) => !prevState);

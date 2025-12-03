@@ -2,7 +2,7 @@ import Avatar from "./avatar";
 import ShoppingCart from "./shopping-cart";
 import HamburgerMenu from "./hamburger-menu";
 import NavLinksList from "./nav-links-list";
-import Setings from "./Setings";
+import Setings from "./setings";
 
 export default function MainNavigation() {
   return (
