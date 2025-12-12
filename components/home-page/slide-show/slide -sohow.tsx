@@ -34,7 +34,7 @@ const SlidesArray = [
 ];
 export default function SlideShow() {
   return (
-    <section className="w-full h-[452px] bg-slide-show-backgroud">
+    <section className="w-full h-[452px] bg-slide-show-background">
       <Slide
         category={SlidesArray[0].category}
         description={SlidesArray[0].description}

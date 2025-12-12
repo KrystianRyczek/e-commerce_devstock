@@ -1,12 +1,12 @@
-@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
 
 @theme {
   --breakpoint-mobile: 30rem;
   --w-mobile: 30rem;
   --breakpoint-tablet: 48rem;
   --breakpoint-desktop: 90rem;
-  --color-backgroud: #41444f;
+  --color-background: #41444f;
   --color-foreground: #1a1a1a;
   --color-logoOrange: #f29145;
   --color-logoNeutral: #fcfcfc;
@@ -14,22 +14,68 @@
   --color-nav-link-active: #f29145;
   --color-hamburger-menu: #fcfcfc;
   --color-line: #383b42;
-  --color-footer-backgroud: #222327;
+  --color-footer-background: #222327;
   --color-footer-text: #e7e7e7;
   --color-footer-h: #fcfcfc;
-  --clolor-slide-show-backgroud: #222327;
+  --clolor-slide-show-background: #222327;
   --clolor-slide-show-h: #fcfcfc;
   --clolor-slide-show-text: #e7e7e7;
   --clolor-slide-show-button: #f29145;
   --clolor-slide-show-arow: #262626;
   --color-section-text: #fcfcfc;
   --color-section-link: #f29145;
-  --color-brand-backgroud: #262626;
+  /* -------------------------------------------------- */
+  --color-brand-background: #262626;
   --color-brand-border: #616674;
-  --color-recomendation-backgroud: #262626;
+  /* -------------------------------------------------- */
+  --color-recomendation-background: #262626;
   --color-recomendation-text: #fcfcfc;
   --color-recomendation-category-text: #fdedd7;
-  --color-recomendation-category-backgroud: #e5610a;
+  --color-recomendation-category-background: #e5610a;
+  /* -------------------------------------------------- */
+  --color-filter-h: #fcfcfc;
+  --color-filter-icon: #fcfcfc;
+  --color-filter-background: #262626;
+  --color-filter-text: #fcfcfc;
+  --color-filter-placeholder: #b0b0b0;
+  --color-filter-border: #616674;
+  --color-filter-error-text: #ff4d4f;
+  /* --------------------------------------------------- */
+  --color-filter-checkbox-text: #fcfcfc;
+  --color-filter-checkbox-background: #1a1a1a;
+  --color-filter-checkbox-background-checked: #f29145;
+  --color-filter-checkbox-border: #616674;
+  --color-filter-checkbox-checkmark: #262626;
+  /* --------------------------------------------------- */
+  --color-filter-input-background: #fcfcfc;
+  --color-filter-input-text: #1a1a1a;
+  --color-filter-input-placeholder: #616674;
+  --color-filter-input-border: #616674;
+  --color-filter-input-border-focus: #f29145;
+  --color-filter-input-currency: #1a1a1a;
+  /* -------------------------------------------------- */
+  --color-product-card-background: #262626;
+  --color-product-card-border: #383b42;
+  --color-product-card-text: #fcfcfc;
+  --color-product-card-button-background: #e5610a;
+  --color-product-card-button-text: #fdedd7;
+  --color-product-icon: #fcfcfc;
+  --color-product-icon-background: #262626;
+  /* -------------------------------------------------- */
+
+  /* -------------------------------------------------- */
+
+  /* -------------------------------------------------- */
+
+  /* -------------------------------------------------- */
+
+  /* -------------------------------------------------- */
+  /* -------------------------------------------------- */
+  /* -------------------------------------------------- */
+  /* -------------------------------------------------- */
+  /* -------------------------------------------------- */
+  /* -------------------------------------------------- */
+  /* -------------------------------------------------- */
 }
 @layer base {
   * {
@@ -41,7 +87,7 @@
     text-decoration: none;
   }
   html {
-    @apply bg-backgroud;
+    @apply bg-background;
   }
   body {
     @apply max-tablet:w-80 min-tablet:w-192 min-desktop:w-360 flex flex-col mx-auto bg-foreground;

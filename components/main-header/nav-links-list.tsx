@@ -13,7 +13,7 @@ export default function NavLinksList({
 }: NavLinksList) {
   const navLinkArray: NavLinkItem[] = [
     { href: "/", label: "Home" },
-    { href: "/product", label: "Product" },
+    { href: "/products", label: "Products" },
     { href: "/contacts", label: "Contacts" },
   ];
   return (

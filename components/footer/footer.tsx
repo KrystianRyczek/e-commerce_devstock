@@ -8,7 +8,7 @@ import ContentList from "./content-list";
 
 export default function Footer() {
   return (
-    <footer className="w-full min-h-[474px] bg-footer-backgroud mt-auto flex max-desktop:flex-col max-desktop:gap-10 max-desktop:px-10 justify-center items-center pb-20">
+    <footer className="w-full min-h-[474px] bg-footer-background mt-auto flex max-desktop:flex-col max-desktop:gap-10 max-desktop:px-10 justify-center items-center pb-20">
       <div className="w-[532px] max-desktop:w-full flex flex-col gap-[24px]">
         <h2 className="text-logoOrange font-semibold text-[36px] leading-[46px] tracking-[-0.02rem]">
           Devstock

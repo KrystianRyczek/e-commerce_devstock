@@ -6,7 +6,7 @@ import Setings from "./setings";
 
 export default function MainNavigation() {
   return (
-    <header className="w-full flex flex-col px-[40px] py-[16px]">
+    <header className="w-full flex flex-col px-[40px] max-desktop:px-[20px] py-[16px]">
       <div className="w-full flex justify-between ">
         <HamburgerMenu />
         <h1 className="text-logoOrange font-semibold text-[36px] max-tablet:text-[26px] leading-[46px] tracking-[-0.02rem] ">
