@@ -20,8 +20,6 @@ export default function CategoryList() {
   ];
 
   return (
-    // <div className="w-full flex flex-col gap-6 text-section-text">
-    //   <h2>Category</h2>
     <ul className="flex max-tablet:flex-col w-full min-tablet:justify-between max-tablet:gap-[10px]">
       {categoryArray.map((category) => (
         <Card
@@ -31,6 +29,5 @@ export default function CategoryList() {
         />
       ))}
     </ul>
-    // </div>
   );
 }

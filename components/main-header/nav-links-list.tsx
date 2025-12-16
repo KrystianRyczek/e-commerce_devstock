@@ -15,6 +15,8 @@ export default function NavLinksList({
     { href: "/", label: "Home" },
     { href: "/products", label: "Products" },
     { href: "/contacts", label: "Contacts" },
+    { href: "/register", label: "Register" },
+    { href: "/login", label: "Login" },
   ];
   return (
     <ul className={className}>
