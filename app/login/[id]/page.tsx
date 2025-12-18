@@ -1,12 +1,12 @@
 import Logo from "@/components/login/logo";
-import LoginUserName from "@/components/login/login-username";
+import LoginAuth from "@/components/login/login-auth";
 
-export default function UserNamePage() {
+export default function UserAuthPage() {
   return (
     <main className="flex w-full h-[612px] ">
       <div className="flex flex-col gap-[32px] m-auto justify-center items-center">
         <Logo />
-        <LoginUserName />
+        <LoginAuth />
       </div>
     </main>
   );

@@ -13,7 +13,7 @@ export default function SortOptionInput({
         id={`${label} Select`}
         name={`${label} Select`}
         aria-label="Currency"
-        className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pr-7 pl-1 text-base text-filter-input-currency focus:outline-none"
+        className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pr-7 pl-1 text-filter-input-currency focus:outline-none"
       >
         {itemPerPageArray && (
           <>

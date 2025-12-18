@@ -89,9 +89,36 @@
   --color-purchasing-container-button-text-disabled: #b0b0b0;
   --color-purchasing-container-button-border-disabled: #616674;
   /* -------------------------------------------------- */
-
+  --color-login-background: #262626;
+  --color-login-border: #383b42;
+  --color-login-h: #fcfcfc;
+  --color-login-palaceholder: #b0b0b0;
+  --color-login-input-border: #616674;
+  --color-login-text-primary: #fcfcfc;
+  --color-login-text-secondary: #e7e7e7;
+  --color-login-button-background: #f29145;
+  --color-login-button-text: #262626;
+  --color-login-checkbox-border: #616674;
+  --color-login-checkbox-background: #1a1a1a;
+  --color-login-checkbox-background-checked: #f29145;
+  --color-login-checkbox-checkmark: #262626;
   /* -------------------------------------------------- */
-
+  --color-register-background: #262626;
+  --color-register-border: #383b42;
+  --color-register-h: #fcfcfc;
+  --color-register-placeholder: #b0b0b0;
+  --color-register-input-border: #616674;
+  --color-register-text-primary: #fcfcfc;
+  --color-register-text-secondary: #e7e7e7;
+  --color-register-error-text: #f87171;
+  --color-register-input-border-error: #dc2626;
+  --color-register-link: #f29145;
+  --color-register-button-background: #f29145;
+  --color-register-button-text: #262626;
+  --color-register-checkbox-border: #616674;
+  --color-register-checkbox-background: #1a1a1a;
+  --color-register-checkbox-background-checked: #f29145;
+  --color-register-checkbox-checkmark: #262626;
   /* -------------------------------------------------- */
 
   /* -------------------------------------------------- */

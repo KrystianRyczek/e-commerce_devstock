@@ -1,8 +1,8 @@
-import Avatar from "./avatar";
-import ShoppingCart from "./shopping-cart";
+import Avatar from "./svg/avatar";
+import ShoppingCart from "./svg/shopping-cart";
 import HamburgerMenu from "./hamburger-menu";
 import NavLinksList from "./nav-links-list";
-import Setings from "./setings";
+import Setings from "./svg/setings";
 
 export default function MainNavigation() {
   return (
