@@ -32,8 +32,9 @@ export default function RegisterSelect({
           } text-[16px] font-[400] leading-[26px] focus:outline-none  appearance-none px-3`}
           {...register(name)}
         >
+          <option value={""}>Select a country</option>
           {countryseArray.map((country) => (
-            <option key={country} id={country}>
+            <option key={country} id={country} value={country}>
               {country}
             </option>
           ))}

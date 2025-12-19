@@ -6,6 +6,48 @@ import RegisterSelect from "./registration-select";
 import RegistrationCheckbox from "./registration-checkbox";
 import Link from "next/link";
 import RegistrationButton from "./registration-button";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z
+  .object({
+    email: z.email("Not a valid email!"),
+    phone: z
+      .string()
+      .regex(/.$/, "Numer telefonu jest wymagany!")
+      .regex(
+        /[+]{1}[(]{1}[0-9]{2,}[)]{1}[0-9]{1,}$/,
+        "Invalid phone number format! Example: +(Code country) 9 digit mobile number"
+      )
+      .min(14, "Podany numer jest zbyt krótki!")
+      .max(14, "Podany numer jest zbyt długi!"),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters long")
+      .regex(
+        /\d+/,
+        "Password at least 8 characters and includes at least upper case letter, lower case letter and number."
+      )
+      .regex(
+        /\W+/,
+        "Password at least 8 characters and includes at least upper case letter, lower case letter and number."
+      )
+      .regex(
+        /[A-Z]+/,
+        "Password at least 8 characters and includes at least upper case letter, lower case letter and number."
+      )
+      .regex(
+        /[a-z]+/,
+        "Password at least 8 characters and includes at least upper case letter, lower case letter and number."
+      ),
+
+    confirmPassword: z.string(),
+    country: z.string().nonempty("Country is required"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 export type FormValues = {
   email: string;
@@ -16,47 +58,17 @@ export type FormValues = {
   ConditionsAndPrivancy: boolean;
 };
 
-const resolver: Resolver<FormValues> = async (values) => {
-  console.log(values);
-
-  return {
-    values: values.email ? values : {},
-    errors: !values.email
-      ? {
-          email: {
-            type: "required",
-            message: "This is required.",
-          },
-        }
-      : {},
-  };
-};
-
-// function IsolateReRender({ control }: { control: Control<FormValues> }) {
-//   const firstName = useWatch({
-//     control,
-//     name: "firstName",
-//     defaultValue: "default",
-//   });
-
-//   return <div style={{ color: "white" }}>{firstName}</div>;
-// }
-
 export default function RegistrationForm() {
   const {
-    control,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
-    mode: "onChange",
-    resolver: resolver,
+  } = useForm({
+    resolver: zodResolver(schema),
     defaultValues: {},
   });
 
-  const onSubmit = handleSubmit((data: FormValues): void =>
-    alert(JSON.stringify(data))
-  );
+  const onSubmit = handleSubmit((data): void => alert(JSON.stringify(data)));
 
   return (
     <div className="flex flex-col gap-[32px] w-full h-full border-[1px] p-[24px] text-register-h border-register-border  bg-register-background">
@@ -132,7 +144,6 @@ export default function RegistrationForm() {
           </p>
         </div>
         <RegistrationButton />
-        {/* <IsolateReRender control={control} /> */}
       </form>
     </div>
   );
