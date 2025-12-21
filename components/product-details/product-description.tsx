@@ -15,8 +15,8 @@ export default function ProductDescription({
   description: string;
 }) {
   return (
-    <div className="w-[427px] h-[500px] flex flex-col gap-[32px] text-product-description-h">
-      <div className="flex flex-col gap-[20px]">
+    <div className="w-[427px] max-tablet:w-full flex flex-col gap-[32px] text-product-description-h ">
+      <div className="flex flex-col gap-[20px] max-desktop:hidden">
         <h2 className="text-[28px] font-[500] leading-[40px]">{name}</h2>
         <Link
           className="w-[66px] h-[36px] rounded-[6px] bg-product-description-button flex justify-center items-center"
@@ -27,11 +27,11 @@ export default function ProductDescription({
           </span>
         </Link>
       </div>
-      <p className="text-[32px] font-[500] leading-[44px]">
+      <p className="text-[32px] font-[500] leading-[44px] max-desktop:hidden ">
         {price} {currency}
       </p>
       <div className="flex flex-col gap-[4px]">
-        <p className="text-[16px] font-[400] leading-[26px]">{description}</p>
+        <p className="text-[16px] font-[400] leading-[26px] ">{description}</p>
         <Link
           href={``}
           className="text-[16px] font-[500] leading-[26px] text-product-description-link"
@@ -39,11 +39,11 @@ export default function ProductDescription({
           View More
         </Link>
       </div>
-      <div className="flex flex-col gap-[14px]">
+      <div className="mobile:flex tablet:hidden desktop:flex flex-col gap-[14px]">
         <p className="text-[18px] font-[400] leading-[28px] text-product-description-text-primary ">
           Shipping Available
         </p>
-        <div className="w-[312px] h-[88px] p-[16px] flex gap-[8px] border-[1px] border-product-description-border rounded-[6px]">
+        <div className="w-[312px] max-tablet:w-full h-[88px] p-[16px] flex  gap-[8px] border-[1px] border-product-description-border rounded-[6px]">
           <Badge />
           <div className="flex flex-col gap-[4px]">
             <p className="text-[16px] font-[500] leading-[26px]">

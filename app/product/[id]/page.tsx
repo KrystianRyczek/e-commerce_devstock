@@ -13,17 +13,7 @@ const product = {
   promo: 34.99,
   currency: "USD",
   stock: 10,
-  variants: [
-    "#b0b0b0",
-    "#4caf50",
-    "#f29145",
-    "#b0b0b0",
-    "#4caf50",
-    "#f29145",
-    "#b0b0b0",
-    "#4caf50",
-    "#f29145",
-  ],
+  variants: ["#b0b0b0", "#4caf50", "#f29145", "#b0b0b0"],
   description:
     "The Xierra X16 mouse is a cutting-edge peripheral that combines precision and comfort. Its ergonomic design fits snugly in your hand, while its high-precision sensor ensures smooth and accurate ",
 };

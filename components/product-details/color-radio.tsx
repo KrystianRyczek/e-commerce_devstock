@@ -11,7 +11,7 @@ export default function ColorRadio({
   checked: boolean;
 }) {
   return (
-    <div className="flex relative w-[54px] h-[54px]">
+    <div className="flex relative w-[54px] max-desktop:w-[28px] h-[54px] max-desktop:h-[28px]">
       <input
         id={color + index}
         className={"peer hidden"}

@@ -1,22 +1,18 @@
 import Link from "next/link";
 import ArrowLeft from "@/components/product-details/svg/arrow-left";
 
-export default function NavigationBar({
-  productName,
-}: {
-  productName: string;
-}) {
+export default function NavigationBar() {
   return (
-    <div className="w-full text-white flex gap-[8px] items-center px-[40px] max-desktop:px-[20px] py-[10px] max-desktop:py-[8px] ">
+    <div className="flex w-full text-white gap-[8px] items-center ">
       <Link
-        href="/products"
+        href="/"
         className="text-navigation-bar-text hover:underline-none cursor-pointer text-product-nav-primary text-[16px] leading-[26px] font-[500]"
       >
-        Products
+        Home
       </Link>
       <ArrowLeft />
       <p className="text-product-nav-secondary text-[16px] leading-[26px] font-[500]">
-        {productName}
+        Cart
       </p>
     </div>
   );

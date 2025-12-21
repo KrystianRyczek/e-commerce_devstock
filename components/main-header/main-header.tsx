@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Avatar from "./svg/avatar";
 import ShoppingCart from "./svg/shopping-cart";
 import HamburgerMenu from "./hamburger-menu";
@@ -14,8 +15,12 @@ export default function MainNavigation() {
           <span className="text-logoNeutral">Hub</span>
         </h1>
         <div className="flex gap-5 h-[40px] max-tablet:hidden">
-          <ShoppingCart />
-          <Avatar />
+          <Link href="/cart" className="flex justify-center my-auto h-[24px] w-[25px]">
+            <ShoppingCart />
+          </Link>
+          <Link href="/profile" className="flex justify-center my-auto h-[24px] w-[25px]">
+            <Avatar />
+          </Link>
           <Setings />
         </div>
       </div>

@@ -120,8 +120,22 @@
   --color-register-checkbox-background-checked: #f29145;
   --color-register-checkbox-checkmark: #262626;
   /* -------------------------------------------------- */
-
+  --color-cart-background: #262626;
+  --color-cart-border: #383b42;
+  --color-cart-text: #fcfcfc;
+  --color-cart-button-background: #f29145;
+  --color-cart-button-text: #fdedd7;
+  --color-cart-link: #f29145;
+  --color-cart-icon: #f87171;
+  --color-cart-input-border: #fcfcfc;
+  --color-cart-input-text: #fcfcfc;
   /* -------------------------------------------------- */
+  --color-cart-checkout-background: #262626;
+  --color-cart-checkout-border: #383b42;
+  --color-cart-checkout-h: #fcfcfc;
+  --color-cart-checkout-text: #e7e7e7;
+  --color-cart-checkout-button-background: #f29145;
+  --color-cart-checkout-button-text: #262626;
   /* -------------------------------------------------- */
   /* -------------------------------------------------- */
   /* -------------------------------------------------- */
