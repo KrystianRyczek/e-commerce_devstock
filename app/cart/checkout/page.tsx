@@ -11,7 +11,7 @@ import dhl from "@/public/shipping-methods/dhl.png";
 
 import mastercard from "@/public/payment-services/Mastercard.png";
 import paypal from "@/public/payment-services/Paypal.png";
-import visa from "@/public/payment-services/visa.png";
+import visa from "@/public/payment-services/Visa.png";
 
 const cartProductsArray = [
   {
