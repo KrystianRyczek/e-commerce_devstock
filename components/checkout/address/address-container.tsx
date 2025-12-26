@@ -1,11 +1,11 @@
 "use client";
 import { UserAddress } from "@/app/cart/checkout/page";
-import AddressInput from "./address-input";
 import { useEffect, useState } from "react";
 import Address from "./address";
 import AddressSwitch from "./address-switch";
 import UserAddressSelector from "./user-address-seletor";
 import NewAddress from "./new-address";
+import { UseFormRegister } from "react-hook-form";
 
 export default function AddressContainer({
   userAddressArray,
@@ -15,10 +15,13 @@ export default function AddressContainer({
   insert,
 }: {
   userAddressArray: UserAddress[];
-  register: (name: string) => any;
+  register: UseFormRegister<any>;
   setValue: (name: string, value: string | number) => void;
   remove: (index: number) => void;
-  insert: (index: number, value: UserAddress) => void;
+  insert: (
+    index: number,
+    value: { [key: string]: string | number | boolean }
+  ) => void;
 }) {
   const [newAddressSelected, setNewAddressSelected] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<UserAddress>(

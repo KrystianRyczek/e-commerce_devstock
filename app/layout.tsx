@@ -1,4 +1,4 @@
-// @ts-ignore: missing type declarations for CSS side-effect import
+// @ts-expect-error: missing type declarations for CSS side-effect import
 import "./globals.css";
 import MainNavigation from "@/components/main-header/main-header";
 import Footer from "@/components/footer/footer";

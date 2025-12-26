@@ -1,13 +1,11 @@
-import Product from "@/app/products/@products/[[...filter]]/page";
-import AddressInput from "./address-input";
 import NewAddressSelect from "./new-address-select";
-import ProductCheckbox from "../product/product-checkbox";
 import AddressCheckbox from "./address-checkbox";
+import { UseFormRegister } from "react-hook-form";
 
 export default function NewAddress({
   register,
 }: {
-  register: (name: string) => any;
+  register: UseFormRegister<any>;
 }) {
   return (
     <fieldset className="flex flex-col w-full gap-[16px] mt-[16px]">

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-
+import { UseFormRegister } from "react-hook-form";
 export default function QuantityInput({
   name,
   index,
@@ -13,8 +13,8 @@ export default function QuantityInput({
   index: number;
   value: number;
   stock: number;
-  register: (name: string) => any;
-  setValue: (name: string, value: any) => void;
+  register: UseFormRegister<any>;
+  setValue: (name: string, value: string | number) => void;
   getValues: (name: string) => any;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,11 +47,9 @@ export default function QuantityInput({
       <input
         className="w-1/2 flex justify-center text-center outline-none text-14-24-500"
         id={name}
-        name={name}
         type="number"
         min={1}
         max={stock}
-        ref={inputRef}
         defaultValue={value}
         {...register(`products.${index}.quantity`)}
       />

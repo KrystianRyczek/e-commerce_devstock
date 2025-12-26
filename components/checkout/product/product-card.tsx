@@ -1,4 +1,5 @@
 import { CartProduct } from "@/app/cart/checkout/page";
+import { UseFormRegister } from "react-hook-form";
 import Image from "next/image";
 import Link from "next/link";
 import QuantityInput from "./quantity-input";
@@ -13,7 +14,7 @@ export default function ProductCard({
 }: {
   product: CartProduct;
   index: number;
-  register: (name: string) => any;
+  register: UseFormRegister<any>;
   setValue: (name: string, value: any) => void;
   getValues: (name: string) => any;
 }) {
@@ -53,7 +54,6 @@ export default function ProductCard({
                 <p className="flex">$</p>
                 <input
                   id={`price`}
-                  name="price"
                   className="flex w-[80px]"
                   type="text"
                   disabled

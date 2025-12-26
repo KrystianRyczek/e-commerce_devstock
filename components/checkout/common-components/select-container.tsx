@@ -1,4 +1,5 @@
 import Image, { StaticImageData } from "next/image";
+import { UseFormRegister } from "react-hook-form";
 
 export default function SelectContainer({
   openModal,
@@ -7,7 +8,7 @@ export default function SelectContainer({
   label,
 }: {
   openModal: () => void;
-  register: (name: string) => any;
+  register: UseFormRegister<any>;
   img: StaticImageData;
   label: string;
 }) {
@@ -23,12 +24,7 @@ export default function SelectContainer({
         </div>
         <p className="flex text-18-28-500">{label}</p>
       </button>
-      <input
-        className="hidden"
-        type="text"
-        name="shipping"
-        {...register("shipping")}
-      />
+      <input className="hidden" type="text" {...register("shipping")} />
     </label>
   );
 }

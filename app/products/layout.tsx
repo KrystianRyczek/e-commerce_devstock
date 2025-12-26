@@ -1,5 +1,3 @@
-// @ts-ignore: missing type declarations for CSS side-effect import
-
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

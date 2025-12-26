@@ -1,5 +1,5 @@
 import CheckMark from "./svg/check-mark";
-
+import { UseFormRegister } from "react-hook-form";
 export default function ProductCheckbox({
   name,
   index,
@@ -7,7 +7,7 @@ export default function ProductCheckbox({
 }: {
   name: string;
   index: number;
-  register: (name: string) => any;
+  register: UseFormRegister<any>;
 }) {
   return (
     <label htmlFor={name} className="flex items-center cursor-pointer">
@@ -16,7 +16,6 @@ export default function ProductCheckbox({
           className="peer h-full w-full cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border bg-checkout-checkbox-background border-checkout-checkbox-border checked:bg-checkout-checkbox-background-checked"
           type="checkbox"
           id={name}
-          name={name}
           {...register(`products.${index}.protection`)}
         />
         <CheckMark />

@@ -1,9 +1,10 @@
 import AddressInput from "./address-input";
+import { UseFormRegister } from "react-hook-form";
 
 export default function Address({
   register,
 }: {
-  register: (name: string) => any;
+  register: UseFormRegister<any>;
 }) {
   return (
     <fieldset className="flex flex-col gap-[16px] w-full text-18-28-500">

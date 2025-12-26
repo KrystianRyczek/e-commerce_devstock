@@ -7,7 +7,10 @@ export default function AddressSwitch({
   newAddressSelected: boolean;
   setNewAddressSelected: (value: boolean) => void;
   remove: (index: number) => void;
-  insert: (index: number, value: any) => void;
+  insert: (
+    index: number,
+    value: { [key: string]: string | number | boolean }
+  ) => void;
 }) {
   return (
     <div className="flex w-full mb-[16px]">
