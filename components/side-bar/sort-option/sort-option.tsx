@@ -12,7 +12,7 @@ const sortOptionArray = [
 export default function SortOption() {
   return (
     <FilterContainer label="Sort & Display">
-      <ul>
+      <ul className="text-16-26-500 text-filter-text">
         <li className="py-1 flex flex-col gap-2">
           <p className="w-15">Show </p>
           <SortOptionInput label="Show" itemPerPageArray={itemPerPageArray} />

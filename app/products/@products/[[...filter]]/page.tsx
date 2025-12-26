@@ -149,7 +149,6 @@ export default async function Product({
   console.log("Product1 pararelRouteParams:", pararelRouteParams.filter);
   return (
     <main className="w-full">
-      <h2 className="text-white">List</h2>
       <ProductList productsArray={productsArray} />
     </main>
   );

@@ -6,6 +6,7 @@
   --w-mobile: 30rem;
   --breakpoint-tablet: 48rem;
   --breakpoint-desktop: 90rem;
+  /* -------------------------------------------------- */
   --color-background: #41444f;
   --color-foreground: #1a1a1a;
   --color-logoOrange: #f29145;
@@ -14,22 +15,31 @@
   --color-nav-link-active: #f29145;
   --color-hamburger-menu: #fcfcfc;
   --color-line: #383b42;
+  /* -------------------------------------------------- */
   --color-footer-background: #222327;
   --color-footer-text: #e7e7e7;
   --color-footer-h: #fcfcfc;
+  /* -------------------------------------------------- */
   --clolor-slide-show-background: #222327;
   --clolor-slide-show-h: #fcfcfc;
   --clolor-slide-show-text: #e7e7e7;
   --clolor-slide-show-button: #f29145;
   --clolor-slide-show-arow: #262626;
+  /* -------------------------------------------------- */
   --color-section-text: #fcfcfc;
   --color-section-link: #f29145;
   /* -------------------------------------------------- */
+  --color-category-background: #262626;
+  --color-category-border: #616674;
+  --color-category-text: #fcfcfc;
+  /* -------------------------------------------------- */
   --color-brand-background: #262626;
   --color-brand-border: #616674;
+  --color-brand-text: #fcfcfc;
   /* -------------------------------------------------- */
   --color-recomendation-background: #262626;
   --color-recomendation-text: #fcfcfc;
+  --color-recomendation-text-secondary: #e7e7e7;
   --color-recomendation-category-text: #fdedd7;
   --color-recomendation-category-background: #e5610a;
   /* -------------------------------------------------- */
@@ -62,8 +72,8 @@
   --color-product-icon: #fcfcfc;
   --color-product-icon-background: #262626;
   /* -------------------------------------------------- */
-  --color-product-nav-primary: #b0b0b0;
-  --color-product-nav-secondary: #fcfcfc;
+  --color-bar-nav-primary: #fcfcfc;
+  --color-bar-nav-secondary: #b0b0b0;
   /* -------------------------------------------------- */
   --color-product-description-h: #fcfcfc;
   --color-product-description-text-primary: #b0b0b0;
@@ -137,9 +147,54 @@
   --color-cart-checkout-button-background: #f29145;
   --color-cart-checkout-button-text: #262626;
   /* -------------------------------------------------- */
+  --color-checkout-background: #262626;
+  --color-checkout-border: #383b42;
+  --color-checkout-border-separator: #848a97;
+  --color-checkout-border-quantity: #fcfcfc;
+  --color-checkout-h: #fcfcfc;
+  --color-checkout-text-primary: #fcfcfc;
+  --color-checkout-text-secondary: #e7e7e7;
+  --color-checkout-link: #f29145;
+  --color-checkout-button-background: #e5610a;
+  --color-checkout-button-text: #fdedd7;
+  --color-checkout-checkbox-background: #1a1a1a;
+  --color-checkout-checkbox-border: #616674;
+  --color-checkout-address-input: #616674;
+  --color-checkout-checkbox-background-checked: #f29145;
+  --color-checkout-checkbox-checkmark: #262626;
+  --color-checkout-input-placeholder: #b0b0b0;
+
   /* -------------------------------------------------- */
+  --color-modal-background: #1a1a1a;
+  --color-modal-border: #383b42;
+  --color-modal-h: #fcfcfc;
+  --color-modal-text: #fcfcfc;
+  --color-modal-option-background: #262626;
+  --color-modal-option-border: #616674;
   /* -------------------------------------------------- */
+  --color-summary-background: #262626;
+  --color-summary-border: #383b42;
+  --color-summary-cupon-border: #616674;
+  --color-summary-cupon-placeholder: #b0b0b0;
+  --color-summary-h: #fcfcfc;
+  --color-summary-text: #e7e7e7;
+  --color-summary-link: #f29145;
+  --color-summary-button-text: #262626;
+  --color-summary-button-background: #f29145;
   /* -------------------------------------------------- */
+  --color-payment-background: #262626;
+  --color-payment-border: #383b42;
+  --color-payment-h: #fcfcfc;
+  --color-payment-text-primary: #fcfcfc;
+  --color-payment-text-secondary: #e7e7e7;
+  --color-payment-icon-success: #4ade80;
+  --color-payment-link-background: #e5610a;
+  --color-payment-link-text: #fdedd7;
+  --color-payment-status-background: #295b40;
+  --color-payment-status-text: #dcfce8;
+  --color-payment-button-background: #f29145;
+  --color-payment-button-text: #262626;
+
   /* -------------------------------------------------- */
   /* -------------------------------------------------- */
 }
@@ -173,10 +228,58 @@
     @apply block;
   }
   footer ul li {
-    @apply w-[191px] max-desktop:w-[161px] max-tablet:w-[110px]  flex flex-col gap-[32px];
+    @apply w-[191px] max-desktop:w-[161px] max-tablet:w-[110px] flex flex-col gap-[32px];
   }
   footer ul li h3 {
     @apply font-semibold text-[20px] leading-[30px] tracking-[-0.02rem];
+  }
+  .flex-c {
+    @apply flex flex-col;
+  }
+  .text-44-54-700 {
+    @apply text-[44px] font-[700] leading-[54px];
+  }
+  .text-36-46-600 {
+    @apply text-[36px] leading-[46px] font-[600];
+  }
+  .text-32-44-500 {
+    @apply text-[32px] leading-[44px] font-[500];
+  }
+  .text-28-40-600 {
+    @apply text-[28px] leading-[40px] font-[600];
+  }
+  .text-28-40-500 {
+    @apply text-[28px] leading-[40px] font-[500];
+  }
+  .text-24-36-500 {
+    @apply text-[24px] leading-[36px] font-[500];
+  }
+  .text-20-30-500 {
+    @apply text-[20px] leading-[30px] font-[500];
+  }
+  .text-20-30-600 {
+    @apply text-[20px] leading-[30px] font-[600];
+  }
+  .text-18-28-600 {
+    @apply text-[18px] leading-[28px] font-[600];
+  }
+  .text-18-28-500 {
+    @apply text-[18px] leading-[28px] font-[500];
+  }
+  .text-18-28-400 {
+    @apply text-[18px] leading-[28px] font-[400];
+  }
+  .text-16-26-500 {
+    @apply text-[16px] leading-[26px] font-[500];
+  }
+  .text-16-26-400 {
+    @apply text-[16px] leading-[26px] font-[400];
+  }
+  .text-14-24-500 {
+    @apply text-[14px] leading-[24px] font-[500];
+  }
+  .text-14-24-400 {
+    @apply text-[14px] leading-[24px] font-[400];
   }
 }
 .swiper-slide {

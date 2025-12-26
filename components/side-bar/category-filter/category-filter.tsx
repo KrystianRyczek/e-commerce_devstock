@@ -10,7 +10,7 @@ export default function CategoryFilter({
 }) {
   return (
     <FilterContainer label="Category">
-      <ul>
+      <ul className="text-16-26-500 text-filter-text">
         <li className="py-1">
           <CategoryInput label="All" checked={categoriesNotSelected} />
         </li>

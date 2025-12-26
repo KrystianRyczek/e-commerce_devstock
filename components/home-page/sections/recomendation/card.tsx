@@ -20,22 +20,16 @@ export default function Card({ name, image, category, price, promo }: Product) {
       </div>
       <div className="flex flex-col gap-[16px]">
         <Link
-          className="flex w-fit h-[36px] px-[6px] py-[10px] text-[14px] leading-[24px] font-[500] items-center text-recomendation-category-text bg-recomendation-category-background rounded-[6px]"
+          className="flex w-fit h-[36px] px-[6px] py-[10px] text-14-24-500 items-center text-recomendation-category-text bg-recomendation-category-background rounded-[6px]"
           href={"/"}
         >
           {category}
         </Link>
         <div className="flex flex-col gap-[8px]">
-          <h3 className="text-[18px] leading-[28px] font-[400]">{name}</h3>
+          <h3 className="text-18-28-400 text-recomendation-text">{name}</h3>
           <div className="flex gap-[10px] items-center">
-            <p className="text-[28px] leading-[40px] tracking-[0.015rem] font-[600]">
-              ${price}
-            </p>
-            {promo && (
-              <p className="text-[18px] leading-[28px] font-[400] line-through">
-                ${promo}
-              </p>
-            )}
+            <p className="text-28-40-600 tracking-[0.015rem]">${price}</p>
+            {promo && <p className="text-18-28-400 line-through text-recomendation-text-secondary">${promo}</p>}
           </div>
         </div>
       </div>

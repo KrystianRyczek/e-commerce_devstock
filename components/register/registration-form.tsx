@@ -73,9 +73,7 @@ export default function RegistrationForm() {
   return (
     <div className="flex flex-col gap-[32px] w-full h-full border-[1px] p-[24px] text-register-h border-register-border  bg-register-background">
       <div className="flex flex-col gap-[20px] w-full">
-        <h2 className="text-[24px] font-[600] leading-[34px]">
-          Create Account
-        </h2>
+        <h2 className="text-18-28-500">Create Account</h2>
         <hr className="text-register-border"></hr>
       </div>
       <form className="flex flex-col gap-[24px] w-full" onSubmit={onSubmit}>
@@ -126,12 +124,12 @@ export default function RegistrationForm() {
           register={register}
           countryseArray={["Polska", "USA", "Kanada", "Peru", "RPA", "Chiny"]}
         />
-        <div className="flex gap-[16px] justify-center items-center text-[14px] font-[500] leading-[24px] text-register-text-secondary">
+        <div className="flex gap-[16px] justify-center items-center text-14-24-500 text-register-text-secondary">
           <RegistrationCheckbox
             label="ConditionsAndPrivancy"
             register={register}
           />
-          <p className="w-[calc(100%-26px)] ">
+          <p className="w-[calc(100%-26px)] text-16-26-400">
             By creating an account and check, you agree to the{" "}
             <Link href="#" className="text-register-link">
               Conditions of Use

@@ -27,7 +27,7 @@ export default function LoginAuth() {
         <div className="flex justify-between gap-[5px] text-[14px] font-[400] leading-[24px]">
           <LoginCheckbox label="Save password" />
           <Link
-            className=" text-login-text-primary text-[16px] font-[500] leading-[26px]"
+            className=" text-login-text-primary text-16-26-500"
             href="/reset"
           >
             Forgot your password?

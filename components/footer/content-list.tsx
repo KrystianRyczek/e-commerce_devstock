@@ -4,7 +4,7 @@ export default function ContentList({ contents }: ContentList) {
     <ul className="flex flex-col gap-[16px]">
       {contents.map((item: string) => (
         <li
-          className="font-medium text-base leading-[26px] text-footer-text tracking-[0%]"
+          className="font-medium text-base text-16-26-500 text-footer-text"
           key={item}
         >
           {item}

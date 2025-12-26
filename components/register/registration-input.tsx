@@ -32,14 +32,14 @@ export default function RegistrationInput({
       htmlFor={id}
       className="flex flex-col gap-[16px] w-full text-register-h"
     >
-      <p className="flex text-[18px] font-[500] leading-[28px]">{label}</p>
+      <p className="flex text-18-28-500">{label}</p>
       <div className="flex relative w-full h-[48px]">
         <input
           className={`w-full h-[54px] rounded-[6px] placeholder:text-register-placeholder text-register-text-primary border-[1px] ${
             errors?.[name]
               ? "border-register-input-border-error"
               : "border-register-border"
-          } text-[16px] font-[400] leading-[26px] focus:outline-none px-3`}
+          } text-16-26-400 focus:outline-none px-3`}
           name={name}
           id={id}
           type={isVisible ? "text" : type}
@@ -55,7 +55,7 @@ export default function RegistrationInput({
           ))}
       </div>
 
-      <p className="text-[14px] font-[400] leading-[24px] text-register-error-text">
+      <p className="text-16-26-400 text-register-error-text">
         {errors?.[name]?.message}
       </p>
     </label>

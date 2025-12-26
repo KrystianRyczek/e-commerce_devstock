@@ -7,17 +7,15 @@ export default function NavigationBar({
   productName: string;
 }) {
   return (
-    <div className="w-full text-white flex gap-[8px] items-center px-[40px] max-desktop:px-[20px] py-[10px] max-desktop:py-[8px] ">
+    <div className="w-full flex text-bar-nav-secondary gap-[8px] items-center px-[40px] max-desktop:px-[20px] py-[10px] max-desktop:py-[8px] text-16-26-500">
       <Link
         href="/products"
-        className="text-navigation-bar-text hover:underline-none cursor-pointer text-product-nav-primary text-[16px] leading-[26px] font-[500]"
+        className="hover:underline-none cursor-pointer text-bar-nav-primary"
       >
         Products
       </Link>
       <ArrowLeft />
-      <p className="text-product-nav-secondary text-[16px] leading-[26px] font-[500]">
-        {productName}
-      </p>
+      <p>{productName}</p>
     </div>
   );
 }

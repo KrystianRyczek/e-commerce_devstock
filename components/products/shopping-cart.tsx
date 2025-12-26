@@ -1,5 +1,7 @@
 "use client";
 
+import Cart from "./svg/cart";
+
 export default function ShoppingCart() {
   return (
     <button
@@ -9,12 +11,7 @@ export default function ShoppingCart() {
       }}
       className="flex absolute justify-center items-center w-[32px] h-[32px] p-[4px] rounded-[6px] top-[20px] left-[20px] min-desktop:top-[30px] min-desktop:left-[30px] cursor-pointer bg-black"
     >
-      <svg className="flex h-[18px] w-[19px]">
-        <path
-          className="stroke-white fill-white scale-53"
-          d="M32.914 5.4l-2.914 11.6c0 0.139-0.028 0.27-0.078 0.389-0.102 0.24-0.293 0.432-0.532 0.533-0.12 0.051-0.252 0.078-0.39 0.078h-19l0.8 4h17.2c0.553 0 1 0.447 1 1s-0.447 1-1 1h-18c-0.553 0-1-0.447-1-1l-3.8-19h-3.2c-0.552 0-1-0.448-1-1s0.448-1 1-1h4c0.553 0 1 0.448 1 1l0.2 1h24.8c0.553 0 1 0.448 1 1 0 0.143-0.032 0.277-0.086 0.4zM9.6 16h3.4v-10h-5.4l2 10zM19 6h-5v10h5v-10zM25 6h-5v10h5v-10zM26 6v10h2.253l2.533-10h-4.786zM12 26c1.657 0 3 1.344 3 3s-1.343 3-3 3-3-1.344-3-3 1.343-3 3-3zM12 30c0.553 0 1-0.447 1-1s-0.447-1-1-1-1 0.447-1 1 0.447 1 1 1zM26 26c1.657 0 3 1.344 3 3s-1.343 3-3 3-3-1.344-3-3 1.343-3 3-3zM26 30c0.553 0 1-0.447 1-1s-0.447-1-1-1-1 0.447-1 1 0.447 1 1 1z"
-        />
-      </svg>
+      <Cart />
     </button>
   );
 }

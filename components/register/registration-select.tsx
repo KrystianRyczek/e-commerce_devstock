@@ -20,7 +20,7 @@ export default function RegisterSelect({
       htmlFor={name}
       className="flex flex-col gap-[16px] w-full text-register-h"
     >
-      <p className="flex text-[18px] font-[500] leading-[28px]">{label}</p>
+      <p className="flex text-18-28-500">{label}</p>
       <div className="h-[54px] grid shrink-0 grid-cols-1 focus-within:relative rounded-md utline-none">
         <select
           id={name}
@@ -29,7 +29,7 @@ export default function RegisterSelect({
             errors?.[name]
               ? "border-register-input-border-error"
               : "border-register-border"
-          } text-[16px] font-[400] leading-[26px] focus:outline-none  appearance-none px-3`}
+          } text-16-26-400 focus:outline-none  appearance-none px-3`}
           {...register(name)}
         >
           <option value={""}>Select a country</option>

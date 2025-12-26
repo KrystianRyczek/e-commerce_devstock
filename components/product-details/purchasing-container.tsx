@@ -4,6 +4,7 @@ import { useActionState, useState, useRef } from "react";
 import SubmitButton from "./submit-button";
 import ColorRadio from "./color-radio";
 import Badge from "./svg/badge";
+import QuantityInput from "./quantity-input";
 
 export default function PurchasingContainer({
   name,
@@ -74,17 +75,17 @@ export default function PurchasingContainer({
   return (
     <div>
       <div className="flex flex-col gap-[20px] min-desktop:hidden mb-[24px]">
-        <h2 className="text-[28px] font-[500] leading-[40px]">{name}</h2>
+        <h2 className="text-28-40-500 ">{name}</h2>
         <div className="flex justify-between items-center pr-[10px]">
           <Link
             className="w-[66px] h-[36px] rounded-[6px] bg-product-description-button flex justify-center items-center"
             href={`/products/categorys=${category}`}
           >
-            <span className="flex text-product-description-button-text text-[14px] font-[500] leading-[24px]">
+            <span className="flex text-product-description-button-text text-14-24-500">
               {category}
             </span>
           </Link>
-          <p className="text-[32px] font-[500] leading-[44px]">
+          <p className="text-32-44-500 ">
             {price} {currency}
           </p>
         </div>
@@ -94,7 +95,7 @@ export default function PurchasingContainer({
         action={formAction}
       >
         <fieldset className="flex flex-wrap gap-[16px] max-desktop:gap-[9px]">
-          <legend className="mb-[14px] max-desktop:mb-[8px] text-[18px] font-[500] leading-[28px]">
+          <legend className="mb-[14px] max-desktop:mb-[8px] text-18-28-500">
             Color:
           </legend>
           {variants &&
@@ -109,49 +110,22 @@ export default function PurchasingContainer({
             ))}
         </fieldset>
         <div className="w-[243px] flex flex-wrap gap-[14px] max-desktop:gap-[8px]">
-          <legend className="w-full text-[18px] font-[500] leading-[28px]">
-            Quantity:
-          </legend>
-          <label
-            htmlFor="quantity"
-            className="flex w-[142px] h-[54px] rounded-[6px] border-[1px] border-purchasing-container-stock-border text-purchasing-container-stock-text "
-          >
-            <button
-              className="w-1/4 text-[30px] pl-2"
-              type="button"
-              onClick={subtractHandler}
-            >
-              -
-            </button>
-            <input
-              className="w-1/2 flex justify-center text-center outline-none text-[24px] font-[500]"
-              id="quantity"
-              name="quantity"
-              type="number"
-              min={1}
-              max={stock}
-              ref={quantityRef}
-              defaultValue={1}
-              disabled
-            />
-            <button
-              className="w-1/4 text-[30px] pr-2"
-              type="button"
-              onClick={addHandler}
-            >
-              +
-            </button>
-          </label>
-          <span className="ml-[16px] h-[54px] flex items-center text-[16px] font-[500] leading-[26px] text-purchasing-container-stock-text">
+          <legend className="w-full text-18-28-500">Quantity:</legend>
+          <QuantityInput
+            name="quantity"
+            stock={stock}
+            quantityRef={quantityRef}
+            subtractHandler={subtractHandler}
+            addHandler={addHandler}
+          />
+          <span className="ml-[16px] h-[54px] flex items-center text-16-26-500 text-purchasing-container-stock-text">
             Stock: {stock}
           </span>
         </div>
         <div className="w-full h-[40px] flex justify-between items-center">
-          <legend className="text-[18px] font-[500] leading-[28px]">
-            Subtotal:
-          </legend>
+          <legend className="text-18-28-500">Subtotal:</legend>
           <label
-            className="w-fit flex justify-end text-[28px] font-[500] leading-[40px] text-purchasing-container-price-input-text"
+            className="w-fit flex justify-end text-28-40-500  text-purchasing-container-price-input-text"
             htmlFor="subtotal"
           >
             <input
@@ -172,16 +146,14 @@ export default function PurchasingContainer({
       </form>
       <div className="desktop:hidden tablet:flex mobile:hidden flex-col gap-[20px] mt-[24px]">
         <div className="flex flex-col gap-[14px]">
-          <p className="flex text-[18px] font-[400] leading-[28px] text-product-description-text-primary ">
+          <p className="flex text-18-28-400 text-product-description-text-primary ">
             Shipping Available
           </p>
           <div className="w-[312px] max-desktop:w-full p-[16px] max-desktop:p-[10px] flex gap-[8px] border-[1px] border-product-description-border rounded-[6px]">
             <Badge />
             <div className="flex flex-col gap-[4px]">
-              <p className="text-[16px] font-[500] leading-[26px]">
-                NexusHub Courier
-              </p>
-              <p className="text-[16px] font-[400] leading-[26px] text-product-description-text-secondary">
+              <p className="text-16-26-500">NexusHub Courier</p>
+              <p className="text-16-26-400 text-product-description-text-secondary">
                 Estimated arrival 30 Sep - 3 Oct
               </p>
             </div>

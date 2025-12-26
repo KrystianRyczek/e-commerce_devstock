@@ -25,12 +25,12 @@ export default function ProductCard({ product }: { product: Product }) {
             />
           </div>
           <div>
-            <button className="mt-[12px] mb-[8px] px-[12px] py-[6px] bg-product-card-button-background text-product-card-button-text rounded-[6px] text-[12px] font-medium">
+            <button className="mt-[12px] mb-[8px] px-[12px] py-[6px] bg-product-card-button-background text-product-card-button-text rounded-[6px] text-14-24-500">
               {product.category}
             </button>
             <div className="w-full h-[76px] text-product-card-text">
-              <h3>{product.name}</h3>
-              <p>
+              <h3 className="text-18-28-400">{product.name}</h3>
+              <p className="text-28-40-600 -tracking-[0.02rem]">
                 {product.price} {product.currency}
               </p>
             </div>

@@ -10,7 +10,7 @@ export default function LoginButton({
   return (
     <Link href={href}>
       <button
-        className="w-full h-[54px] rounded-[6px] bg-login-button-background text-login-button-text"
+        className="w-full h-[54px] rounded-[6px] bg-login-button-background text-login-button-text text-16-26-500"
         type="button"
       >
         <p>{label}</p>

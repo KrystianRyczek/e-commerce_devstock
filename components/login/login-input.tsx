@@ -29,10 +29,10 @@ export default function LoginInput({
       className="relative flex flex-col gap-[16px] w-full mb-[32px]"
       htmlFor={name}
     >
-      <p className="flex text-[18px] font-[500] leading-[28px]">{label}</p>
+      <p className="flex text-18-28-500">{label}</p>
       <div className="flex relative w-full h-[48px]">
         <input
-          className="flex w-full h-full placeholder:text-login-palaceholder bg-transparent border-[1px] border-login-border rounded-[4px] px-[12px] text-white placeholder-login-text"
+          className="flex w-full h-full text-14-24-400 placeholder:text-login-palaceholder bg-transparent border-[1px] border-login-border rounded-[4px] px-[12px] text-white placeholder-login-text"
           type={isVisible ? "text" : type}
           id={id}
           name={name}

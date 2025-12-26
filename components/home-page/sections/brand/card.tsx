@@ -15,7 +15,7 @@ export default function Card({ image, label }: Card) {
           className="object-contain"
         />
       </div>
-      <h3>{label}</h3>
+      <h3 className="text-20-30-500 -tracking-[0.02rem]">{label}</h3>
     </li>
   );
 }

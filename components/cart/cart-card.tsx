@@ -3,6 +3,8 @@ import CartCheckbox from "./cart-checkbox";
 import Image from "next/image";
 import DeleteCat from "./svg/delete-cart";
 import Link from "next/link";
+import QuantityInput from "./quantity-input";
+import { useRef } from "react";
 
 export default function CartCard({
   product,
@@ -17,16 +19,40 @@ export default function CartCard({
     "All Selected:",
     product.selected
   );
+  const quantityRef = useRef<HTMLInputElement | null>(null);
+
+  const addHandler = (stock: number) => {
+    if (quantityRef.current) {
+      const currentValue = quantityRef.current.value
+        ? +quantityRef.current.value
+        : 0;
+      if (currentValue < stock) {
+        quantityRef.current.value = (currentValue + 1).toString();
+      }
+    }
+  };
+  const subtractHandler = () => {
+    if (quantityRef.current) {
+      const currentValue = quantityRef.current.value
+        ? +quantityRef.current.value
+        : 0;
+      if (currentValue > 1) {
+        quantityRef.current.value = (currentValue - 1).toString();
+      }
+    }
+  };
+
   return (
-    <label className="w-full flex items-center gap-[16px]">
+    <label className="w-full flex items-center gap-[16px] relative">
       <CartCheckbox
-        label={`select-${product.id}`}
+        label={`select${product.id}`}
+        style="flex items-center cursor-pointer max-tablet:absolute max-tablet:top-[16px] max-tablet:right-[16px]"
         checked={product.selected}
         onChange={() => {
           selllectNoneHandler(product.id);
         }}
       />
-      <div className=" flex max-tablet:flex-col w-full p-[24px] rounded-[6px] border-[1px] border-cart-border bg-cart-background gap-[32px]">
+      <div className=" flex max-tablet:flex-col w-full p-[24px] max-tablet:p-[10px] rounded-[6px] border-[1px] border-cart-border bg-cart-background gap-[32px]">
         <div className="flex flex-col relative w-[172px] h-[138px] p-[12px] border-[1px] border-cart-border rounded-[6px]">
           <div className="relative w-full h-full">
             <Image src={product.img} alt={product.name} fill />
@@ -42,15 +68,13 @@ export default function CartCard({
             </div>
             <Link
               href={`/products/${product.id}`}
-              className=" flex items-center justify-center mb-[16px] w-[80px] h-[36px] text-[14px] font-[500] leading-[24px] rounded-[6px] bg-cart-checkout-button-background text-cart-checkout-button-text"
+              className=" flex items-center justify-center mb-[16px] w-[80px] h-[36px] text-14-24-500 rounded-[6px] bg-cart-checkout-button-background text-cart-checkout-button-text"
             >
               {product.category}
             </Link>
-            <div className="flex justify-between">
-              <p className="text-[24px] font-[500] leading-[36px]">
-                ${product.price}
-              </p>
-              <div className="hidden min-tablet:flex gap-[24px] items-center ">
+            <div className="max-tablet:flex-col flex justify-between">
+              <p className="text-24-36-500">${product.price}</p>
+              <div className="flex gap-[24px] items-center max-tablet:justify-between ">
                 <Link
                   href="#"
                   className="text-[16px] font-[500] leading-[28px] text-cart-link"
@@ -58,32 +82,17 @@ export default function CartCard({
                   Write note
                 </Link>
                 <div className="h-[24px] border-[1px] border-cart-border"></div>
-                <label className="flex relative w-[125px] h-[44px]">
-                  <input
-                    type="text"
-                    className="flex text-center w-full h-full border-[1px] border-cart-input-border rounded-[6px] text-cart-input-text"
-                    defaultValue={product.quantity}
-                  />
-                </label>
+                <QuantityInput
+                  key={`quantity${product.id}`}
+                  name={`quantity${product.id}`}
+                  stock={product.stock}
+                  quantityRef={quantityRef}
+                  subtractHandler={subtractHandler}
+                  addHandler={() => addHandler(product.stock)}
+                />
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex min-tablet:hidden mobile:flex-col gap-[24px] mobile:gap-[10px] items-center mobile:items-start">
-          <Link
-            href="#"
-            className="text-[16px] font-[500] leading-[28px] text-cart-link"
-          >
-            Write note
-          </Link>
-          <div className="flex mobile:hidden h-[24px] border-[1px] border-cart-border"></div>
-          <label className="flex relative w-[125px] h-[44px]">
-            <input
-              type="text"
-              className="flex text-center w-full h-full border-[1px] border-cart-input-border rounded-[6px] text-cart-input-text"
-              defaultValue={product.quantity}
-            />
-          </label>
         </div>
       </div>
     </label>

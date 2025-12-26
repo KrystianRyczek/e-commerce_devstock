@@ -23,10 +23,10 @@ export default function LoginUserName() {
       <div className="flex flex-col w-full gap-[8px]">
         <LoginButton label="Continue" href="/login/auth" />
 
-        <div className="flex gap-[5px] text-[14px] font-[400] leading-[24px]">
+        <div className="flex gap-[5px] text-14-24-400">
           <p className=" text-login-text-secondary">Not a member?</p>
           <Link
-            className=" text-login-text-primary text-[14px] font-[500] leading-[24px]"
+            className=" text-login-text-primary text-14-24-500"
             href="/register"
           >
             Register
