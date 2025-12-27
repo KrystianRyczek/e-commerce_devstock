@@ -43,19 +43,22 @@ const schema = z
 
     confirmPassword: z.string(),
     country: z.string().nonempty("Country is required"),
+    conditionsAndPrivancy: z.boolean().refine((val) => val === true, {
+      message: "You must accept the terms and conditions",
+    }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
 
-export type FormValues = {
+export type RegistationFormValues = {
   email: string;
   phone: string;
   password: string;
   confirmPassword: string;
   country: string;
-  ConditionsAndPrivancy: boolean;
+  conditionsAndPrivancy: boolean;
 };
 
 export default function RegistrationForm() {
@@ -63,7 +66,7 @@ export default function RegistrationForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<RegistationFormValues>({
     resolver: zodResolver(schema),
     defaultValues: {},
   });
@@ -126,7 +129,7 @@ export default function RegistrationForm() {
         />
         <div className="flex gap-[16px] justify-center items-center text-14-24-500 text-register-text-secondary">
           <RegistrationCheckbox
-            label="ConditionsAndPrivancy"
+            label="conditionsAndPrivancy"
             register={register}
           />
           <p className="w-[calc(100%-26px)] text-16-26-400">

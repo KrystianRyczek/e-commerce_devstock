@@ -1,6 +1,6 @@
 import ArrowDown from "./svg/arrow-down";
-import type { FieldErrors } from "react-hook-form";
-import type { FormValues } from "./registration-form";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import type { RegistationFormValues } from "./registration-form";
 
 export default function RegisterSelect({
   label,
@@ -10,10 +10,10 @@ export default function RegisterSelect({
   register,
 }: {
   label: string;
-  name: keyof FormValues;
+  name: keyof RegistationFormValues;
   countryseArray: string[];
-  errors: FieldErrors<FormValues> | undefined;
-  register: any;
+  errors: FieldErrors<RegistationFormValues> | undefined;
+  register: UseFormRegister<RegistationFormValues>;
 }) {
   return (
     <label
@@ -24,7 +24,6 @@ export default function RegisterSelect({
       <div className="h-[54px] grid shrink-0 grid-cols-1 focus-within:relative rounded-md utline-none">
         <select
           id={name}
-          name={name}
           className={`col-start-1 row-start-1 w-full h-[54px] rounded-[6px] bg-register-background placeholder:text-register-placeholder text-register-text-primary border-[1px] ${
             errors?.[name]
               ? "border-register-input-border-error"
