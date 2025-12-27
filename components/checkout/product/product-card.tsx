@@ -1,9 +1,10 @@
 import { CartProduct } from "@/app/cart/checkout/page";
-import { UseFormRegister, FieldValues } from "react-hook-form";
+import { UseFormRegister, UseFormSetValue } from "react-hook-form";
 import Image from "next/image";
 import Link from "next/link";
 import QuantityInput from "./quantity-input";
 import ProductCheckbox from "./product-checkbox";
+import { CheckoutFormData } from "../checout-form";
 
 export default function ProductCard({
   product,
@@ -14,9 +15,9 @@ export default function ProductCard({
 }: {
   product: CartProduct;
   index: number;
-  register: UseFormRegister<FieldValues>;
-  setValue: (name: string, value: string | number) => void;
-  getValues: (name: string) => any;
+  register: UseFormRegister<CheckoutFormData>;
+  setValue: UseFormSetValue<CheckoutFormData>;
+  getValues: (name: string) => { [key: string]: string | number };
 }) {
   return (
     <li key={product.id} className="flex justify-between items-center">

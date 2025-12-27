@@ -2,6 +2,8 @@ import { UserAddress } from "@/app/cart/checkout/page";
 import { useRef } from "react";
 import CheckoutModal from "../common-components/modal";
 import Link from "next/link";
+import { CheckoutFormData } from "../checout-form";
+import { UseFormSetValue } from "react-hook-form";
 
 export default function UserAddressSelector({
   label,
@@ -13,7 +15,7 @@ export default function UserAddressSelector({
   label: string;
   setLabel: (label: string) => void;
   userAddressArray: UserAddress[];
-  setValue: (name: string, value: string | number) => void;
+  setValue: UseFormSetValue<CheckoutFormData>;
   setSelectedAddress: (address: UserAddress) => void;
 }) {
   const modalRef = useRef<HTMLDialogElement>(null);

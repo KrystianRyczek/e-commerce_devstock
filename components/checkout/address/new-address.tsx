@@ -1,11 +1,11 @@
 import NewAddressSelect from "./new-address-select";
 import AddressCheckbox from "./address-checkbox";
 import { UseFormRegister, FieldValues } from "react-hook-form";
-
+import { CheckoutFormData } from "../checout-form";
 export default function NewAddress({
   register,
 }: {
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<CheckoutFormData>;
 }) {
   return (
     <fieldset className="flex flex-col w-full gap-[16px] mt-[16px]">

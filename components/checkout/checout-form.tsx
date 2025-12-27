@@ -12,7 +12,12 @@ import ProductContainer from "./product/product-container";
 import PaymentSelect from "./payment/payment-select";
 import SummaryContainer from "./summary-container";
 
-type FormData = any;
+export type CheckoutFormData = {
+  products: { [key: string]: string | number | boolean }[];
+  address: { [key: string]: string | number }[];
+  shipping: number;
+  payment: number;
+};
 
 export default function CheckoutForm({
   cartProductsArray,
@@ -33,7 +38,7 @@ export default function CheckoutForm({
     setValue,
     getValues,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<CheckoutFormData>({
     mode: "onChange",
     defaultValues: {
       products: [],

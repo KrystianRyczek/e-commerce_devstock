@@ -1,7 +1,7 @@
 import { CartProduct } from "@/app/cart/checkout/page";
 import ProductCard from "@/components/checkout/product/product-card";
-import { UseFormRegister, FieldValues } from "react-hook-form";
-
+import { UseFormRegister, FieldValues, UseFormSetValue } from "react-hook-form";
+import { CheckoutFormData } from "../checout-form";
 export default function ProductContainer({
   productsArray,
   register,
@@ -9,9 +9,9 @@ export default function ProductContainer({
   getValues,
 }: {
   productsArray: CartProduct[];
-  register: UseFormRegister<FieldValues>;
-  setValue: (name: string, value: string | number) => void;
-  getValues: (name: string) => any;
+  register: UseFormRegister<CheckoutFormData>;
+  setValue: UseFormSetValue<CheckoutFormData>;
+  getValues: (name: string) => { [key: string]: string | number };
 }) {
   return (
     <fieldset className="flex flex-col w-full ">

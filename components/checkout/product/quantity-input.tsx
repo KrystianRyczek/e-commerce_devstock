@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { UseFormRegister, FieldValues } from "react-hook-form";
+import { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { CheckoutFormData } from "../checout-form";
 export default function QuantityInput({
   name,
   index,
@@ -13,20 +14,20 @@ export default function QuantityInput({
   index: number;
   value: number;
   stock: number;
-  register: UseFormRegister<FieldValues>;
-  setValue: (name: string, value: string | number) => void;
-  getValues: (name: string) => any;
+  register: UseFormRegister<CheckoutFormData>;
+  setValue: UseFormSetValue<CheckoutFormData>;
+  getValues: (name: string) => { [key: string]: string | number };
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const addHandler = () => {
-    const currentValue = getValues(`products.${index}.quantity`);
+    const currentValue = +getValues(`products.${index}.quantity`);
 
     if (currentValue < stock) {
       setValue(`products.${index}.quantity`, +currentValue + 1);
     }
   };
   const subtractHandler = () => {
-    const currentValue = getValues(`products.${index}.quantity`);
+    const currentValue = +getValues(`products.${index}.quantity`);
 
     if (currentValue > 1) {
       setValue(`products.${index}.quantity`, +currentValue - 1);

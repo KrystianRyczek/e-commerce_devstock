@@ -5,7 +5,12 @@ import Address from "./address";
 import AddressSwitch from "./address-switch";
 import UserAddressSelector from "./user-address-seletor";
 import NewAddress from "./new-address";
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import {
+  UseFieldArrayInsert,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
+import { CheckoutFormData } from "../checout-form";
 
 export default function AddressContainer({
   userAddressArray,
@@ -15,13 +20,10 @@ export default function AddressContainer({
   insert,
 }: {
   userAddressArray: UserAddress[];
-  register: UseFormRegister<FieldValues>;
-  setValue: (name: string, value: string | number) => void;
+  register: UseFormRegister<CheckoutFormData>;
+  setValue: UseFormSetValue<CheckoutFormData>;
   remove: (index: number) => void;
-  insert: (
-    index: number,
-    value: { [key: string]: string | number | boolean }
-  ) => void;
+  insert: UseFieldArrayInsert<CheckoutFormData>;
 }) {
   const [newAddressSelected, setNewAddressSelected] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<UserAddress>(

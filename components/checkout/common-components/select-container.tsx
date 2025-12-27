@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import { UseFormRegister, FieldValues } from "react-hook-form";
-
+import { CheckoutFormData } from "../checout-form";
 export default function SelectContainer({
   openModal,
   register,
@@ -8,7 +8,7 @@ export default function SelectContainer({
   label,
 }: {
   openModal: () => void;
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<CheckoutFormData>;
   img: StaticImageData;
   label: string;
 }) {

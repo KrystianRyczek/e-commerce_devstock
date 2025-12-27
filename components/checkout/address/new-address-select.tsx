@@ -1,11 +1,12 @@
 import { UseFormRegister, FieldValues } from "react-hook-form";
+import { CheckoutFormData } from "../checout-form";
 export default function NewAddressSelect({
   register,
   name,
   placeholder,
   options,
 }: {
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<CheckoutFormData>;
   name: string;
   placeholder: string;
   options: { label: string; value: string }[];

@@ -1,3 +1,6 @@
+import { UseFieldArrayInsert } from "react-hook-form";
+import { CheckoutFormData } from "../checout-form";
+
 export default function AddressSwitch({
   newAddressSelected,
   setNewAddressSelected,
@@ -7,10 +10,7 @@ export default function AddressSwitch({
   newAddressSelected: boolean;
   setNewAddressSelected: (value: boolean) => void;
   remove: (index: number) => void;
-  insert: (
-    index: number,
-    value: { [key: string]: string | number | boolean }
-  ) => void;
+  insert: UseFieldArrayInsert<CheckoutFormData>;
 }) {
   return (
     <div className="flex w-full mb-[16px]">

@@ -4,16 +4,16 @@ import { useRef, useState, useEffect } from "react";
 import CheckoutModal from "../common-components/modal";
 import Image from "next/image";
 import SelectContainer from "../common-components/select-container";
-import { UseFormRegister, FieldValues } from "react-hook-form";
-
+import { UseFormRegister, FieldValues, UseFormSetValue } from "react-hook-form";
+import { CheckoutFormData } from "../checout-form";
 export default function ShippingSelect({
   shippingMethodsArray,
   register,
   setValue,
 }: {
   shippingMethodsArray: ShippingMethod[];
-  register: UseFormRegister<FieldValues>;
-  setValue: (name: string, value: any) => void;
+  register: UseFormRegister<CheckoutFormData>;
+  setValue: UseFormSetValue<CheckoutFormData>;
 }) {
   const modalRef = useRef<HTMLDialogElement>(null);
   const [sippingMethod, setShippingMethod] = useState(shippingMethodsArray[0]);
