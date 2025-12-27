@@ -1,4 +1,3 @@
-// @ts-expect-error: Next.js handles CSS imports at build time
 import "./globals.css";
 import MainNavigation from "@/components/main-header/main-header";
 import Footer from "@/components/footer/footer";
