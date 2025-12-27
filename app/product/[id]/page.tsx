@@ -30,14 +30,7 @@ export type Product = {
   description: string;
 };
 
-export default async function ProductDetailsPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const curentParams = await params;
-  console.log(curentParams.id);
-
+export default async function ProductDetailsPage() {
   return (
     <main>
       <NavigationBar productName={product.name} />
@@ -45,3 +38,21 @@ export default async function ProductDetailsPage({
     </main>
   );
 }
+// export default async function ProductDetailsPage({
+//   params,
+// }: {
+//   params: { id: string };
+// }) {
+//   const curentParams = await params;
+//   console.log(curentParams.id);
+
+//   return (
+//     <main>
+//       <NavigationBar productName={product.name} />
+//       <ProductDetails product={product} />
+//     </main>
+//   );
+// }
+// Type error: Type '{ params: { id: string; }; }' does not satisfy the constraint 'PageProps'.
+//   Types of property 'params' are incompatible.
+//     Type '{ id: string; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
