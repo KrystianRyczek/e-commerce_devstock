@@ -15,7 +15,7 @@ export default function ProductCard({
   product: CartProduct;
   index: number;
   register: UseFormRegister<FieldValues>;
-  setValue: (name: string, value: any) => void;
+  setValue: (name: string, value: string | number) => void;
   getValues: (name: string) => any;
 }) {
   return (

@@ -5,7 +5,7 @@ export default function CheckoutModal({
   ref,
   children,
 }: {
-  ref: any;
+  ref: React.Ref<unknown>;
   children: React.ReactNode;
 }) {
   const [monument, setMonument] = useState(false);

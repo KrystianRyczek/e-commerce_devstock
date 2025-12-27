@@ -13,20 +13,21 @@ export default function SummaryContainer({ watch }: { watch: () => any }) {
   console.log("Watched Values in SummaryContainer:", watchedValues);
   const quantity = watchedValues.products
     ? watchedValues.products.reduce(
-        (total: number, product: any) => +product.quantity + total,
+        (total: number, product: { quantity: number }) =>
+          +product.quantity + total,
         0
       )
     : 0;
   const price = watchedValues.products
     ? watchedValues.products.reduce(
-        (total: number, product: any) =>
+        (total: number, product: { price: number; quantity: number }) =>
           +product.price * +product.quantity + total,
         0
       )
     : 0;
   const protection = watchedValues.products
     ? watchedValues.products.reduce(
-        (total: number, product: any) =>
+        (total: number, product: { protection: boolean; quantity: number }) =>
           product.protection ? total + 1 * +product.quantity : total,
         0
       )

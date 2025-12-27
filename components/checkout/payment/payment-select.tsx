@@ -12,7 +12,7 @@ export default function PaymentSelect({
 }: {
   paymentMethodsArray: PaymentMethod[];
   register: UseFormRegister<FieldValues>;
-  setValue: (name: string, value: any) => void;
+  setValue: (name: string, value: string | number) => void;
 }) {
   const modalRef = useRef<HTMLDialogElement>(null);
   const [paymentMethod, setPaymentMethod] = useState(paymentMethodsArray[0]);
