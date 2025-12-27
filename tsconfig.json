@@ -27,6 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
+    "types/**/*.d.ts",
     "components/product-details/slide-show.js"
   ],
   "exclude": ["node_modules"]
