@@ -1,11 +1,11 @@
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, FieldValues } from "react-hook-form";
 export default function NewAddressSelect({
   register,
   name,
   placeholder,
   options,
 }: {
-  register: UseFormRegister<any>;
+  register: UseFormRegister<FieldValues>;
   name: string;
   placeholder: string;
   options: { label: string; value: string }[];

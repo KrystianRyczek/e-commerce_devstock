@@ -1,5 +1,5 @@
 import Image, { StaticImageData } from "next/image";
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, FieldValues } from "react-hook-form";
 
 export default function SelectContainer({
   openModal,
@@ -8,7 +8,7 @@ export default function SelectContainer({
   label,
 }: {
   openModal: () => void;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<FieldValues>;
   img: StaticImageData;
   label: string;
 }) {

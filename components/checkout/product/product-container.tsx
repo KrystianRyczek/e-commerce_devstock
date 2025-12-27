@@ -1,6 +1,6 @@
 import { CartProduct } from "@/app/cart/checkout/page";
 import ProductCard from "@/components/checkout/product/product-card";
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, FieldValues } from "react-hook-form";
 
 export default function ProductContainer({
   productsArray,
@@ -9,7 +9,7 @@ export default function ProductContainer({
   getValues,
 }: {
   productsArray: CartProduct[];
-  register: UseFormRegister<any>;
+  register: UseFormRegister<FieldValues>;
   setValue: (name: string, value: any) => void;
   getValues: (name: string) => any;
 }) {

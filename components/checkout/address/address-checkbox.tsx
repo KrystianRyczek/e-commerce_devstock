@@ -1,5 +1,5 @@
 import CheckMark from "../product/svg/check-mark";
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, FieldValues } from "react-hook-form";
 export default function AddressCheckbox({
   name,
   index,
@@ -7,7 +7,7 @@ export default function AddressCheckbox({
 }: {
   name: string;
   index: number;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<FieldValues>;
 }) {
   return (
     <label

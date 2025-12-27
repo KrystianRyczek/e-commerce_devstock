@@ -1,5 +1,5 @@
 import { CartProduct } from "@/app/cart/checkout/page";
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, FieldValues } from "react-hook-form";
 import Image from "next/image";
 import Link from "next/link";
 import QuantityInput from "./quantity-input";
@@ -14,7 +14,7 @@ export default function ProductCard({
 }: {
   product: CartProduct;
   index: number;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<FieldValues>;
   setValue: (name: string, value: any) => void;
   getValues: (name: string) => any;
 }) {

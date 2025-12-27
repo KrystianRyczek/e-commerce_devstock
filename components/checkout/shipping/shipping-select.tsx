@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import CheckoutModal from "../common-components/modal";
 import Image from "next/image";
 import SelectContainer from "../common-components/select-container";
+import { UseFormRegister, FieldValues } from "react-hook-form";
 
 export default function ShippingSelect({
   shippingMethodsArray,
@@ -11,7 +12,7 @@ export default function ShippingSelect({
   setValue,
 }: {
   shippingMethodsArray: ShippingMethod[];
-  register: (name: string) => any;
+  register: UseFormRegister<FieldValues>;
   setValue: (name: string, value: any) => void;
 }) {
   const modalRef = useRef<HTMLDialogElement>(null);

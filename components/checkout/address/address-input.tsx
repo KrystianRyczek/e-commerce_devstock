@@ -1,4 +1,4 @@
-import { UseFormRegister } from "react-hook-form";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 export default function AddressInput({
   label,
   name,
@@ -6,7 +6,7 @@ export default function AddressInput({
 }: {
   label?: string;
   name: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<FieldValues>;
 }) {
   return (
     <label className="flex flex-col w-full gap-[8px]" htmlFor={name}>

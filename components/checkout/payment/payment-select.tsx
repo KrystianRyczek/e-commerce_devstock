@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import CheckoutModal from "../common-components/modal";
 import Image from "next/image";
 import SelectContainer from "../common-components/select-container";
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, FieldValues } from "react-hook-form";
 
 export default function PaymentSelect({
   paymentMethodsArray,
@@ -11,7 +11,7 @@ export default function PaymentSelect({
   setValue,
 }: {
   paymentMethodsArray: PaymentMethod[];
-  register: UseFormRegister<any>;
+  register: UseFormRegister<FieldValues>;
   setValue: (name: string, value: any) => void;
 }) {
   const modalRef = useRef<HTMLDialogElement>(null);
