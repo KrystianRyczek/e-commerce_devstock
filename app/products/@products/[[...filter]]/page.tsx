@@ -140,16 +140,27 @@ const productsArray = [
   // },
 ];
 
-export default async function Product({
-  params,
-}: {
-  params: { filter: string[] };
-}) {
-  const pararelRouteParams = await params;
-  console.log("Product1 pararelRouteParams:", pararelRouteParams.filter);
+export default async function Product() {
+
   return (
     <main className="w-full">
       <ProductList productsArray={productsArray} />
     </main>
   );
 }
+// export default async function Product({
+//   params,
+// }: {
+//   params: { filter: string[] };
+// }) {
+//   const pararelRouteParams = await params;
+//   console.log("Product1 pararelRouteParams:", pararelRouteParams.filter);
+//   return (
+//     <main className="w-full">
+//       <ProductList productsArray={productsArray} />
+//     </main>
+//   );
+// }
+// Type error: Type '{ params: { filter: string[]; }; }' does not satisfy the constraint 'PageProps'.
+//   Types of property 'params' are incompatible.
+//     Type '{ filter: string[]; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
