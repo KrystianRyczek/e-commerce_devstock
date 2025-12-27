@@ -1,8 +1,8 @@
 import SlideShow from "@/components/product-details/slide-show";
 import PurchasingContainer from "@/components/product-details/purchasing-container";
 import ProductDescription from "@/components/product-details/product-description";
-
-export default function ProductDetails({ product }: { product: any }) {
+import { Product } from "@/app/product/[id]/page";
+export default function ProductDetails({ product }: { product: Product }) {
   return (
     <div className="w-full text-white flex gap-[32px] max-desktop:gap-[18px] items-start p-[40px] max-desktop:px-[8px] ">
       <div className="flex max-desktop:flex-col gap-[40px] w-[889px] max-tablet:w-full">

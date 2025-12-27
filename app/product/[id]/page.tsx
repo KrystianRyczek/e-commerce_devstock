@@ -1,3 +1,4 @@
+import { StaticImageData } from "next/image";
 import NavigationBar from "@/components/product-details/navigation-bar";
 import ProductDetails from "@/components/product-details/product-details";
 import m1 from "@/public/product-images/m1.png";
@@ -16,6 +17,17 @@ const product = {
   variants: ["#b0b0b0", "#4caf50", "#f29145", "#b0b0b0"],
   description:
     "The Xierra X16 mouse is a cutting-edge peripheral that combines precision and comfort. Its ergonomic design fits snugly in your hand, while its high-precision sensor ensures smooth and accurate ",
+};
+export type Product = {
+  name: string;
+  category: string;
+  imgs: StaticImageData[];
+  price: number;
+  promo: number;
+  currency: string;
+  stock: number;
+  variants: string[];
+  description: string;
 };
 
 export default async function ProductDetailsPage({

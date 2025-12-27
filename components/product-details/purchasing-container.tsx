@@ -57,15 +57,18 @@ export default function PurchasingContainer({
     }
   };
 
-  const addItemToCart = async (prevState: any, formData: FormData) => {
+  const addItemToCart = async (
+    prevState: { errors: string[] },
+    formData: FormData
+  ) => {
     const color = formData.get("color");
     console.log("Selected color:", color);
     const itemCount = formData.get("quantity");
     console.log("Selected quantity:", itemCount);
 
-    let errors = [];
+    const errors: string[] = [];
 
-    return {};
+    return { errors };
   };
 
   const [formState, formAction] = useActionState(addItemToCart, {
