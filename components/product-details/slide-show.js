@@ -10,6 +10,7 @@ import "swiper/css/thumbs";
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import Image from "next/image";
 
 export default function SlideShow({ imagesArray }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -30,7 +31,7 @@ export default function SlideShow({ imagesArray }) {
       >
         {imagesArray.map((image, index) => (
           <SwiperSlide key={index}>
-            <img src={image.src} />
+            <Image src={image} alt={`Slide img`} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -46,7 +47,7 @@ export default function SlideShow({ imagesArray }) {
       >
         {imagesArray.map((image, index) => (
           <SwiperSlide key={index}>
-            <img src={image.src} />
+            <Image src={image} alt={`Slide img`} />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -8,15 +8,32 @@ import webcam from "@/public/category/camera.png";
 
 type CategoryArray = {
   name: string;
-  image: StaticImageData;
+  image: string;
 };
 export default function CategoryList() {
   const categoryArray: CategoryArray[] = [
-    { name: "Mouse", image: mouse },
-    { name: "Monitor", image: monitor },
-    { name: "Headphone", image: headphone },
-    { name: "Keyboard", image: keyboard },
-    { name: "Webcam", image: webcam },
+    {
+      name: "Mouse",
+      image: "https://res.cloudinary.com/dts7qcxky/image/upload/mouse_nhm6kp",
+    },
+    {
+      name: "Monitor",
+      image: "https://res.cloudinary.com/dts7qcxky/image/upload/monitor_ac6kfg",
+    },
+    {
+      name: "Headphone",
+      image:
+        "https://res.cloudinary.com/dts7qcxky/image/upload/headphone_aq7pjm",
+    },
+    {
+      name: "Keyboard",
+      image:
+        "https://res.cloudinary.com/dts7qcxky/image/upload/keyboard_gqzcnr",
+    },
+    {
+      name: "Webcam",
+      image: "https://res.cloudinary.com/dts7qcxky/image/upload/camera_i6hkiw",
+    },
   ];
 
   return (

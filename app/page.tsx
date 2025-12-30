@@ -4,7 +4,7 @@ import CategoryList from "@/components/home-page/sections/category/list";
 import Section from "@/components/home-page/sections/section";
 import SlideShow from "@/components/home-page/slide-show/slide -sohow";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main className=" flex flex-col gap-[100px] max-desktop:gap-[50px] px-[40px] max-desktop:px-[20px] pb-[80px]">
       {/* <SlideShow /> */}

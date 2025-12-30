@@ -8,16 +8,31 @@ import Razer from "@/public/brands/razer.png";
 import Rexus from "@/public/brands/rexus.png";
 type BrandArray = {
   name: string;
-  image: StaticImageData;
+  image: string;
 };
 export default function BrandList() {
   const brandArray: BrandArray[] = [
-    { name: "ROG", image: ROG },
-    { name: "Logitech", image: Logitech },
-    { name: "JBL", image: JBL },
-    { name: "AOC", image: AOC },
-    { name: "Razer", image: Razer },
-    { name: "Rexus", image: Rexus },
+    {
+      name: "ROG",
+      image: "https://res.cloudinary.com/dts7qcxky/image/upload/rog_h81d2d",
+    },
+    {
+      name: "Logitech",
+      image:
+        "https://res.cloudinary.com/dts7qcxky/image/upload/logitech_cbpk0x",
+    },
+    {
+      name: "JBL",
+      image: "https://res.cloudinary.com/dts7qcxky/image/upload/jbl_yp5wcx",
+    },
+    {
+      name: "AOC",
+      image: "https://res.cloudinary.com/dts7qcxky/image/upload/aoc_gwjakr",
+    },
+    {
+      name: "Razer",
+      image: "https://res.cloudinary.com/dts7qcxky/image/upload/razer_oshngt",
+    },
   ];
 
   return (

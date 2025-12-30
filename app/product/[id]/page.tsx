@@ -9,7 +9,7 @@ import m4 from "@/public/product-images/m4.png";
 const product = {
   name: "Rexus Xierra X16",
   category: "Mouse",
-  imgs: [m1, m2, m3, m4, m4, m1, m2, m3],
+  imgs: [m1, m2, m3, m4],
   price: 100,
   promo: 34.99,
   currency: "USD",

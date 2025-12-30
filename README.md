@@ -38,3 +38,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 npm install
 docker-compose up -d
 PGadmin: http://localhost:5050
+
+- Start database: docker-compose up -d
+- Generate Prisma Client: npm run prisma:generate
+- Run migrations: npm run prisma:migrate
+- Start server: npm start
