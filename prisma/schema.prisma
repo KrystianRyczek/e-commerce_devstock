@@ -13,8 +13,8 @@ datasource db {
 model Products {
   id  Int    @id @default(autoincrement())
   name  String
-  price  Float?
-  prevPrice  Float? @default(0)
+  price  Float
+  prevPrice  Float @default(0)
   description  String?
   category  Categories    @relation(fields: [categoryId], references: [id])
   categoryId  Int
@@ -56,7 +56,7 @@ model Categories {
 model Brands {
   id  Int @id @default(autoincrement())
   name  String @unique
-  imgUrl BrandsImgUrls?
+  imgUrl BrandsImgUrls? 
   products  Products[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -103,16 +103,16 @@ model UsersAddresses{
 model CategoriesImgUrls {
     id    Int    @id @default(autoincrement())
     url String
-    category  Categories? @relation(fields: [categoryId], references: [id])
-    categoryId Int? @unique
+    category  Categories @relation(fields: [categoryId], references: [id])
+    categoryId Int @unique
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
 model BrandsImgUrls {
     id    Int    @id @default(autoincrement())
     url String
-    brand   Brands? @relation(fields: [brandId], references: [id])
-    brandId Int? @unique
+    brand   Brands @relation(fields: [brandId], references: [id])
+    brandId Int @unique
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }

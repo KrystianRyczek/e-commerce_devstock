@@ -343,11 +343,6 @@ export type BrandsSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type BrandsNullableScalarRelationFilter = {
-  is?: Prisma.BrandsWhereInput | null
-  isNot?: Prisma.BrandsWhereInput | null
-}
-
 export type BrandsCreateNestedOneWithoutProductsInput = {
   create?: Prisma.XOR<Prisma.BrandsCreateWithoutProductsInput, Prisma.BrandsUncheckedCreateWithoutProductsInput>
   connectOrCreate?: Prisma.BrandsCreateOrConnectWithoutProductsInput
@@ -368,12 +363,10 @@ export type BrandsCreateNestedOneWithoutImgUrlInput = {
   connect?: Prisma.BrandsWhereUniqueInput
 }
 
-export type BrandsUpdateOneWithoutImgUrlNestedInput = {
+export type BrandsUpdateOneRequiredWithoutImgUrlNestedInput = {
   create?: Prisma.XOR<Prisma.BrandsCreateWithoutImgUrlInput, Prisma.BrandsUncheckedCreateWithoutImgUrlInput>
   connectOrCreate?: Prisma.BrandsCreateOrConnectWithoutImgUrlInput
   upsert?: Prisma.BrandsUpsertWithoutImgUrlInput
-  disconnect?: Prisma.BrandsWhereInput | boolean
-  delete?: Prisma.BrandsWhereInput | boolean
   connect?: Prisma.BrandsWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.BrandsUpdateToOneWithWhereWithoutImgUrlInput, Prisma.BrandsUpdateWithoutImgUrlInput>, Prisma.BrandsUncheckedUpdateWithoutImgUrlInput>
 }

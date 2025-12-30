@@ -23,7 +23,7 @@ export const createBrandsHandler = async () => {
         name: "Logitech",
         imgUrl: {
           create: {
-            url: "https://res.cloudinary.com/dts7qcxky/image/upload/rog_h81d2d",
+            url: "https://res.cloudinary.com/dts7qcxky/image/upload/logitech_cbpk0x",
           },
         },
       },
@@ -38,7 +38,7 @@ export const createBrandsHandler = async () => {
         },
       },
     });
-    const keyboardBrand = await prisma.brands.create({
+    const aoc = await prisma.brands.create({
       data: {
         name: "AOC",
         imgUrl: {
@@ -48,12 +48,22 @@ export const createBrandsHandler = async () => {
         },
       },
     });
-    const aoc = await prisma.brands.create({
+    const razer = await prisma.brands.create({
       data: {
         name: "Razer",
         imgUrl: {
           create: {
             url: "https://res.cloudinary.com/dts7qcxky/image/upload/razer_oshngt",
+          },
+        },
+      },
+    });
+    const rexus = await prisma.brands.create({
+      data: {
+        name: "Rexus",
+        imgUrl: {
+          create: {
+            url: "https://res.cloudinary.com/dts7qcxky/image/upload/rexus_rhrq60",
           },
         },
       },

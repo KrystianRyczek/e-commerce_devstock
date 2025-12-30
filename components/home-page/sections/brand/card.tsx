@@ -1,31 +1,29 @@
 "use client";
+import Image from "next/image";
+import { imageLoader } from "@/util/image-loader";
+import { SectionCard } from "@/util/types";
+import Link from "next/link";
 
-import Image, { type StaticImageData } from "next/image";
-
-type Card = {
-  label: string;
-  image: string;
-};
-function imageLoader(config: { src: string; width: number; quality?: number }) {
-  const urlStart = config.src.split("upload/")[0];
-  const urlEnd = config.src.split("upload/")[1];
-  const transformations = `c_limit,h_46`;
-  return `${urlStart}upload/${transformations}/${urlEnd}`;
-}
-
-export default function Card({ image, label }: Card) {
+export default function Card({ image, label }: SectionCard) {
   return (
-    <li className="w-[220px] max-desktop:w-[120px] h-[190px] max-desktop:h-[150px] p-[12px] rounded-[6px] bg-brand-background border-[1px] border-brand-border flex flex-col gap-[28px] max-desktop:gap-[18px] justify-center items-center">
-      <div className="w-full h-[46px] relative flex justify-center object-contain">
-        <Image
-          loader={imageLoader}
-          src={image}
-          alt={`${label} brand iamge`}
-          fill={true}
-          className="object-contain"
-        />
-      </div>
-      <h3 className="text-20-30-500 -tracking-[0.02rem]">{label}</h3>
+    <li className="flex w-[220px] max-desktop:w-[120px] h-[190px] max-desktop:h-[150px] rounded-[6px] bg-brand-background border-[1px] border-brand-border ">
+      <Link
+        href={`products/brands=${label}`}
+        className="w-full h-full p-[12px] flex flex-col gap-[28px] max-desktop:gap-[18px] justify-center items-center"
+      >
+        <div className="w-full h-[46px] relative flex justify-center object-contain">
+          {image && (
+            <Image
+              loader={(config) => imageLoader(config, `c_limit,h_46`)}
+              src={image}
+              alt={`${label} brand iamge`}
+              fill={true}
+              className="object-contain"
+            />
+          )}
+        </div>
+        <h3 className="text-20-30-500 -tracking-[0.02rem]">{label}</h3>
+      </Link>
     </li>
   );
 }

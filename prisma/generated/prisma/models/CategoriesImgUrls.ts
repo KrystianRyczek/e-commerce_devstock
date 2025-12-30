@@ -186,7 +186,7 @@ export type CategoriesImgUrlsGroupByArgs<ExtArgs extends runtime.Types.Extension
 export type CategoriesImgUrlsGroupByOutputType = {
   id: number
   url: string
-  categoryId: number | null
+  categoryId: number
   createdAt: Date
   updatedAt: Date
   _count: CategoriesImgUrlsCountAggregateOutputType | null
@@ -217,16 +217,16 @@ export type CategoriesImgUrlsWhereInput = {
   NOT?: Prisma.CategoriesImgUrlsWhereInput | Prisma.CategoriesImgUrlsWhereInput[]
   id?: Prisma.IntFilter<"CategoriesImgUrls"> | number
   url?: Prisma.StringFilter<"CategoriesImgUrls"> | string
-  categoryId?: Prisma.IntNullableFilter<"CategoriesImgUrls"> | number | null
+  categoryId?: Prisma.IntFilter<"CategoriesImgUrls"> | number
   createdAt?: Prisma.DateTimeFilter<"CategoriesImgUrls"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CategoriesImgUrls"> | Date | string
-  category?: Prisma.XOR<Prisma.CategoriesNullableScalarRelationFilter, Prisma.CategoriesWhereInput> | null
+  category?: Prisma.XOR<Prisma.CategoriesScalarRelationFilter, Prisma.CategoriesWhereInput>
 }
 
 export type CategoriesImgUrlsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   url?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   category?: Prisma.CategoriesOrderByWithRelationInput
@@ -241,13 +241,13 @@ export type CategoriesImgUrlsWhereUniqueInput = Prisma.AtLeast<{
   url?: Prisma.StringFilter<"CategoriesImgUrls"> | string
   createdAt?: Prisma.DateTimeFilter<"CategoriesImgUrls"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CategoriesImgUrls"> | Date | string
-  category?: Prisma.XOR<Prisma.CategoriesNullableScalarRelationFilter, Prisma.CategoriesWhereInput> | null
+  category?: Prisma.XOR<Prisma.CategoriesScalarRelationFilter, Prisma.CategoriesWhereInput>
 }, "id" | "categoryId">
 
 export type CategoriesImgUrlsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   url?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CategoriesImgUrlsCountOrderByAggregateInput
@@ -263,7 +263,7 @@ export type CategoriesImgUrlsScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CategoriesImgUrlsScalarWhereWithAggregatesInput | Prisma.CategoriesImgUrlsScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"CategoriesImgUrls"> | number
   url?: Prisma.StringWithAggregatesFilter<"CategoriesImgUrls"> | string
-  categoryId?: Prisma.IntNullableWithAggregatesFilter<"CategoriesImgUrls"> | number | null
+  categoryId?: Prisma.IntWithAggregatesFilter<"CategoriesImgUrls"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CategoriesImgUrls"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CategoriesImgUrls"> | Date | string
 }
@@ -272,13 +272,13 @@ export type CategoriesImgUrlsCreateInput = {
   url: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  category?: Prisma.CategoriesCreateNestedOneWithoutImgUrlInput
+  category: Prisma.CategoriesCreateNestedOneWithoutImgUrlInput
 }
 
 export type CategoriesImgUrlsUncheckedCreateInput = {
   id?: number
   url: string
-  categoryId?: number | null
+  categoryId: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -287,13 +287,13 @@ export type CategoriesImgUrlsUpdateInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  category?: Prisma.CategoriesUpdateOneWithoutImgUrlNestedInput
+  category?: Prisma.CategoriesUpdateOneRequiredWithoutImgUrlNestedInput
 }
 
 export type CategoriesImgUrlsUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -301,7 +301,7 @@ export type CategoriesImgUrlsUncheckedUpdateInput = {
 export type CategoriesImgUrlsCreateManyInput = {
   id?: number
   url: string
-  categoryId?: number | null
+  categoryId: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -315,7 +315,7 @@ export type CategoriesImgUrlsUpdateManyMutationInput = {
 export type CategoriesImgUrlsUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -441,7 +441,7 @@ export type CategoriesImgUrlsSelect<ExtArgs extends runtime.Types.Extensions.Int
   categoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  category?: boolean | Prisma.CategoriesImgUrls$categoryArgs<ExtArgs>
+  category?: boolean | Prisma.CategoriesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoriesImgUrls"]>
 
 export type CategoriesImgUrlsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -450,7 +450,7 @@ export type CategoriesImgUrlsSelectCreateManyAndReturn<ExtArgs extends runtime.T
   categoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  category?: boolean | Prisma.CategoriesImgUrls$categoryArgs<ExtArgs>
+  category?: boolean | Prisma.CategoriesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoriesImgUrls"]>
 
 export type CategoriesImgUrlsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -459,7 +459,7 @@ export type CategoriesImgUrlsSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   categoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  category?: boolean | Prisma.CategoriesImgUrls$categoryArgs<ExtArgs>
+  category?: boolean | Prisma.CategoriesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoriesImgUrls"]>
 
 export type CategoriesImgUrlsSelectScalar = {
@@ -472,24 +472,24 @@ export type CategoriesImgUrlsSelectScalar = {
 
 export type CategoriesImgUrlsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "url" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["categoriesImgUrls"]>
 export type CategoriesImgUrlsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  category?: boolean | Prisma.CategoriesImgUrls$categoryArgs<ExtArgs>
+  category?: boolean | Prisma.CategoriesDefaultArgs<ExtArgs>
 }
 export type CategoriesImgUrlsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  category?: boolean | Prisma.CategoriesImgUrls$categoryArgs<ExtArgs>
+  category?: boolean | Prisma.CategoriesDefaultArgs<ExtArgs>
 }
 export type CategoriesImgUrlsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  category?: boolean | Prisma.CategoriesImgUrls$categoryArgs<ExtArgs>
+  category?: boolean | Prisma.CategoriesDefaultArgs<ExtArgs>
 }
 
 export type $CategoriesImgUrlsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CategoriesImgUrls"
   objects: {
-    category: Prisma.$CategoriesPayload<ExtArgs> | null
+    category: Prisma.$CategoriesPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     url: string
-    categoryId: number | null
+    categoryId: number
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["categoriesImgUrls"]>
@@ -886,7 +886,7 @@ readonly fields: CategoriesImgUrlsFieldRefs;
  */
 export interface Prisma__CategoriesImgUrlsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  category<T extends Prisma.CategoriesImgUrls$categoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoriesImgUrls$categoryArgs<ExtArgs>>): Prisma.Prisma__CategoriesClient<runtime.Types.Result.GetResult<Prisma.$CategoriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  category<T extends Prisma.CategoriesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoriesDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoriesClient<runtime.Types.Result.GetResult<Prisma.$CategoriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1314,25 +1314,6 @@ export type CategoriesImgUrlsDeleteManyArgs<ExtArgs extends runtime.Types.Extens
    * Limit how many CategoriesImgUrls to delete.
    */
   limit?: number
-}
-
-/**
- * CategoriesImgUrls.category
- */
-export type CategoriesImgUrls$categoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Categories
-   */
-  select?: Prisma.CategoriesSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Categories
-   */
-  omit?: Prisma.CategoriesOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CategoriesInclude<ExtArgs> | null
-  where?: Prisma.CategoriesWhereInput
 }
 
 /**

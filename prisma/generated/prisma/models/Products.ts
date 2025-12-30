@@ -222,8 +222,8 @@ export type ProductsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type ProductsGroupByOutputType = {
   id: number
   name: string
-  price: number | null
-  prevPrice: number | null
+  price: number
+  prevPrice: number
   description: string | null
   categoryId: number
   brandId: number
@@ -257,8 +257,8 @@ export type ProductsWhereInput = {
   NOT?: Prisma.ProductsWhereInput | Prisma.ProductsWhereInput[]
   id?: Prisma.IntFilter<"Products"> | number
   name?: Prisma.StringFilter<"Products"> | string
-  price?: Prisma.FloatNullableFilter<"Products"> | number | null
-  prevPrice?: Prisma.FloatNullableFilter<"Products"> | number | null
+  price?: Prisma.FloatFilter<"Products"> | number
+  prevPrice?: Prisma.FloatFilter<"Products"> | number
   description?: Prisma.StringNullableFilter<"Products"> | string | null
   categoryId?: Prisma.IntFilter<"Products"> | number
   brandId?: Prisma.IntFilter<"Products"> | number
@@ -275,8 +275,8 @@ export type ProductsWhereInput = {
 export type ProductsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  price?: Prisma.SortOrderInput | Prisma.SortOrder
-  prevPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  price?: Prisma.SortOrder
+  prevPrice?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
@@ -296,8 +296,8 @@ export type ProductsWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ProductsWhereInput[]
   NOT?: Prisma.ProductsWhereInput | Prisma.ProductsWhereInput[]
   name?: Prisma.StringFilter<"Products"> | string
-  price?: Prisma.FloatNullableFilter<"Products"> | number | null
-  prevPrice?: Prisma.FloatNullableFilter<"Products"> | number | null
+  price?: Prisma.FloatFilter<"Products"> | number
+  prevPrice?: Prisma.FloatFilter<"Products"> | number
   description?: Prisma.StringNullableFilter<"Products"> | string | null
   categoryId?: Prisma.IntFilter<"Products"> | number
   brandId?: Prisma.IntFilter<"Products"> | number
@@ -314,8 +314,8 @@ export type ProductsWhereUniqueInput = Prisma.AtLeast<{
 export type ProductsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  price?: Prisma.SortOrderInput | Prisma.SortOrder
-  prevPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  price?: Prisma.SortOrder
+  prevPrice?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
@@ -334,8 +334,8 @@ export type ProductsScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ProductsScalarWhereWithAggregatesInput | Prisma.ProductsScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Products"> | number
   name?: Prisma.StringWithAggregatesFilter<"Products"> | string
-  price?: Prisma.FloatNullableWithAggregatesFilter<"Products"> | number | null
-  prevPrice?: Prisma.FloatNullableWithAggregatesFilter<"Products"> | number | null
+  price?: Prisma.FloatWithAggregatesFilter<"Products"> | number
+  prevPrice?: Prisma.FloatWithAggregatesFilter<"Products"> | number
   description?: Prisma.StringNullableWithAggregatesFilter<"Products"> | string | null
   categoryId?: Prisma.IntWithAggregatesFilter<"Products"> | number
   brandId?: Prisma.IntWithAggregatesFilter<"Products"> | number
@@ -345,8 +345,8 @@ export type ProductsScalarWhereWithAggregatesInput = {
 
 export type ProductsCreateInput = {
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -361,8 +361,8 @@ export type ProductsCreateInput = {
 export type ProductsUncheckedCreateInput = {
   id?: number
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   categoryId: number
   brandId: number
@@ -376,8 +376,8 @@ export type ProductsUncheckedCreateInput = {
 
 export type ProductsUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -392,8 +392,8 @@ export type ProductsUpdateInput = {
 export type ProductsUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -408,8 +408,8 @@ export type ProductsUncheckedUpdateInput = {
 export type ProductsCreateManyInput = {
   id?: number
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   categoryId: number
   brandId: number
@@ -419,8 +419,8 @@ export type ProductsCreateManyInput = {
 
 export type ProductsUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -429,8 +429,8 @@ export type ProductsUpdateManyMutationInput = {
 export type ProductsUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -514,8 +514,8 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
   increment?: number
   decrement?: number
   multiply?: number
@@ -708,8 +708,8 @@ export type ProductsUpdateOneWithoutImgUrlsNestedInput = {
 
 export type ProductsCreateWithoutRecommendationInput = {
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -723,8 +723,8 @@ export type ProductsCreateWithoutRecommendationInput = {
 export type ProductsUncheckedCreateWithoutRecommendationInput = {
   id?: number
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   categoryId: number
   brandId: number
@@ -753,8 +753,8 @@ export type ProductsUpdateToOneWithWhereWithoutRecommendationInput = {
 
 export type ProductsUpdateWithoutRecommendationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -768,8 +768,8 @@ export type ProductsUpdateWithoutRecommendationInput = {
 export type ProductsUncheckedUpdateWithoutRecommendationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -782,8 +782,8 @@ export type ProductsUncheckedUpdateWithoutRecommendationInput = {
 
 export type ProductsCreateWithoutVariantsInput = {
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -797,8 +797,8 @@ export type ProductsCreateWithoutVariantsInput = {
 export type ProductsUncheckedCreateWithoutVariantsInput = {
   id?: number
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   categoryId: number
   brandId: number
@@ -827,8 +827,8 @@ export type ProductsUpdateToOneWithWhereWithoutVariantsInput = {
 
 export type ProductsUpdateWithoutVariantsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -842,8 +842,8 @@ export type ProductsUpdateWithoutVariantsInput = {
 export type ProductsUncheckedUpdateWithoutVariantsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -856,8 +856,8 @@ export type ProductsUncheckedUpdateWithoutVariantsInput = {
 
 export type ProductsCreateWithoutCategoryInput = {
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -871,8 +871,8 @@ export type ProductsCreateWithoutCategoryInput = {
 export type ProductsUncheckedCreateWithoutCategoryInput = {
   id?: number
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   brandId: number
   createdAt?: Date | string
@@ -915,8 +915,8 @@ export type ProductsScalarWhereInput = {
   NOT?: Prisma.ProductsScalarWhereInput | Prisma.ProductsScalarWhereInput[]
   id?: Prisma.IntFilter<"Products"> | number
   name?: Prisma.StringFilter<"Products"> | string
-  price?: Prisma.FloatNullableFilter<"Products"> | number | null
-  prevPrice?: Prisma.FloatNullableFilter<"Products"> | number | null
+  price?: Prisma.FloatFilter<"Products"> | number
+  prevPrice?: Prisma.FloatFilter<"Products"> | number
   description?: Prisma.StringNullableFilter<"Products"> | string | null
   categoryId?: Prisma.IntFilter<"Products"> | number
   brandId?: Prisma.IntFilter<"Products"> | number
@@ -926,8 +926,8 @@ export type ProductsScalarWhereInput = {
 
 export type ProductsCreateWithoutBrandInput = {
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -941,8 +941,8 @@ export type ProductsCreateWithoutBrandInput = {
 export type ProductsUncheckedCreateWithoutBrandInput = {
   id?: number
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   categoryId: number
   createdAt?: Date | string
@@ -981,8 +981,8 @@ export type ProductsUpdateManyWithWhereWithoutBrandInput = {
 
 export type ProductsCreateWithoutCartsInput = {
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -996,8 +996,8 @@ export type ProductsCreateWithoutCartsInput = {
 export type ProductsUncheckedCreateWithoutCartsInput = {
   id?: number
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   categoryId: number
   brandId: number
@@ -1031,8 +1031,8 @@ export type ProductsUpdateManyWithWhereWithoutCartsInput = {
 
 export type ProductsCreateWithoutImgUrlsInput = {
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1046,8 +1046,8 @@ export type ProductsCreateWithoutImgUrlsInput = {
 export type ProductsUncheckedCreateWithoutImgUrlsInput = {
   id?: number
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   categoryId: number
   brandId: number
@@ -1076,8 +1076,8 @@ export type ProductsUpdateToOneWithWhereWithoutImgUrlsInput = {
 
 export type ProductsUpdateWithoutImgUrlsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1091,8 +1091,8 @@ export type ProductsUpdateWithoutImgUrlsInput = {
 export type ProductsUncheckedUpdateWithoutImgUrlsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1106,8 +1106,8 @@ export type ProductsUncheckedUpdateWithoutImgUrlsInput = {
 export type ProductsCreateManyCategoryInput = {
   id?: number
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   brandId: number
   createdAt?: Date | string
@@ -1116,8 +1116,8 @@ export type ProductsCreateManyCategoryInput = {
 
 export type ProductsUpdateWithoutCategoryInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1131,8 +1131,8 @@ export type ProductsUpdateWithoutCategoryInput = {
 export type ProductsUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1146,8 +1146,8 @@ export type ProductsUncheckedUpdateWithoutCategoryInput = {
 export type ProductsUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1157,8 +1157,8 @@ export type ProductsUncheckedUpdateManyWithoutCategoryInput = {
 export type ProductsCreateManyBrandInput = {
   id?: number
   name: string
-  price?: number | null
-  prevPrice?: number | null
+  price: number
+  prevPrice?: number
   description?: string | null
   categoryId: number
   createdAt?: Date | string
@@ -1167,8 +1167,8 @@ export type ProductsCreateManyBrandInput = {
 
 export type ProductsUpdateWithoutBrandInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1182,8 +1182,8 @@ export type ProductsUpdateWithoutBrandInput = {
 export type ProductsUncheckedUpdateWithoutBrandInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1197,8 +1197,8 @@ export type ProductsUncheckedUpdateWithoutBrandInput = {
 export type ProductsUncheckedUpdateManyWithoutBrandInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1207,8 +1207,8 @@ export type ProductsUncheckedUpdateManyWithoutBrandInput = {
 
 export type ProductsUpdateWithoutCartsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1222,8 +1222,8 @@ export type ProductsUpdateWithoutCartsInput = {
 export type ProductsUncheckedUpdateWithoutCartsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1237,8 +1237,8 @@ export type ProductsUncheckedUpdateWithoutCartsInput = {
 export type ProductsUncheckedUpdateManyWithoutCartsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  prevPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  prevPrice?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   brandId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1386,8 +1386,8 @@ export type $ProductsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
-    price: number | null
-    prevPrice: number | null
+    price: number
+    prevPrice: number
     description: string | null
     categoryId: number
     brandId: number

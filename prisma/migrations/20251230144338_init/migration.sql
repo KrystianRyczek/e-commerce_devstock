@@ -2,8 +2,8 @@
 CREATE TABLE "Products" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "price" DOUBLE PRECISION,
-    "prevPrice" DOUBLE PRECISION DEFAULT 0,
+    "price" DOUBLE PRECISION NOT NULL,
+    "prevPrice" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "description" TEXT,
     "categoryId" INTEGER NOT NULL,
     "brandId" INTEGER NOT NULL,
@@ -100,7 +100,7 @@ CREATE TABLE "UsersAddresses" (
 CREATE TABLE "CategoriesImgUrls" (
     "id" SERIAL NOT NULL,
     "url" TEXT NOT NULL,
-    "categoryId" INTEGER,
+    "categoryId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -111,7 +111,7 @@ CREATE TABLE "CategoriesImgUrls" (
 CREATE TABLE "BrandsImgUrls" (
     "id" SERIAL NOT NULL,
     "url" TEXT NOT NULL,
-    "brandId" INTEGER,
+    "brandId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -188,10 +188,10 @@ ALTER TABLE "Auth" ADD CONSTRAINT "Auth_userId_fkey" FOREIGN KEY ("userId") REFE
 ALTER TABLE "UsersAddresses" ADD CONSTRAINT "UsersAddresses_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "CategoriesImgUrls" ADD CONSTRAINT "CategoriesImgUrls_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Categories"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "CategoriesImgUrls" ADD CONSTRAINT "CategoriesImgUrls_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "BrandsImgUrls" ADD CONSTRAINT "BrandsImgUrls_brandId_fkey" FOREIGN KEY ("brandId") REFERENCES "Brands"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "BrandsImgUrls" ADD CONSTRAINT "BrandsImgUrls_brandId_fkey" FOREIGN KEY ("brandId") REFERENCES "Brands"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ProductsImgUrls" ADD CONSTRAINT "ProductsImgUrls_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Products"("id") ON DELETE SET NULL ON UPDATE CASCADE;
