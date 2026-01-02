@@ -1,18 +1,16 @@
 "use client";
-import React, { useRef, useState } from "react";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
+
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-
-// import required modules
+import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
-import Image from "next/image";
+import SwipperImageContainer from "./common-components/swipper-image-container";
 
 export default function SlideShow({ imagesArray }) {
+  
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
@@ -31,7 +29,11 @@ export default function SlideShow({ imagesArray }) {
       >
         {imagesArray.map((image, index) => (
           <SwiperSlide key={index}>
-            <Image src={image} alt={`Slide img`} />
+            <SwipperImageContainer
+              url={image.url}
+              alt={`Slide img`}
+              transformation="e_upscale/c_limit,h_317,w_398"
+            />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -47,7 +49,11 @@ export default function SlideShow({ imagesArray }) {
       >
         {imagesArray.map((image, index) => (
           <SwiperSlide key={index}>
-            <Image src={image} alt={`Slide img`} />
+            <SwipperImageContainer
+              url={image.url}
+              alt={`Slide img`}
+              transformation="e_upscale/c_limit,h_99,w_130"
+            />
           </SwiperSlide>
         ))}
       </Swiper>

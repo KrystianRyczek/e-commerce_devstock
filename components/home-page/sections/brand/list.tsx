@@ -1,7 +1,5 @@
 import Card from "./card";
-
-type BrandsArray = { id: number; name: string; imgUrl: { url: string } | null };
-
+import { BrandsArray } from "@/util/types";
 export default function BrandList({ brands }: { brands: BrandsArray[] }) {
   return (
     <ul className="flex w-[1480px] gap-[30px]">

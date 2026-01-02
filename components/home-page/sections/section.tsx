@@ -1,13 +1,8 @@
 import Link from "next/link";
-import { ReactNode } from "react";
 import SeeAllArrow from "../svg/see-all-arrow";
-type Section = {
-  children: ReactNode;
-  title: string;
-  href: string | undefined;
-};
+import { SectionParams } from "@/util/types";
 
-export default function Section({ children, title, href }: Section) {
+export default function Section({ children, title, href }: SectionParams) {
   return (
     <div className="w-full flex flex-col gap-6 text-section-text overflow-hidden">
       <div className="flex justify-between items-center">

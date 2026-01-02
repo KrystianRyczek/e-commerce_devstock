@@ -1,12 +1,10 @@
 import ArrowDown from "@/components/side-bar/svg/arrow-down";
+import { FilterContainerParams } from "@/util/types";
 
 export default function FilterContainer({
   label,
   children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+}: FilterContainerParams) {
   return (
     <div className="flex flex-col gap-2 w-full border-2  bg-filter-background border-filter-border rounded-md">
       <details className="group ">

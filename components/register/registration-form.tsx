@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { useForm, useWatch, Control, Resolver } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import RegistrationInput from "./registration-input";
 import RegisterSelect from "./registration-select";
 import RegistrationCheckbox from "./registration-checkbox";
@@ -40,7 +39,6 @@ const schema = z
         /[a-z]+/,
         "Password at least 8 characters and includes at least upper case letter, lower case letter and number."
       ),
-
     confirmPassword: z.string(),
     country: z.string().nonempty("Country is required"),
     conditionsAndPrivancy: z.boolean().refine((val) => val === true, {

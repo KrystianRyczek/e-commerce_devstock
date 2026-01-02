@@ -1,120 +1,112 @@
 "use client";
-import CategoryFilter from "@/components/side-bar/category-filter/category-filter";
 import PriceFilter from "@/components/side-bar/price-filter/price-filter";
 import SortOption from "@/components/side-bar/sort-option/sort-option";
-import { useEffect, useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-
-type Filter = {
-  categorys: string[] | [];
-  currentCurrency: { [key: string]: string };
-  priceRange: { [key: string]: number | null };
-};
+import { useSearchParams, useRouter } from "next/navigation";
+import SelectFilter from "@/components/side-bar/select-filter/select-filter";
+import { useForm } from "react-hook-form";
+import { FilterFormData, SideBarParams } from "@/util/types";
+import { resolver } from "@/util/resolver";
 
 export default function SideBar({
-  currencys,
+  brands,
   categories,
-}: {
-  currencys: { name: string; rate: number }[];
-  categories: string[];
-}) {
-  const [filter, setFilter] = useState<Filter>({
-    categorys: [],
-    currentCurrency: { min: "PLN", max: "PLN" },
-    priceRange: { min: null, max: null },
-  });
+  currencys,
+}: SideBarParams) {
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const pathname = usePathname();
-  const formRef = useRef<HTMLFormElement>(null);
 
-  // useEffect(() => {
-  //   const query = pathname.split("/product/")[1];
-  //   if (query.includes("categorys=")) {
-  //   }
+  const selectedCategories = searchParams.get("categories")
+    ? JSON.parse(searchParams.get("categories") as string)
+    : [];
+  const selectedBrands = searchParams.get("brands")
+    ? JSON.parse(searchParams.get("brands") as string)
+    : [];
 
-  //   console.log("query", query);
-  // }, []);
-
-  const onChangeHandler = (): void => {
-    const categorys: string[] = [];
-    formRef.current
-      ?.querySelectorAll("input[type=checkbox][data-id=category]:checked")
-      .forEach((checkbox) => {
-        categorys.push((checkbox as HTMLInputElement).value);
-      });
-    const minPriceInput = Number(
-      formRef.current?.minPrice.value.replace(",", ".")
-    )
-      ? Number(formRef.current?.minPrice.value.replace(",", "."))
-      : 0;
-    const maxPriceInput = Number(
-      formRef.current?.maxPrice.value.replace(",", ".")
-    )
-      ? Number(formRef.current?.maxPrice.value.replace(",", "."))
-      : 0;
-    setFilter({
-      categorys,
-      currentCurrency: {
-        min: formRef.current?.minPriceCurrency.value,
-        max: formRef.current?.maxPriceCurrency.value,
-      },
-      priceRange: {
-        min: minPriceInput,
-        max: maxPriceInput,
-      },
-    });
+  const defaultValues: FilterFormData = {
+    show: searchParams.get("show") === null ? 9 : +searchParams.get("show")!,
+    sort: searchParams.get("sort")?.toString() || "Default order",
+    category: categories.map((category) =>
+      selectedCategories.includes(category.name.toLowerCase())
+        ? category.name.toLowerCase()
+        : false
+    ),
+    categoryAll: selectedCategories?.length > 0 ? false : true,
+    brand: brands.map((brand) =>
+      selectedBrands.includes(brand.name.toLowerCase())
+        ? brand.name.toLowerCase()
+        : false
+    ),
+    brandAll: selectedBrands.length > 0 ? false : true,
+    price: {
+      min: searchParams.get("min")
+        ? parseFloat(searchParams.get("min")!)
+        : null,
+      max: searchParams.get("max")
+        ? parseFloat(searchParams.get("max")!)
+        : null,
+    },
+    currencys: {
+      minCurrency: searchParams.get("currencyMin") || "PLN",
+      minCurrencyIcon: searchParams.get("currencyMin") || "PLN",
+      maxCurrency: searchParams.get("currencyMax") || "PLN",
+      maxCurrencyIcon: searchParams.get("currencyMax") || "PLN",
+    },
   };
-
-  useEffect(() => {
-    const currentRateMin =
-      currencys.find((currency) => currency.name === filter.currentCurrency.min)
-        ?.rate || 1;
-    const currentRateMax =
-      currencys.find((currency) => currency.name === filter.currentCurrency.max)
-        ?.rate || 1;
-
-    const categorysString =
-      filter.categorys.length > 0
-        ? "categorys=" +
-          filter.categorys.map((category) => `${category}`).join("&")
-        : "";
-    const minPriceString =
-      filter.priceRange.min != null && filter.priceRange.min > 0
-        ? `${(filter.priceRange.min * currentRateMin).toFixed(2)}`
-        : "";
-
-    const maxPriceString = filter.priceRange.max
-      ? `${(filter.priceRange.max * currentRateMax).toFixed(2)}`
-      : "";
-
-    const queryString: string =
-      categorysString +
-      (filter.priceRange.min ? `/min=${minPriceString}` : "") +
-      (filter.priceRange.min && filter.priceRange.max
-        ? `/max=${maxPriceString}`
-        : filter.priceRange.max && filter.priceRange.max > 0
-        ? `max=${maxPriceString}`
-        : "");
-
-    router.replace(`/products/${queryString}`);
-  }, [filter]);
-
-  const categoriesNotSelected =
-    filter.categorys.length === 0 ||
-    (filter.categorys.length === 1 && filter.categorys[0].includes("all"));
-
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { errors, isSubmitting },
+  } = useForm<FilterFormData>({
+    mode: "all",
+    defaultValues,
+    resolver: resolver,
+  });
+  const submitHandler = async (data: FilterFormData) => {
+    router.push(
+      `./products?categories=${JSON.stringify(
+        data.category.filter((item) => item !== false)
+      )}&brands=${JSON.stringify(
+        data.brand.filter((item) => item !== false)
+      )}&min=${data.price.min ? data.price.min : 0}&max=${
+        data.price.max ? data.price.max : 0
+      }&currencyMin=${data.currencys.minCurrency}&currencyMax=${
+        data.currencys.maxCurrency
+      }&show=${data.show}&sort=${data.sort}`
+    );
+  };
   return (
     <form
-      ref={formRef}
-      onChange={onChangeHandler}
       className="flex flex-col gap-4"
+      onSubmit={handleSubmit(submitHandler)}
     >
-      <SortOption />
-      <CategoryFilter
-        categories={categories}
-        categoriesNotSelected={categoriesNotSelected}
+      <SortOption register={register} />
+      <SelectFilter
+        label="Category"
+        selectOptions={categories}
+        register={register}
+        setValue={setValue}
+        getValues={getValues}
       />
-      <PriceFilter currentCurrency={filter.currentCurrency} />
+      <SelectFilter
+        label="Brand"
+        selectOptions={brands}
+        register={register}
+        setValue={setValue}
+        getValues={getValues}
+      />
+      <PriceFilter
+        currentCurrency={currencys}
+        register={register}
+        errors={errors}
+        getValues={getValues}
+        setValue={setValue}
+      />
+
+      <button type="submit" className="btn-primary w-full mt-4 cursor-pointer">
+        Apply Filters
+      </button>
     </form>
   );
 }

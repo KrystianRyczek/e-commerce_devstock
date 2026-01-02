@@ -12,11 +12,18 @@ import {
 export default async function Home() {
   const brands = await brandsWithImages;
   const categories = await categoriesWithImages;
+  const test = await recommendedProducts;
+  console.log("recommendedProducts", test[0].product.variants);
   const recommended = await recommendedProducts.map((item) => ({
-    ...item.product,
+    id: item.product.id,
+    name: item.product.name,
+    variantId: item.product.variants[0].id,
+    price: item.product.variants[0].price,
+    prevPrice: item.product.variants[0].prevPrice,
     category: item.product.category.name,
     imgUrls: item.product.imgUrls[0].url,
   }));
+  console.log("recommended", recommended);
   return (
     <main className=" flex flex-col gap-[100px] max-desktop:gap-[50px] px-[40px] max-desktop:px-[20px] pb-[80px]">
       {/* <SlideShow /> */}

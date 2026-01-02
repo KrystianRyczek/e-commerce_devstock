@@ -3,6 +3,7 @@
 import { useState } from "react";
 import LoginEye from "./svg/login-eye";
 import LoginEyeOff from "./svg/login-eye-off";
+import { LoginInputParams } from "@/util/types";
 
 export default function LoginInput({
   label,
@@ -12,15 +13,7 @@ export default function LoginInput({
   type,
   inputRef,
   defaultValue,
-}: {
-  label: string;
-  palceholder: string;
-  name: string;
-  id: string;
-  type: string;
-  inputRef: React.RefObject<HTMLInputElement | null>;
-  defaultValue: string;
-}) {
+}: LoginInputParams) {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible((prevState) => !prevState);

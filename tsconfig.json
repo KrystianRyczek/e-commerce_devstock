@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "types/**/*.d.ts",
-    "components/product-details/slide-show.js"
+    "components/product-details/slide-show.js",
+    "components/product-details/common-components/swipper-image-container.js"
   ],
   "exclude": ["node_modules"]
 }

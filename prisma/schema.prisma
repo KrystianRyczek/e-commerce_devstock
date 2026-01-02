@@ -13,8 +13,6 @@ datasource db {
 model Products {
   id  Int    @id @default(autoincrement())
   name  String
-  price  Float
-  prevPrice  Float @default(0)
   description  String?
   category  Categories    @relation(fields: [categoryId], references: [id])
   categoryId  Int
@@ -38,10 +36,13 @@ model Recommendation {
 
 model ProductVariants {
   id  Int    @id @default(autoincrement())
-  color String
-  stock Int @default(0)
   product   Products? @relation(fields: [productId], references: [id])
   productId Int?
+  color String
+  stock Int @default(0)
+  price  Float
+  prevPrice  Float @default(0)
+  tag String
 }
 
 model Categories {

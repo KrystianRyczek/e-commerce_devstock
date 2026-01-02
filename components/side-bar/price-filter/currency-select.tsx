@@ -1,16 +1,30 @@
+import { FilterFormData, CurrencySelectParams } from "@/util/types";
+
 export default function CurrencySelect({
   label,
   curencyNameArray,
-}: {
-  label: string;
-  curencyNameArray: string[];
-}) {
+  register,
+  getValues,
+  setValue,
+}: CurrencySelectParams) {
+  const changeCurrencyHandler = () => {
+    const currentCurrenty = getValues(
+      `currencys.${label.toLocaleLowerCase()}Currency` as keyof FilterFormData
+    );
+    setValue(
+      `currencys.${label.toLocaleLowerCase()}CurrencyIcon` as keyof FilterFormData,
+      currentCurrenty
+    );
+  };
   return (
     <div className="grid shrink-0 grid-cols-1 focus-within:relative">
       <select
         id={`${label.toLocaleLowerCase()}PriceCurrency`}
-        name={`${label.toLocaleLowerCase()}PriceCurrency`}
         aria-label="Currency"
+        {...register(
+          `currencys.${label.toLocaleLowerCase()}Currency` as keyof FilterFormData,
+          { onChange: changeCurrencyHandler }
+        )}
         className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pr-7 pl-1 text-base text-filter-input-currency placeholder:text-filter-input-currency focus:outline-none"
       >
         {curencyNameArray.map((currency) => (

@@ -1,16 +1,27 @@
+"use client";
+import { QuantityInputParams } from "@/util/types";
+
 export default function QuantityInput({
-  name,
+  price,
   stock,
-  quantityRef,
-  subtractHandler,
-  addHandler,
-}: {
-  name: string;
-  stock: number;
-  quantityRef?: React.RefObject<HTMLInputElement | null>;
-  subtractHandler: () => void;
-  addHandler: () => void;
-}) {
+  register,
+  setValue,
+  getValues,
+}: QuantityInputParams) {
+  const decreaseHandler = () => {
+    const currentQuantity = getValues("quantity");
+    if (+currentQuantity > 1) {
+      setValue("quantity", +currentQuantity - 1);
+      setValue("subtotal", +((+currentQuantity - 1) * price).toFixed(2));
+    }
+  };
+  const increaseHandler = () => {
+    const currentQuantity = getValues("quantity");
+    if (+currentQuantity < stock) {
+      setValue("quantity", +currentQuantity + 1);
+      setValue("subtotal", +((+currentQuantity + 1) * price).toFixed(2));
+    }
+  };
   return (
     <label
       htmlFor="quantity"
@@ -19,25 +30,24 @@ export default function QuantityInput({
       <button
         className="w-1/4 text-[30px] pl-2"
         type="button"
-        onClick={subtractHandler}
+        onClick={decreaseHandler}
       >
         -
       </button>
       <input
         className="w-1/2 flex justify-center text-center outline-none text-[24px] font-[500]"
         id="quantity"
-        name="quantity"
         type="number"
-        min={1}
+        min={stock > 0 ? 1 : 0}
         max={stock}
-        ref={quantityRef}
-        defaultValue={1}
+        defaultValue={stock > 0 ? 1 : 0}
         disabled
+        {...register(`quantity`)}
       />
       <button
         className="w-1/4 text-[30px] pr-2"
         type="button"
-        onClick={addHandler}
+        onClick={increaseHandler}
       >
         +
       </button>

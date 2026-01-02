@@ -1,24 +1,27 @@
+import { FilterFormData, SortOptionInputParams } from "@/util/types";
+
 export default function SortOptionInput({
   label,
+  name,
   itemPerPageArray,
   sortOptionArray,
-}: {
-  label: string;
-  itemPerPageArray?: number[];
-  sortOptionArray?: string[];
-}) {
+  register,
+}: SortOptionInputParams) {
   return (
     <div className="grid shrink-0 grid-cols-1 focus-within:relative rounded-md bg-filter-input-background pl-1 outline-1 -outline-offset-1 outline-filter-input-border has-[select:focus-within]:outline-2 has-[select:focus-within]:outline-filter-input-border-focus">
       <select
-        id={`${label} Select`}
-        name={`${label} Select`}
-        aria-label="Currency"
+        id={`${label}Select`}
+        {...register(name as keyof FilterFormData)}
         className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pr-7 pl-1 text-filter-input-currency focus:outline-none"
       >
         {itemPerPageArray && (
           <>
             {itemPerPageArray.map((itemPerPage) => (
-              <option key={itemPerPage} id={`${label}Option${itemPerPage}`}>
+              <option
+                key={itemPerPage}
+                id={`${label}Option${itemPerPage}`}
+                value={itemPerPage}
+              >
                 {itemPerPage}
               </option>
             ))}
@@ -27,7 +30,11 @@ export default function SortOptionInput({
         {sortOptionArray && (
           <>
             {sortOptionArray.map((sortOption) => (
-              <option key={sortOption} id={`${label}Option${sortOption}`}>
+              <option
+                key={sortOption}
+                id={`${label}Option${sortOption}`}
+                value={sortOption}
+              >
                 {sortOption}
               </option>
             ))}

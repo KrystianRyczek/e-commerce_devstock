@@ -2,8 +2,6 @@
 CREATE TABLE "Products" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "price" DOUBLE PRECISION NOT NULL,
-    "prevPrice" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "description" TEXT,
     "categoryId" INTEGER NOT NULL,
     "brandId" INTEGER NOT NULL,
@@ -25,9 +23,12 @@ CREATE TABLE "Recommendation" (
 -- CreateTable
 CREATE TABLE "ProductVariants" (
     "id" SERIAL NOT NULL,
+    "productId" INTEGER,
     "color" TEXT NOT NULL,
     "stock" INTEGER NOT NULL DEFAULT 0,
-    "productId" INTEGER,
+    "price" DOUBLE PRECISION NOT NULL,
+    "prevPrice" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "tag" TEXT NOT NULL,
 
     CONSTRAINT "ProductVariants_pkey" PRIMARY KEY ("id")
 );

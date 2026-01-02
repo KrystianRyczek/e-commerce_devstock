@@ -1,42 +1,29 @@
 import SlideShow from "@/components/product-details/slide-show";
 import PurchasingContainer from "@/components/product-details/purchasing-container";
-import ProductDescription from "@/components/product-details/product-description";
-import { Product } from "@/app/product/[id]/page";
-export default function ProductDetails({ product }: { product: Product }) {
+import type { ProductCard } from "@/util/types";
+import ProductDetailContainer from "./common-components/product-detail-container";
+import ShippingDetailsContainer from "./common-components/shipping-details-container";
+
+export default function ProductDetails({ product }: { product: ProductCard }) {
   return (
-    <div className="w-full text-white flex gap-[32px] max-desktop:gap-[18px] items-start p-[40px] max-desktop:px-[8px] ">
-      <div className="flex max-desktop:flex-col gap-[40px] w-[889px] max-tablet:w-full">
-        <div className="w-[422px] max-tablet:w-full h-[472px] max-tablet:h-[380px] relative">
-          <SlideShow imagesArray={product.imgs} />
+    <div className="w-full text-white flex max-tablet:flex-col gap-[32px] max-desktop:gap-[18px] items-start p-[40px] max-desktop:px-[8px] ">
+      <div className="flex w-[422px] max-tablet:w-full max-desktop:flex-col gap-[40px]">
+        <div className="w-full h-[472px] max-tablet:h-[380px] relative">
+          <SlideShow imagesArray={product.imgUrls} />
         </div>
-        <div className="min-tablet:hidden">
-          <PurchasingContainer
-            name={product.name}
-            category={product.category}
-            currency={product.currency}
-            price={product.price}
-            stock={product.stock}
-            variants={product.variants}
-          />
+        <div className="w-full  mobile:hidden tablet:flex tablet:flex-col desktop:hidden  gap-[32px] ">
+          <ProductDetailContainer description={product.description ?? ""} />
+          <ShippingDetailsContainer />
         </div>
-        <ProductDescription
-          name={product.name}
-          category={product.category}
-          price={product.price}
-          currency={product.currency}
-          description={product.description}
-        />
       </div>
-      <div className="max-tablet:hidden">
-        <PurchasingContainer
-          name={product.name}
-          category={product.category}
-          currency={product.currency}
-          price={product.price}
-          stock={product.stock}
-          variants={product.variants}
-        />
-      </div>
+      <PurchasingContainer
+        id={product.id}
+        name={product.name}
+        category={product.category.name}
+        currency={"USD"}
+        variants={product.variants}
+        description={product.description ?? ""}
+      />
     </div>
   );
 }
