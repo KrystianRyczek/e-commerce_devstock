@@ -7,7 +7,7 @@ export default async function ProductDetailsPage({
 }: {
   params: { id: string };
 }) {
-  const curentParams = await params;
+  const curentParams = params;
   const productId = Number(curentParams.id);
   const productData = await currentProduct(productId);
   return (
