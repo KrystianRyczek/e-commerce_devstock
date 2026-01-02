@@ -91,7 +91,7 @@ export type PurchasingContainerParams = {
 export type BrandsArray = {
   id: number;
   name: string;
-  imgUrl: { url: string };
+  imgUrl: { url: string } | null;
 };
 export type SectionParams = {
   children: ReactNode;
