@@ -5,10 +5,10 @@ import { currentProduct } from "@/util/fetching-data";
 export default async function ProductDetailsPage({
   params,
 }: {
-  params: Promise<{ id: string[] }>;
+  params: Promise<{ id: string }>;
 }) {
   const curentParams = await params;
-  const productId = Number(curentParams.id[0]);
+  const productId = Number(curentParams.id);
   const productData = await currentProduct(productId);
   return (
     <main>
