@@ -5,7 +5,7 @@ import { currentProduct } from "@/util/fetching-data";
 export default async function ProductDetailsPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
   const curentParams = await params;
   const productId = Number(curentParams.id);

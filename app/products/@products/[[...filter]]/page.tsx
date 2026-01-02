@@ -141,7 +141,16 @@ const productsArray = [
 ];
 
 export default async function Product() {
-
+  //     {
+  //         searchParams
+  //     }: {
+  //         searchParams: {
+  //             search_param: string // This is a required query param
+  //             start?: number // This is an optional query param
+  //         }
+  //     }
+  // ) {
+  // const { search_param, start = 0 } = searchParams;
   return (
     <main className="w-full">
       <ProductList productsArray={productsArray} />
