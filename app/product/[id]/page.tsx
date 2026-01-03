@@ -6,12 +6,14 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-export default async function ProductDetailsPage({ params }: Props) {
+export default async function ProductDetailsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const resolvedParams = await params;
   const productId = Number(resolvedParams.id);
   const productData = await currentProduct(productId);
-  // export default async function ProductDetailsPage() {
-  //   const productData = await currentProduct(10);
   return (
     <main>
       <NavigationBar productName={productData?.name} />

@@ -93,83 +93,33 @@ const productsArray = [
     stock: 10,
     currency: "USD",
   },
-  // {
-  //   id: 10,
-  //   category: "Monitor",
-  //   name: "Monitor5",
-  //   image: [monitor2],
-  //   price: 154.0,
-  //   stock: 10,
-  //   currency: "USD",
-  // },
-  // {
-  //   id: 11,
-  //   category: "Headphone",
-  //   name: "Headphone6",
-  //   image: [headphone2],
-  //   price: 105.47,
-  //   stock: 10,
-  //   currency: "USD",
-  // },
-  // {
-  //   id: 12,
-  //   category: "Mouse",
-  //   name: "Mouse7",
-  //   image: [maus1],
-  //   price: 11.23,
-  //   stock: 10,
-  //   currency: "USD",
-  // },
-  // {
-  //   id: 13,
-  //   category: "Keyboard",
-  //   name: "Keyboard7",
-  //   image: [kayboard1],
-  //   price: 92.99,
-  //   stock: 10,
-  //   currency: "USD",
-  // },
-  // {
-  //   id: 14,
-  //   category: "Monitor",
-  //   name: "Monitor9",
-  //   image: [monitor1],
-  //   price: 504.0,
-  //   stock: 10,
-  //   currency: "USD",
-  // },
 ];
 
-export default async function Product() {
-  //     {
-  //         searchParams
-  //     }: {
-  //         searchParams: {
-  //             search_param: string // This is a required query param
-  //             start?: number // This is an optional query param
-  //         }
-  //     }
-  // ) {
-  // const { search_param, start = 0 } = searchParams;
+export default async function Product({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
+  const currentSearchParams = await searchParams;
+
+  const queryParams: { [key: string]: string | string[] | number | null } = {
+    ...(await searchParams),
+    categories: currentSearchParams.categories
+      ? JSON.parse(currentSearchParams.categories)
+      : [],
+    brands: currentSearchParams.brands
+      ? JSON.parse(currentSearchParams.brands)
+      : [],
+    min: currentSearchParams.min ? Number(currentSearchParams.min) : null,
+    max: currentSearchParams.max ? Number(currentSearchParams.max) : null,
+    show: currentSearchParams.show ? Number(currentSearchParams.show) : null,
+    page: currentSearchParams.page ? Number(currentSearchParams.page) : null,
+  };
+
+  console.log("Search Params:", queryParams);
   return (
     <main className="w-full">
       <ProductList productsArray={productsArray} />
     </main>
   );
 }
-// export default async function Product({
-//   params,
-// }: {
-//   params: { filter: string[] };
-// }) {
-//   const pararelRouteParams = await params;
-//   console.log("Product1 pararelRouteParams:", pararelRouteParams.filter);
-//   return (
-//     <main className="w-full">
-//       <ProductList productsArray={productsArray} />
-//     </main>
-//   );
-// }
-// Type error: Type '{ params: { filter: string[]; }; }' does not satisfy the constraint 'PageProps'.
-//   Types of property 'params' are incompatible.
-//     Type '{ filter: string[]; }' is missing the following properties from type 'Promise<any>': then, catch, finally, [Symbol.toStringTag]
