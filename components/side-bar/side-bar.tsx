@@ -15,10 +15,10 @@ export default function SideBar({
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const selectedCategories = searchParams.get("categories")
+  const initCategories = searchParams.get("categories")
     ? JSON.parse(searchParams.get("categories") as string)
     : [];
-  const selectedBrands = searchParams.get("brands")
+  const initBrands = searchParams.get("brands")
     ? JSON.parse(searchParams.get("brands") as string)
     : [];
 
@@ -26,17 +26,17 @@ export default function SideBar({
     show: searchParams.get("show") === null ? 9 : +searchParams.get("show")!,
     sort: searchParams.get("sort")?.toString() || "Default order",
     category: categories.map((category) =>
-      selectedCategories.includes(category.name.toLowerCase())
+      initCategories.includes(category.name.toLowerCase())
         ? category.name.toLowerCase()
         : false
     ),
-    categoryAll: selectedCategories?.length > 0 ? false : true,
+    categoryAll: initCategories?.length > 0 ? false : true,
     brand: brands.map((brand) =>
-      selectedBrands.includes(brand.name.toLowerCase())
+      initBrands.includes(brand.name.toLowerCase())
         ? brand.name.toLowerCase()
         : false
     ),
-    brandAll: selectedBrands.length > 0 ? false : true,
+    brandAll: initBrands.length > 0 ? false : true,
     price: {
       min: searchParams.get("min")
         ? parseFloat(searchParams.get("min")!)
@@ -64,16 +64,18 @@ export default function SideBar({
     resolver: resolver,
   });
   const submitHandler = async (data: FilterFormData) => {
+    const selectedCategories = data.category.filter((item) => item !== false);
+    const selectedBrands = data.brand.filter((item) => item !== false);
     router.push(
-      `./products?categories=${JSON.stringify(
-        data.category.filter((item) => item !== false)
-      )}&brands=${JSON.stringify(
-        data.brand.filter((item) => item !== false)
-      )}&min=${data.price.min ? data.price.min : 0}&max=${
-        data.price.max ? data.price.max : 0
+      `./products?categories=${
+        selectedCategories.length ? JSON.stringify(selectedCategories) : ""
+      }&brands=${
+        selectedBrands.length ? JSON.stringify(selectedBrands) : ""
+      }&min=${data.price.min ? data.price.min : ""}&max=${
+        data.price.max ? data.price.max : ""
       }&currencyMin=${data.currencys.minCurrency}&currencyMax=${
         data.currencys.maxCurrency
-      }&show=${data.show}&sort=${data.sort}`
+      }&sort=${data.sort}&show=${data.show}`
     );
   };
   return (

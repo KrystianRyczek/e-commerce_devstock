@@ -6,6 +6,8 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 
+import { StaticImageData } from "next/image";
+
 export type RecommendedProduct = {
   id: number;
   name: string;
@@ -188,4 +190,21 @@ export type SideBarParams = {
   brands: { name: string }[];
   categories: { name: string }[];
   currencys: { name: string; rate: number }[];
+};
+export type ProductsPageProductCard = {
+  id: number;
+  name: string;
+  category: { name: string };
+  brand: { name: string };
+  imgUrls: { url: string }[];
+  variants: { id: number; price: number; prevPrice: number }[];
+};
+export type QueryParams = {
+  categories: string[];
+  brands: string[];
+  min: number;
+  max: number;
+  show: number;
+  page: number;
+  sort: string;
 };

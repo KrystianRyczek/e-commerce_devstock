@@ -1,19 +1,10 @@
 import ProductCard from "@/components/products/product-card";
-import { type StaticImageData } from "next/image";
-type ProductArray = {
-  id: number;
-  category: string;
-  name: string;
-  image: StaticImageData[];
-  price: number;
-  stock: number;
-  currency: string;
-}[];
+import type { ProductsPageProductCard } from "@/util/types";
 
 export default function ProductList({
   productsArray,
 }: {
-  productsArray: ProductArray;
+  productsArray: ProductsPageProductCard[];
 }) {
   return (
     <ul className="flex flex-wrap w-full gap-y-[32px] max-desktop:gap-y-[16px]  gap-x-[48px] max-desktop:gap-x-[24px]">

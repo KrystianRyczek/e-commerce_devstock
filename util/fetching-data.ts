@@ -1,6 +1,7 @@
 import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { tr } from "zod/locales";
+import { QueryParams } from "./types";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
@@ -56,7 +57,7 @@ export const recommendedProducts = await prisma.recommendation.findMany({
             prevPrice: true,
           },
           where: {
-            tag: "standard",
+            tag: { equals: "standard", mode: "insensitive" },
           },
         },
       },
@@ -77,8 +78,8 @@ export const brandsNameList = await prisma.brands.findMany({
   },
 });
 
-export const currentProduct = (productId: number) => {
-  return prisma.products.findUnique({
+export const currentProduct = async (productId: number) =>
+  await prisma.products.findUnique({
     where: { id: productId },
     select: {
       id: true,
@@ -106,4 +107,66 @@ export const currentProduct = (productId: number) => {
       },
     },
   });
-};
+
+export const products = async (
+  queryParams: QueryParams,
+  filterName: string = "id",
+  order: "asc" | "desc" = "asc"
+) =>
+  await prisma.products.findMany({
+    skip: (queryParams.page - 1) * queryParams.show,
+    take: queryParams.show,
+    where: {
+      AND: [
+        {
+          category: {
+            name: { in: queryParams.categories, mode: "insensitive" },
+          },
+        },
+        { brand: { name: { in: queryParams.brands, mode: "insensitive" } } },
+        {
+          variants: {
+            some: {
+              tag: { equals: "standard", mode: "insensitive" },
+              price: { gte: queryParams.min, lte: queryParams.max },
+            },
+          },
+        },
+      ],
+    },
+    orderBy: {
+      [filterName]: order,
+    },
+    select: {
+      id: true,
+      name: true,
+      imgUrls: {
+        select: {
+          url: true,
+        },
+        where: {
+          main: true,
+        },
+      },
+      category: {
+        select: {
+          name: true,
+        },
+      },
+      brand: {
+        select: {
+          name: true,
+        },
+      },
+      variants: {
+        select: {
+          id: true,
+          price: true,
+          prevPrice: true,
+        },
+        where: {
+          tag: { equals: "standard", mode: "insensitive" },
+        },
+      },
+    },
+  });
