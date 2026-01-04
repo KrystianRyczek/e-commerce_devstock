@@ -73,6 +73,14 @@
   --color-product-icon: #fcfcfc;
   --color-product-icon-background: #262626;
   /* -------------------------------------------------- */
+  --color-pagination-button-border: #fcfcfc;
+  --color-pagination-button-text: #fcfcfc;
+  --color-pagination-button-border-disabled: #383b42;
+  --color-pagination-button-text-disabled: #383b42;
+  --color-pagination-button-page-background-active: #f29145;
+  --color-pagination-button-page-text: #b0b0b0;
+  --color-pagination-button-page-text-active: #262626;
+  /* -------------------------------------------------- */
   --color-bar-nav-primary: #fcfcfc;
   --color-bar-nav-secondary: #b0b0b0;
   /* -------------------------------------------------- */

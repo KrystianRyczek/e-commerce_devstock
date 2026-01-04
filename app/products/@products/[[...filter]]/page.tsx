@@ -1,7 +1,9 @@
+import PaginationBar from "@/components/products/pagination-bar";
 import ProductList from "@/components/products/product list";
 import {
   categoriesNameList,
   brandsNameList,
+  totalProductsCount,
   products,
 } from "@/util/fetching-data";
 import type { ProductsPageProductCard, QueryParams } from "@/util/types";
@@ -31,13 +33,18 @@ export default async function Product({
     page: currentSearchParams.page ? Number(currentSearchParams.page) : 1,
     sort: currentSearchParams.sort ? currentSearchParams.sort : "Default order",
   };
-  console.log("Search Params:", queryParams);
 
+  console.log("Search Params:", queryParams);
+  const count = await totalProductsCount(queryParams);
   const productsArray = await products(queryParams);
-  console.log(productsArray);
+  const maxPageNumber = Math.ceil(count / queryParams.show);
+
   return (
     <main className="w-full">
       <ProductList productsArray={productsArray} />
+      {maxPageNumber ? (
+        <PaginationBar maxPageNnumber={maxPageNumber} page={queryParams.page} />
+      ) : null}
     </main>
   );
 }

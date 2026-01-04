@@ -20,6 +20,7 @@ export default function Card({ product }: { product: RecommendedProduct }) {
   return (
     <div className="flex relative w-full">
       <button
+        type="button"
         onClick={handleAddToCart}
         className="w-[32px] h-[32px] absolute top-[32px] left-[32px] flex items-center justify-center bg-recomendation-background text-white z-1 rounded-[6px]"
       >

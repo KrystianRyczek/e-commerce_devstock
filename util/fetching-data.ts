@@ -107,6 +107,27 @@ export const currentProduct = async (productId: number) =>
       },
     },
   });
+export const totalProductsCount = async (queryParams: QueryParams) =>
+  await prisma.products.count({
+    where: {
+      AND: [
+        {
+          category: {
+            name: { in: queryParams.categories, mode: "insensitive" },
+          },
+        },
+        { brand: { name: { in: queryParams.brands, mode: "insensitive" } } },
+        {
+          variants: {
+            some: {
+              tag: { equals: "standard", mode: "insensitive" },
+              price: { gte: queryParams.min, lte: queryParams.max },
+            },
+          },
+        },
+      ],
+    },
+  });
 
 export const products = async (
   queryParams: QueryParams,
