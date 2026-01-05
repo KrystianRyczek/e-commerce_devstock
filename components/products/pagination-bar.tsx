@@ -22,32 +22,41 @@ export default function PaginationBar({
     url.searchParams.set("page", newPageNumber.toString());
     window.location.href = url.toString();
   };
+
+  const labelLastButon = maxPageNnumber;
+  const laletPrevButon = maxPageNnumber - 1;
+  const laletBntBeforePrevButon = maxPageNnumber - 2;
+  const currentPage = page;
+  const labelBtnThree =
+    page - 3 <= 0
+      ? 3
+      : page > maxPageNnumber - 4
+      ? maxPageNnumber - 3 > 3
+        ? maxPageNnumber - 3
+        : 3
+      : page;
+  const labelBtnTwo = labelBtnThree - 2 < 1 ? 2 : labelBtnThree - 1;
+  const labelBtnOne = labelBtnTwo - 1 < 1 ? 1 : labelBtnTwo - 1;
   return (
     <div className="flex max-desktop:flex-col gap-[16px] justify-between items-center w-full pt-[48px] pb-[68px]">
       <div className="flex gap-[8px]">
         <PageNumberButton
-          pageNumber={page <= 3 ? 1 : page > 3 ? page - 2 : page}
+          pageNumber={labelBtnOne}
           active={page === 1}
           pageNumberClickHandler={pageNumberClickHandler}
         />
 
         {maxPageNnumber > 1 && (
           <PageNumberButton
-            pageNumber={page <= 3 ? 2 : page > 3 ? page - 1 : page}
+            pageNumber={labelBtnTwo}
             active={page === 2}
             pageNumberClickHandler={pageNumberClickHandler}
           />
         )}
         {maxPageNnumber > 2 && (
           <PageNumberButton
-            pageNumber={
-              page < 3
-                ? 3
-                : page > maxPageNnumber - 3
-                ? maxPageNnumber - 3
-                : page
-            }
-            active={page >= 3 && page <= maxPageNnumber - 3}
+            pageNumber={labelBtnThree}
+            active={page === labelBtnThree}
             pageNumberClickHandler={pageNumberClickHandler}
           />
         )}

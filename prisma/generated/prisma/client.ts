@@ -65,10 +65,10 @@ export type Categories = Prisma.CategoriesModel
  */
 export type Brands = Prisma.BrandsModel
 /**
- * Model Carts
+ * Model CartItems
  * 
  */
-export type Carts = Prisma.CartsModel
+export type CartItems = Prisma.CartItemsModel
 /**
  * Model Users
  * 

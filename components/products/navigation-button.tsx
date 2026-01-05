@@ -15,7 +15,7 @@ export default function NavigationButton({
       onClick={clickHandler}
       className={`w-[132px] h-[44px] flex gap-[16px] ${
         direction === "next" ? "" : "flex-row-reverse"
-      } justify-center items-center border-[1px] rounded-[6px] disabled:border-pagination-button-border-disabled disabled:text-pagination-button-text-disabled`}
+      } justify-center items-center border-[1px] rounded-[6px] cursor-pointer disabled:border-pagination-button-border-disabled disabled:text-pagination-button-text-disabled disabled:cursor-default`}
       disabled={disabled}
     >
       <span>{direction === "next" ? "Next" : "Previous"}</span>

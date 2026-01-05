@@ -56,7 +56,7 @@ export const ModelName = {
   ProductVariants: 'ProductVariants',
   Categories: 'Categories',
   Brands: 'Brands',
-  Carts: 'Carts',
+  CartItems: 'CartItems',
   Users: 'Users',
   Auth: 'Auth',
   UsersAddresses: 'UsersAddresses',
@@ -136,14 +136,18 @@ export const BrandsScalarFieldEnum = {
 export type BrandsScalarFieldEnum = (typeof BrandsScalarFieldEnum)[keyof typeof BrandsScalarFieldEnum]
 
 
-export const CartsScalarFieldEnum = {
+export const CartItemsScalarFieldEnum = {
   id: 'id',
+  sesionCart: 'sesionCart',
+  productId: 'productId',
+  price: 'price',
+  quantity: 'quantity',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type CartsScalarFieldEnum = (typeof CartsScalarFieldEnum)[keyof typeof CartsScalarFieldEnum]
+export type CartItemsScalarFieldEnum = (typeof CartItemsScalarFieldEnum)[keyof typeof CartItemsScalarFieldEnum]
 
 
 export const UsersScalarFieldEnum = {

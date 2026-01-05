@@ -1,6 +1,9 @@
 "use server";
-
+import { v4 as uuidv4 } from "uuid";
 import { CartProduct } from "./types";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export const action = async (formData: FormData) => {
   "use server";
@@ -44,4 +47,14 @@ export const action = async (formData: FormData) => {
 export const addToCartAction = async (product: CartProduct) => {
   "use server";
   console.log("Adding to cart:", product);
+
+  try {
+    // Simulate adding to cart (e.g., database operation)
+    // Here you would typically interact with your database or session
+    console.log(`Product ${product.id} added to cart successfully.`);
+    return { success: true };
+  } catch (error) {
+    console.error("Error adding product to cart:", error);
+    return { success: false };
+  }
 };
