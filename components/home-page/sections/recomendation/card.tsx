@@ -10,6 +10,7 @@ export default function Card({ product }: { product: RecommendedProduct }) {
   const handleAddToCart = () => {
     addToCartAction({
       id: product.id,
+      name: product.name,
       variantId: product.variantId,
       price: product.price,
       quantity: 1,
@@ -32,7 +33,7 @@ export default function Card({ product }: { product: RecommendedProduct }) {
             <Image
               loader={(config) => imageLoader(config, "")}
               src={product.imgUrls}
-              alt={`${product.name} iamge`}
+              alt={`${product.name} image`}
               fill
             />
           </div>

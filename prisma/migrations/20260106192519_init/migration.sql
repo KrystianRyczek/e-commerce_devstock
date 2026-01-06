@@ -56,11 +56,14 @@ CREATE TABLE "Brands" (
 -- CreateTable
 CREATE TABLE "CartItems" (
     "id" SERIAL NOT NULL,
-    "sesionCart" INTEGER NOT NULL,
-    "productId" INTEGER,
-    "price" DOUBLE PRECISION NOT NULL,
-    "quantity" INTEGER NOT NULL,
     "userId" INTEGER,
+    "sesionCart" TEXT NOT NULL,
+    "productId" INTEGER NOT NULL,
+    "variantId" INTEGER NOT NULL,
+    "quantity" INTEGER NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
+    "subtotal" DOUBLE PRECISION NOT NULL,
+    "comment" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -71,6 +74,7 @@ CREATE TABLE "CartItems" (
 CREATE TABLE "Users" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "avatar" TEXT NOT NULL,
     "role" TEXT NOT NULL,
     "status" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -136,6 +140,17 @@ CREATE TABLE "ProductsImgUrls" (
     CONSTRAINT "ProductsImgUrls_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "SlideShow" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "category" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "imgUrl" TEXT NOT NULL,
+
+    CONSTRAINT "SlideShow_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Recommendation_productId_key" ON "Recommendation"("productId");
 
@@ -170,10 +185,10 @@ ALTER TABLE "Recommendation" ADD CONSTRAINT "Recommendation_productId_fkey" FORE
 ALTER TABLE "ProductVariants" ADD CONSTRAINT "ProductVariants_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Products"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "CartItems" ADD CONSTRAINT "CartItems_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Products"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "CartItems" ADD CONSTRAINT "CartItems_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "CartItems" ADD CONSTRAINT "CartItems_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "CartItems" ADD CONSTRAINT "CartItems_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Auth" ADD CONSTRAINT "Auth_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

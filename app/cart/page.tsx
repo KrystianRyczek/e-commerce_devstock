@@ -1,59 +1,47 @@
-import type { StaticImageData } from "next/image";
 import CartContainer from "@/components/cart/cart-container";
+import EmptyCartContainer from "@/components/cart/epty-cart-container";
 import NavigationBar from "@/components/cart/navigation-bar";
+import { cartItemsBySessionCart, cartItemsByUser } from "@/util/fetching-data";
+import { cookies } from "next/headers";
 
-import monitor1 from "@/public/products-card/monitor1.png";
-import maus1 from "@/public/products-card/maus1.png";
-import kayboard1 from "@/public/products-card/kayboard1.png";
-
-const cartProductsArray = [
-  {
-    id: 1,
-    name: "Product 1",
-    img: maus1,
-    category: "Mouse",
-    price: 29.99,
-    quantity: 2,
-    stock: 10,
-    selected: true,
-  },
-  {
-    id: 2,
-    name: "Product 2",
-    img: kayboard1,
-    category: "Keyboard",
-    price: 49.99,
-    quantity: 1,
-    stock: 5,
-    selected: true,
-  },
-  {
-    id: 3,
-    name: "Product 3",
-    img: monitor1,
-    category: "Monitor",
-    price: 199.99,
-    quantity: 1,
-    stock: 3,
-    selected: true,
-  },
-];
 export type CartProduct = {
   id: number;
   name: string;
-  img: StaticImageData;
+  color: string;
+  imgUrls: { url: string };
   category: string;
   price: number;
   quantity: number;
   stock: number;
   selected: boolean;
+  comment: string;
 };
 
-export default function CartPage() {
+export default async function CartPage() {
+  const cookieStore = await cookies();
+  const sessionCartId = cookieStore.get("sessionCartId")?.value || "";
+  const sessionCartIdItems: CartProduct[] = await cartItemsBySessionCart(
+    sessionCartId
+  );
+  const userCartItems: CartProduct[] = []; //await cartItemsByUser(1223);
+  let cartProductsArray: CartProduct[] = [];
+  if (userCartItems.length === 0) {
+    cartProductsArray = [...sessionCartIdItems];
+  } else if (sessionCartIdItems.length === 0) {
+    cartProductsArray = [...userCartItems];
+  } else {
+    // Merge both carts, and sum duplicate items
+  }
+
+  console.log(cartProductsArray.length);
   return (
     <main className="flex flex-col w-full min-h-[612px] text-white p-[40px] max-tablet:p-[8px] max-desktop:p-[20px]">
       <NavigationBar />
-      <CartContainer products={cartProductsArray} />
+      {cartProductsArray.length > 0 ? (
+        <CartContainer products={cartProductsArray} />
+      ) : (
+        <EmptyCartContainer />
+      )}
     </main>
   );
 }

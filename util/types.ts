@@ -44,6 +44,7 @@ export type ProductCard = {
 };
 export type ProductFormData = {
   id: number;
+  name: string;
   variantId: number;
   price: number;
   quantity: number;
@@ -52,6 +53,7 @@ export type ProductFormData = {
 };
 export type CartProduct = {
   id: number;
+  name: string;
   variantId: number;
   price: number;
   quantity: number;

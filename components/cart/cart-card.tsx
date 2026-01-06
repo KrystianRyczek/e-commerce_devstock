@@ -5,21 +5,44 @@ import DeleteCat from "./svg/delete-cart";
 import Link from "next/link";
 import QuantityInput from "./quantity-input";
 import { useRef } from "react";
+import { imageLoader } from "@/util/image-loader";
 
 export default function CartCard({
   product,
-  selllectNoneHandler,
+  setCartProducts,
 }: {
   product: CartProduct;
-  selllectNoneHandler: (id: number) => void;
+  setCartProducts: React.Dispatch<React.SetStateAction<CartProduct[]>>;
 }) {
-  console.log(
-    "CartCard Rendered:",
-    product.name,
-    "All Selected:",
-    product.selected
-  );
   const quantityRef = useRef<HTMLInputElement | null>(null);
+
+  const deleteHandler = (id: number, color: string) => {
+    setCartProducts((prevProducts) =>
+      prevProducts.filter(
+        (product) => product.id !== id || product.color !== color
+      )
+    );
+  };
+  const quantityChangeHandler = (
+    id: number,
+    color: string,
+    quantity: number
+  ) => {
+    setCartProducts((prevProducts) => {
+      const productIndex = prevProducts.findIndex(
+        (product) => product.id === id && product.color === color
+      );
+      if (productIndex !== -1) {
+        const updatedProducts = [...prevProducts];
+        updatedProducts[productIndex] = {
+          ...updatedProducts[productIndex],
+          quantity,
+        };
+        return updatedProducts;
+      }
+      return prevProducts;
+    });
+  };
 
   const addHandler = (stock: number) => {
     if (quantityRef.current) {
@@ -28,6 +51,7 @@ export default function CartCard({
         : 0;
       if (currentValue < stock) {
         quantityRef.current.value = (currentValue + 1).toString();
+        quantityChangeHandler(product.id, product.color, +currentValue + 1);
       }
     }
   };
@@ -38,33 +62,66 @@ export default function CartCard({
         : 0;
       if (currentValue > 1) {
         quantityRef.current.value = (currentValue - 1).toString();
+        quantityChangeHandler(product.id, product.color, +currentValue - 1);
       }
     }
   };
 
+  const selllectOneHandler = (id: number, color: string) => {
+    setCartProducts((prevProducts) => {
+      const productIndex = prevProducts.findIndex(
+        (product) => product.id === id && product.color === color
+      );
+      if (productIndex !== -1) {
+        const updatedProducts = [...prevProducts];
+        updatedProducts[productIndex] = {
+          ...updatedProducts[productIndex],
+          selected: !updatedProducts[productIndex].selected,
+        };
+        return updatedProducts;
+      }
+      return prevProducts;
+    });
+  };
   return (
     <label className="w-full flex items-center gap-[16px] relative">
       <CartCheckbox
-        label={`select${product.id}`}
+        label={`select${product.id + " " + product.color}`}
         style="flex items-center cursor-pointer max-tablet:absolute max-tablet:top-[16px] max-tablet:right-[16px]"
         checked={product.selected}
-        onChange={() => {
-          selllectNoneHandler(product.id);
-        }}
+        onChange={() => selllectOneHandler(product.id, product.color)}
       />
       <div className=" flex max-tablet:flex-col w-full p-[24px] max-tablet:p-[10px] rounded-[6px] border-[1px] border-cart-border bg-cart-background gap-[32px]">
         <div className="flex flex-col relative w-[172px] h-[138px] p-[12px] border-[1px] border-cart-border rounded-[6px]">
           <div className="relative w-full h-full">
-            <Image src={product.img} alt={product.name} fill />
+            <Image
+              loader={(config) => imageLoader(config, "")}
+              src={product.imgUrls.url}
+              alt={product.name}
+              fill
+            />
           </div>
         </div>
         <div className="flex w-full">
           <div className="flex flex-col w-full ">
-            <div className="flex justify-between w-full mb-[12px]">
-              <p className="text-[20px] font-[500] leading-[30px]">
-                {product.name}
-              </p>
-              <DeleteCat />
+            <div className="flex justify-between w-full mb-[12px] ">
+              <div className="flex flex-col w-full gap-[16px]">
+                <p className="text-20-30-500">{product.name}</p>
+                <p className="text-20-30-500 flex items-center gap-[8px]">
+                  Color:{" "}
+                  <span
+                    style={{
+                      backgroundColor: product.color,
+                      borderRadius: "6px",
+                    }}
+                    className="h-6 w-6"
+                  ></span>
+                </p>
+              </div>
+
+              <DeleteCat
+                onClick={() => deleteHandler(product.id, product.color)}
+              />
             </div>
             <Link
               href={`/products/${product.id}`}
@@ -84,7 +141,7 @@ export default function CartCard({
                 <div className="h-[24px] border-[1px] border-cart-border"></div>
                 <QuantityInput
                   key={`quantity${product.id}`}
-                  name={`quantity${product.id}`}
+                  defautlValue={product.quantity}
                   stock={product.stock}
                   quantityRef={quantityRef}
                   subtractHandler={subtractHandler}

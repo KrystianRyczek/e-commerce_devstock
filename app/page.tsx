@@ -2,18 +2,18 @@ import BrandList from "@/components/home-page/sections/brand/list";
 import RecomendationList from "@/components/home-page/sections/recomendation/list";
 import CategoryList from "@/components/home-page/sections/category/list";
 import Section from "@/components/home-page/sections/section";
-import SlideShow from "@/components/home-page/slide-show/slide -sohow";
+import SlideShow from "@/components/home-page/slide-show/slide-sohow";
 import {
   brandsWithImages,
   categoriesWithImages,
   recommendedProducts,
+  slidesShow,
 } from "@/util/fetching-data";
 
 export default async function Home() {
   const brands = await brandsWithImages;
   const categories = await categoriesWithImages;
-  const test = await recommendedProducts;
-  console.log("recommendedProducts", test[0].product.variants);
+  const slides = await slidesShow;
   const recommended = await recommendedProducts.map((item) => ({
     id: item.product.id,
     name: item.product.name,
@@ -26,7 +26,7 @@ export default async function Home() {
   console.log("recommended", recommended);
   return (
     <main className=" flex flex-col gap-[100px] max-desktop:gap-[50px] px-[40px] max-desktop:px-[20px] pb-[80px]">
-      {/* <SlideShow /> */}
+      <SlideShow slides={slides} />
       {categories ? (
         <Section title={"Category"} href={undefined}>
           <CategoryList categories={categories} />

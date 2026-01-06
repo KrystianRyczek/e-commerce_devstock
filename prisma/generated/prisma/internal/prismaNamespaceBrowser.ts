@@ -62,7 +62,8 @@ export const ModelName = {
   UsersAddresses: 'UsersAddresses',
   CategoriesImgUrls: 'CategoriesImgUrls',
   BrandsImgUrls: 'BrandsImgUrls',
-  ProductsImgUrls: 'ProductsImgUrls'
+  ProductsImgUrls: 'ProductsImgUrls',
+  SlideShow: 'SlideShow'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -138,11 +139,14 @@ export type BrandsScalarFieldEnum = (typeof BrandsScalarFieldEnum)[keyof typeof 
 
 export const CartItemsScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   sesionCart: 'sesionCart',
   productId: 'productId',
-  price: 'price',
+  variantId: 'variantId',
   quantity: 'quantity',
-  userId: 'userId',
+  price: 'price',
+  subtotal: 'subtotal',
+  comment: 'comment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -153,6 +157,7 @@ export type CartItemsScalarFieldEnum = (typeof CartItemsScalarFieldEnum)[keyof t
 export const UsersScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  avatar: 'avatar',
   role: 'role',
   status: 'status',
   createdAt: 'createdAt',
@@ -217,6 +222,17 @@ export const ProductsImgUrlsScalarFieldEnum = {
 } as const
 
 export type ProductsImgUrlsScalarFieldEnum = (typeof ProductsImgUrlsScalarFieldEnum)[keyof typeof ProductsImgUrlsScalarFieldEnum]
+
+
+export const SlideShowScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  category: 'category',
+  description: 'description',
+  imgUrl: 'imgUrl'
+} as const
+
+export type SlideShowScalarFieldEnum = (typeof SlideShowScalarFieldEnum)[keyof typeof SlideShowScalarFieldEnum]
 
 
 export const SortOrder = {

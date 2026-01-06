@@ -20,6 +20,7 @@ export default function PurchasingContainer({
   variants,
 }: PurchasingContainerParams) {
   const defaultValues = {
+    name: name,
     color: variants[0].color,
     quantity: 1,
     subtotal: variants[0].stock !== 0 ? variants[0].price : 0,
@@ -77,7 +78,14 @@ export default function PurchasingContainer({
       </div>
       <form
         onSubmit={handleSubmit((data) => {
-          addToCartAction(data);
+          addToCartAction({
+            id: data.id,
+            name: data.name,
+            variantId: data.variantId,
+            price: data.price,
+            quantity: data.quantity,
+            subtotal: data.subtotal,
+          });
         })}
         className="w-full p-[24px] max-desktop:p-[16px] flex flex-col gap-[32px] max-desktop:gap-[20px] rounded-[6px] border-[1px] border-purchasing-container-border bg-purchasing-container-background text-purchasing-container-h"
       >

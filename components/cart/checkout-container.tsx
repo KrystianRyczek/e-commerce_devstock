@@ -2,12 +2,11 @@ import Link from "next/link";
 
 export default function CheckoutContainer({
   totalPrice,
+  submitHandler,
 }: {
   totalPrice: number;
+  submitHandler: () => void;
 }) {
-  const submitHandler = () => {
-    console.log("Proceeding to checkout");
-  };
   return (
     <div className="flex flex-col gap-[24px] w-[423px] max-desktop:w-full h-fit p-[24px] mb-[20px] rounded-[6px] bg-cart-checkout-background text-cart-checkout-h border-[1px] border-cart-checkout-border ">
       <div className="flex flex-col gap-[16px]">

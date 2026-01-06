@@ -77,3 +77,8 @@ export type BrandsImgUrls = Prisma.BrandsImgUrlsModel
  * 
  */
 export type ProductsImgUrls = Prisma.ProductsImgUrlsModel
+/**
+ * Model SlideShow
+ * 
+ */
+export type SlideShow = Prisma.SlideShowModel

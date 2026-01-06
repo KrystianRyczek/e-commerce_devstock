@@ -395,7 +395,8 @@ export const ModelName = {
   UsersAddresses: 'UsersAddresses',
   CategoriesImgUrls: 'CategoriesImgUrls',
   BrandsImgUrls: 'BrandsImgUrls',
-  ProductsImgUrls: 'ProductsImgUrls'
+  ProductsImgUrls: 'ProductsImgUrls',
+  SlideShow: 'SlideShow'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "products" | "recommendation" | "productVariants" | "categories" | "brands" | "cartItems" | "users" | "auth" | "usersAddresses" | "categoriesImgUrls" | "brandsImgUrls" | "productsImgUrls"
+    modelProps: "products" | "recommendation" | "productVariants" | "categories" | "brands" | "cartItems" | "users" | "auth" | "usersAddresses" | "categoriesImgUrls" | "brandsImgUrls" | "productsImgUrls" | "slideShow"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1303,6 +1304,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SlideShow: {
+      payload: Prisma.$SlideShowPayload<ExtArgs>
+      fields: Prisma.SlideShowFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SlideShowFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SlideShowPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SlideShowFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SlideShowPayload>
+        }
+        findFirst: {
+          args: Prisma.SlideShowFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SlideShowPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SlideShowFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SlideShowPayload>
+        }
+        findMany: {
+          args: Prisma.SlideShowFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SlideShowPayload>[]
+        }
+        create: {
+          args: Prisma.SlideShowCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SlideShowPayload>
+        }
+        createMany: {
+          args: Prisma.SlideShowCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SlideShowCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SlideShowPayload>[]
+        }
+        delete: {
+          args: Prisma.SlideShowDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SlideShowPayload>
+        }
+        update: {
+          args: Prisma.SlideShowUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SlideShowPayload>
+        }
+        deleteMany: {
+          args: Prisma.SlideShowDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SlideShowUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SlideShowUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SlideShowPayload>[]
+        }
+        upsert: {
+          args: Prisma.SlideShowUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SlideShowPayload>
+        }
+        aggregate: {
+          args: Prisma.SlideShowAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSlideShow>
+        }
+        groupBy: {
+          args: Prisma.SlideShowGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SlideShowGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SlideShowCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SlideShowCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1399,11 +1474,14 @@ export type BrandsScalarFieldEnum = (typeof BrandsScalarFieldEnum)[keyof typeof 
 
 export const CartItemsScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   sesionCart: 'sesionCart',
   productId: 'productId',
-  price: 'price',
+  variantId: 'variantId',
   quantity: 'quantity',
-  userId: 'userId',
+  price: 'price',
+  subtotal: 'subtotal',
+  comment: 'comment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1414,6 +1492,7 @@ export type CartItemsScalarFieldEnum = (typeof CartItemsScalarFieldEnum)[keyof t
 export const UsersScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  avatar: 'avatar',
   role: 'role',
   status: 'status',
   createdAt: 'createdAt',
@@ -1478,6 +1557,17 @@ export const ProductsImgUrlsScalarFieldEnum = {
 } as const
 
 export type ProductsImgUrlsScalarFieldEnum = (typeof ProductsImgUrlsScalarFieldEnum)[keyof typeof ProductsImgUrlsScalarFieldEnum]
+
+
+export const SlideShowScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  category: 'category',
+  description: 'description',
+  imgUrl: 'imgUrl'
+} as const
+
+export type SlideShowScalarFieldEnum = (typeof SlideShowScalarFieldEnum)[keyof typeof SlideShowScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1679,6 +1769,7 @@ export type GlobalOmitConfig = {
   categoriesImgUrls?: Prisma.CategoriesImgUrlsOmit
   brandsImgUrls?: Prisma.BrandsImgUrlsOmit
   productsImgUrls?: Prisma.ProductsImgUrlsOmit
+  slideShow?: Prisma.SlideShowOmit
 }
 
 /* Types for Logging */

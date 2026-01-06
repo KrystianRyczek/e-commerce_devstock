@@ -4,7 +4,6 @@ import ShoppingCart from "./shopping-cart";
 import Link from "next/link";
 import { ProductsPageProductCard } from "@/util/types";
 import { imageLoader } from "@/util/image-loader";
-
 export default function ProductCard({
   product,
 }: {
@@ -36,7 +35,7 @@ export default function ProductCard({
           </div>
         </div>
       </Link>
-      <ShoppingCart />
+      <ShoppingCart product={product} />
     </div>
   );
 }

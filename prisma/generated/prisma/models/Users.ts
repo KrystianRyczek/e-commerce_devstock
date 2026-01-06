@@ -37,6 +37,7 @@ export type UsersSumAggregateOutputType = {
 export type UsersMinAggregateOutputType = {
   id: number | null
   name: string | null
+  avatar: string | null
   role: string | null
   status: boolean | null
   createdAt: Date | null
@@ -46,6 +47,7 @@ export type UsersMinAggregateOutputType = {
 export type UsersMaxAggregateOutputType = {
   id: number | null
   name: string | null
+  avatar: string | null
   role: string | null
   status: boolean | null
   createdAt: Date | null
@@ -55,6 +57,7 @@ export type UsersMaxAggregateOutputType = {
 export type UsersCountAggregateOutputType = {
   id: number
   name: number
+  avatar: number
   role: number
   status: number
   createdAt: number
@@ -74,6 +77,7 @@ export type UsersSumAggregateInputType = {
 export type UsersMinAggregateInputType = {
   id?: true
   name?: true
+  avatar?: true
   role?: true
   status?: true
   createdAt?: true
@@ -83,6 +87,7 @@ export type UsersMinAggregateInputType = {
 export type UsersMaxAggregateInputType = {
   id?: true
   name?: true
+  avatar?: true
   role?: true
   status?: true
   createdAt?: true
@@ -92,6 +97,7 @@ export type UsersMaxAggregateInputType = {
 export type UsersCountAggregateInputType = {
   id?: true
   name?: true
+  avatar?: true
   role?: true
   status?: true
   createdAt?: true
@@ -188,6 +194,7 @@ export type UsersGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type UsersGroupByOutputType = {
   id: number
   name: string
+  avatar: string
   role: string
   status: boolean
   createdAt: Date
@@ -220,6 +227,7 @@ export type UsersWhereInput = {
   NOT?: Prisma.UsersWhereInput | Prisma.UsersWhereInput[]
   id?: Prisma.IntFilter<"Users"> | number
   name?: Prisma.StringFilter<"Users"> | string
+  avatar?: Prisma.StringFilter<"Users"> | string
   role?: Prisma.StringFilter<"Users"> | string
   status?: Prisma.BoolFilter<"Users"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Users"> | Date | string
@@ -232,6 +240,7 @@ export type UsersWhereInput = {
 export type UsersOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -247,6 +256,7 @@ export type UsersWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UsersWhereInput[]
   NOT?: Prisma.UsersWhereInput | Prisma.UsersWhereInput[]
   name?: Prisma.StringFilter<"Users"> | string
+  avatar?: Prisma.StringFilter<"Users"> | string
   role?: Prisma.StringFilter<"Users"> | string
   status?: Prisma.BoolFilter<"Users"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Users"> | Date | string
@@ -259,6 +269,7 @@ export type UsersWhereUniqueInput = Prisma.AtLeast<{
 export type UsersOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -276,6 +287,7 @@ export type UsersScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UsersScalarWhereWithAggregatesInput | Prisma.UsersScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Users"> | number
   name?: Prisma.StringWithAggregatesFilter<"Users"> | string
+  avatar?: Prisma.StringWithAggregatesFilter<"Users"> | string
   role?: Prisma.StringWithAggregatesFilter<"Users"> | string
   status?: Prisma.BoolWithAggregatesFilter<"Users"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Users"> | Date | string
@@ -284,6 +296,7 @@ export type UsersScalarWhereWithAggregatesInput = {
 
 export type UsersCreateInput = {
   name: string
+  avatar: string
   role: string
   status?: boolean
   createdAt?: Date | string
@@ -296,6 +309,7 @@ export type UsersCreateInput = {
 export type UsersUncheckedCreateInput = {
   id?: number
   name: string
+  avatar: string
   role: string
   status?: boolean
   createdAt?: Date | string
@@ -307,6 +321,7 @@ export type UsersUncheckedCreateInput = {
 
 export type UsersUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -319,6 +334,7 @@ export type UsersUpdateInput = {
 export type UsersUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -331,6 +347,7 @@ export type UsersUncheckedUpdateInput = {
 export type UsersCreateManyInput = {
   id?: number
   name: string
+  avatar: string
   role: string
   status?: boolean
   createdAt?: Date | string
@@ -339,6 +356,7 @@ export type UsersCreateManyInput = {
 
 export type UsersUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -348,6 +366,7 @@ export type UsersUpdateManyMutationInput = {
 export type UsersUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -362,6 +381,7 @@ export type UsersNullableScalarRelationFilter = {
 export type UsersCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -375,6 +395,7 @@ export type UsersAvgOrderByAggregateInput = {
 export type UsersMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -384,6 +405,7 @@ export type UsersMaxOrderByAggregateInput = {
 export type UsersMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -445,6 +467,7 @@ export type UsersUpdateOneRequiredWithoutAddressNestedInput = {
 
 export type UsersCreateWithoutCartItemsInput = {
   name: string
+  avatar: string
   role: string
   status?: boolean
   createdAt?: Date | string
@@ -456,6 +479,7 @@ export type UsersCreateWithoutCartItemsInput = {
 export type UsersUncheckedCreateWithoutCartItemsInput = {
   id?: number
   name: string
+  avatar: string
   role: string
   status?: boolean
   createdAt?: Date | string
@@ -482,6 +506,7 @@ export type UsersUpdateToOneWithWhereWithoutCartItemsInput = {
 
 export type UsersUpdateWithoutCartItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -493,6 +518,7 @@ export type UsersUpdateWithoutCartItemsInput = {
 export type UsersUncheckedUpdateWithoutCartItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -503,6 +529,7 @@ export type UsersUncheckedUpdateWithoutCartItemsInput = {
 
 export type UsersCreateWithoutPasswordInput = {
   name: string
+  avatar: string
   role: string
   status?: boolean
   createdAt?: Date | string
@@ -514,6 +541,7 @@ export type UsersCreateWithoutPasswordInput = {
 export type UsersUncheckedCreateWithoutPasswordInput = {
   id?: number
   name: string
+  avatar: string
   role: string
   status?: boolean
   createdAt?: Date | string
@@ -540,6 +568,7 @@ export type UsersUpdateToOneWithWhereWithoutPasswordInput = {
 
 export type UsersUpdateWithoutPasswordInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -551,6 +580,7 @@ export type UsersUpdateWithoutPasswordInput = {
 export type UsersUncheckedUpdateWithoutPasswordInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -561,6 +591,7 @@ export type UsersUncheckedUpdateWithoutPasswordInput = {
 
 export type UsersCreateWithoutAddressInput = {
   name: string
+  avatar: string
   role: string
   status?: boolean
   createdAt?: Date | string
@@ -572,6 +603,7 @@ export type UsersCreateWithoutAddressInput = {
 export type UsersUncheckedCreateWithoutAddressInput = {
   id?: number
   name: string
+  avatar: string
   role: string
   status?: boolean
   createdAt?: Date | string
@@ -598,6 +630,7 @@ export type UsersUpdateToOneWithWhereWithoutAddressInput = {
 
 export type UsersUpdateWithoutAddressInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -609,6 +642,7 @@ export type UsersUpdateWithoutAddressInput = {
 export type UsersUncheckedUpdateWithoutAddressInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -660,6 +694,7 @@ export type UsersCountOutputTypeCountAddressArgs<ExtArgs extends runtime.Types.E
 export type UsersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  avatar?: boolean
   role?: boolean
   status?: boolean
   createdAt?: boolean
@@ -673,6 +708,7 @@ export type UsersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type UsersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  avatar?: boolean
   role?: boolean
   status?: boolean
   createdAt?: boolean
@@ -682,6 +718,7 @@ export type UsersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type UsersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  avatar?: boolean
   role?: boolean
   status?: boolean
   createdAt?: boolean
@@ -691,13 +728,14 @@ export type UsersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type UsersSelectScalar = {
   id?: boolean
   name?: boolean
+  avatar?: boolean
   role?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UsersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "role" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["users"]>
+export type UsersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "avatar" | "role" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["users"]>
 export type UsersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cartItems?: boolean | Prisma.Users$cartItemsArgs<ExtArgs>
   password?: boolean | Prisma.Users$passwordArgs<ExtArgs>
@@ -717,6 +755,7 @@ export type $UsersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
+    avatar: string
     role: string
     status: boolean
     createdAt: Date
@@ -1149,6 +1188,7 @@ export interface Prisma__UsersClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface UsersFieldRefs {
   readonly id: Prisma.FieldRef<"Users", 'Int'>
   readonly name: Prisma.FieldRef<"Users", 'String'>
+  readonly avatar: Prisma.FieldRef<"Users", 'String'>
   readonly role: Prisma.FieldRef<"Users", 'String'>
   readonly status: Prisma.FieldRef<"Users", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Users", 'DateTime'>
