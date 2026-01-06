@@ -21,7 +21,7 @@ export const clearDbDataHandler = async () => {
       console.log("ℹ️  No brands to delete (table may not exist yet)");
     }
     try {
-      await prisma.carts.deleteMany();
+      await prisma.cartItems.deleteMany();
       console.log("✅ Existing carts deleted");
     } catch (e) {
       console.log("ℹ️  No carts to delete (table may not exist yet)");
