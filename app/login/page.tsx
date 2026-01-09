@@ -1,7 +1,7 @@
 import Logo from "@/components/login/logo";
 import SignInUser from "@/components/login/sign-in";
-import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 export const metadata = {
   title: "Sign In - DevStock",
@@ -14,6 +14,7 @@ export default async function SignInPage(props: {
   const { callbackUrl } = await props.searchParams;
 
   const session = await auth();
+
   if (session?.user) {
     redirect(callbackUrl || "/");
   }

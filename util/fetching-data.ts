@@ -6,6 +6,7 @@ import { sortOptionArray } from "./static-data";
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
 });
+
 const prisma = new PrismaClient({ adapter });
 
 export const brandsWithImages = await prisma.brands.findMany({

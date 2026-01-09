@@ -1,28 +1,17 @@
 import NextAuth from "next-auth";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
-import type { NextAuthOptions, Session } from "next-auth";
-
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id?: string;
-      name?: string | null;
-      email?: string | null;
-      image?: string | null;
-    };
-  }
-}
+import type { Session } from "next-auth";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
 });
 const prisma = new PrismaClient({ adapter });
 
-export const config = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
     signIn: "/login",
     error: "/login",
@@ -90,23 +79,11 @@ export const config = {
     }),
   ],
   callbacks: {
-    async session({
-      session,
-      user,
-      trigger,
-      token,
-    }: {
-      session: Session;
-      user: { id: string };
-      trigger?: string;
-      token: { sub?: string };
-    }) {
-      if (session.user) {
+    async session({ session, token }) {
+      if (session.user && token.sub) {
         session.user.id = token.sub;
       }
       return session;
     },
   },
-} satisfies NextAuthOptions;
-
-export const { handlers, auth, signIn, signOut } = NextAuth(config);
+});
