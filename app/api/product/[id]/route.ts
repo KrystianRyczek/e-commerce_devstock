@@ -4,12 +4,12 @@ import { NextRequest } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   console.log("REQ NEXT URL:", req.url);
 
   try {
-    const productId = parseInt(params.id);
+    const productId = parseInt((await params).id);
 
     // Validate the ID
     if (isNaN(productId)) {
