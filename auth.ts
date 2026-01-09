@@ -6,6 +6,17 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
 import type { NextAuthOptions, Session } from "next-auth";
 
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id?: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
+}
+
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
 });

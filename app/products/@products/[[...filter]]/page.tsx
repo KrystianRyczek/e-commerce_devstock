@@ -35,12 +35,18 @@ export default async function Product({
   };
 
   const count = await totalProductsCount(queryParams);
-  const productsArray = await products(queryParams);
+  const productsArray = await products(queryParams)|| [];
   const maxPageNumber = Math.ceil(count / queryParams.show);
 
   return (
     <main className="w-full">
-      <ProductList productsArray={productsArray} />
+      { !productsArray? (
+        <ProductList productsArray={productsArray} />
+      ) : (
+        <p className="text-18-28-500 text-center w-full mt-20">
+          No products found matching the selected filters.
+        </p>
+      )}
       {maxPageNumber ? (
         <PaginationBar maxPageNnumber={maxPageNumber} page={queryParams.page} />
       ) : null}
