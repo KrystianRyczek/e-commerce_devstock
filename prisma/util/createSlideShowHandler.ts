@@ -5,8 +5,7 @@ const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
 });
 const prisma = new PrismaClient({ adapter });
-
-export default async function createSlideShowHandler() {
+export const createSlideShowHandler = async () => {
   try {
     const mouse = await prisma.slideShow.create({
       data: {
@@ -15,7 +14,7 @@ export default async function createSlideShowHandler() {
         description:
           "High-performance gaming mouse for precision and speed. Ergonomic design with customizable buttons and RGB lighting.",
         imgUrl:
-          "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/e_background_removal:fineedges_y/mouse",
+          "https://res.cloudinary.com/dts7qcxky/image/upload/e_background_removal:fineedges_y,c_fit,h_852,w_422/mouse",
       },
     });
     const keyboard = await prisma.slideShow.create({
@@ -25,17 +24,7 @@ export default async function createSlideShowHandler() {
         description:
           "Mechanical gaming keyboard with customizable RGB lighting, programmable keys, and durable build quality for an enhanced gaming experience.",
         imgUrl:
-          "https://res.cloudinary.com/dts7qcxky/image/upload/a_90/e_upscale/e_background_removal:fineedges_y/keyboard",
-      },
-    });
-    const monitor = await prisma.slideShow.create({
-      data: {
-        title: "Monitor",
-        category: "Monitor",
-        description:
-          "High-resolution monitor with vibrant colors and fast refresh rate. Ideal for gaming and multimedia with multiple connectivity options.",
-        imgUrl:
-          "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/e_background_removal:fineedges_y/monitor%20gaming",
+          "https://res.cloudinary.com/dts7qcxky/image/upload/c_crop,g_face,h_422,w_852/a_90/keyboard",
       },
     });
     const headphone = await prisma.slideShow.create({
@@ -46,7 +35,7 @@ export default async function createSlideShowHandler() {
         description:
           "Over-ear headphones with immersive sound quality, noise cancellation, and comfortable fit. Perfect for gaming and music listening.",
         imgUrl:
-          "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/e_background_removal:fineedges_y/headphone",
+          "https://res.cloudinary.com/dts7qcxky/image/upload/ar_1.0,c_scale,h_852/c_crop,g_east,h_852,w_422/headphone",
       },
     });
 

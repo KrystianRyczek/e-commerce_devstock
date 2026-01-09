@@ -3,7 +3,7 @@ import { useState } from "react";
 import LoginEye from "./svg/login-eye";
 import LoginEyeOff from "./svg/login-eye-off";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
-import type { RegistationFormValues } from "./registration-form";
+import type { RegistationFormValuesProps } from "@/util/types";
 
 export default function RegistrationInput({
   label,
@@ -16,13 +16,13 @@ export default function RegistrationInput({
   register,
 }: {
   label: string;
-  name: keyof RegistationFormValues;
+  name: keyof RegistationFormValuesProps;
   id: string;
   type: string;
   defaultValue: string;
   placeholder: string;
-  errors: FieldErrors<RegistationFormValues> | undefined;
-  register: UseFormRegister<RegistationFormValues>;
+  errors: FieldErrors<RegistationFormValuesProps> | undefined;
+  register: UseFormRegister<RegistationFormValuesProps>;
 }) {
   const [isVisible, setIsVisible] = useState(false);
 

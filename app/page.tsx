@@ -23,7 +23,7 @@ export default async function Home() {
     category: item.product.category.name,
     imgUrls: item.product.imgUrls[0].url,
   }));
-  console.log("recommended", recommended);
+
   return (
     <main className=" flex flex-col gap-[100px] max-desktop:gap-[50px] px-[40px] max-desktop:px-[20px] pb-[80px]">
       <SlideShow slides={slides} />

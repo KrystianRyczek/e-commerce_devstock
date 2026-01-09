@@ -1,8 +1,8 @@
-import { PrismaClient } from "@/prisma/generated/prisma/client";
+import { PrismaClient, Prisma } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { tr } from "zod/locales";
 import { QueryParams } from "./types";
-
+import { sortOptionArray } from "./static-data";
+import { id, tr } from "zod/locales";
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
 });
@@ -107,21 +107,23 @@ export const currentProduct = async (productId: number) =>
       },
     },
   });
-export const totalProductsCount = async (queryParams: QueryParams) =>
-  await prisma.products.count({
+
+export const totalRecommendedCount = async (queryParams: QueryParams) =>
+  await prisma.recommendation.count({
     where: {
       AND: [
+        { status: true },
         {
-          category: {
-            name: { in: queryParams.categories, mode: "insensitive" },
-          },
-        },
-        { brand: { name: { in: queryParams.brands, mode: "insensitive" } } },
-        {
-          variants: {
-            some: {
-              tag: { equals: "standard", mode: "insensitive" },
-              price: { gte: queryParams.min, lte: queryParams.max },
+          product: {
+            category: {
+              name: { in: queryParams.categories, mode: "insensitive" },
+            },
+            brand: { name: { in: queryParams.brands, mode: "insensitive" } },
+            variants: {
+              some: {
+                tag: { equals: "standard", mode: "insensitive" },
+                price: { gte: queryParams.min, lte: queryParams.max },
+              },
             },
           },
         },
@@ -129,14 +131,11 @@ export const totalProductsCount = async (queryParams: QueryParams) =>
     },
   });
 
-export const products = async (
-  queryParams: QueryParams,
-  filterName: string = "id",
-  order: "asc" | "desc" = "asc"
-) =>
-  await prisma.products.findMany({
-    skip: (queryParams.page - 1) * queryParams.show,
-    take: queryParams.show,
+export const totalProductsCount = async (queryParams: QueryParams) => {
+  if (queryParams.sort === "Recommended") {
+    return await totalRecommendedCount(queryParams);
+  }
+  return await prisma.products.count({
     where: {
       AND: [
         {
@@ -155,46 +154,239 @@ export const products = async (
         },
       ],
     },
-    orderBy: {
-      [filterName]: order,
-    },
-    select: {
-      id: true,
-      name: true,
-      imgUrls: {
-        select: {
-          url: true,
-        },
-        where: {
-          main: true,
-        },
-      },
-      category: {
-        select: {
-          name: true,
-        },
-      },
-      brand: {
-        select: {
-          name: true,
-        },
-      },
-      variants: {
-        select: {
-          id: true,
-          price: true,
-          prevPrice: true,
-        },
-        where: {
-          tag: { equals: "standard", mode: "insensitive" },
-        },
-      },
-    },
   });
+};
+
+export const products = async (queryParams: QueryParams) => {
+  const sortparams = sortOptionArray.find(
+    (option) => option.name === (queryParams.sort ?? "Default order")
+  );
+
+  let orderBy: { [key: string]: string } = {
+    id: "asc",
+  };
+  if (
+    sortparams?.filterName !== "recommended" &&
+    !sortparams?.filterName.includes("price")
+  ) {
+    if (sortparams) {
+      switch (sortparams.filterName) {
+        case "name":
+          orderBy = { name: sortparams.order };
+          break;
+        case "createdAt":
+          orderBy = { id: sortparams.order };
+          break;
+        default:
+          orderBy = { id: "asc" };
+      }
+    }
+    return await prisma.products.findMany({
+      skip: (queryParams.page - 1) * queryParams.show,
+      take: queryParams.show,
+      where: {
+        AND: [
+          {
+            category: {
+              name: { in: queryParams.categories, mode: "insensitive" },
+            },
+          },
+          { brand: { name: { in: queryParams.brands, mode: "insensitive" } } },
+          {
+            variants: {
+              some: {
+                tag: { equals: "standard", mode: "insensitive" },
+                price: { gte: queryParams.min, lte: queryParams.max },
+              },
+            },
+          },
+        ],
+      },
+      orderBy,
+      select: {
+        id: true,
+        name: true,
+        imgUrls: {
+          select: {
+            url: true,
+          },
+          where: {
+            main: true,
+          },
+        },
+        category: {
+          select: {
+            name: true,
+          },
+        },
+        brand: {
+          select: {
+            name: true,
+          },
+        },
+        variants: {
+          select: {
+            id: true,
+            price: true,
+            prevPrice: true,
+          },
+          where: {
+            tag: { equals: "standard", mode: "insensitive" },
+          },
+        },
+      },
+    });
+  }
+  if (sortparams?.filterName.includes("recommended")) {
+    const recommended = await prisma.recommendation.findMany({
+      skip: (queryParams.page - 1) * queryParams.show,
+      take: queryParams.show,
+      where: {
+        AND: [
+          { status: true },
+          {
+            product: {
+              category: {
+                name: { in: queryParams.categories, mode: "insensitive" },
+              },
+              brand: { name: { in: queryParams.brands, mode: "insensitive" } },
+              variants: {
+                some: {
+                  tag: { equals: "standard", mode: "insensitive" },
+                  price: { gte: queryParams.min, lte: queryParams.max },
+                },
+              },
+            },
+          },
+        ],
+      },
+      select: {
+        product: {
+          select: {
+            id: true,
+            name: true,
+            imgUrls: {
+              select: {
+                url: true,
+              },
+              where: {
+                main: true,
+              },
+            },
+            category: {
+              select: {
+                name: true,
+              },
+            },
+            brand: {
+              select: {
+                name: true,
+              },
+            },
+            variants: {
+              select: {
+                id: true,
+                price: true,
+                prevPrice: true,
+              },
+              where: {
+                tag: { equals: "standard", mode: "insensitive" },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return recommended.map((recommendedProduct) => ({
+      id: recommendedProduct.product.id,
+      name: recommendedProduct.product.name,
+      imgUrls: recommendedProduct.product.imgUrls,
+      category: { name: recommendedProduct.product.category.name },
+      variants: recommendedProduct.product.variants,
+    }));
+  }
+  if (sortparams?.filterName.includes("price")) {
+    const productVariantsByPrice = await prisma.productVariants.findMany({
+      skip: (queryParams.page - 1) * queryParams.show,
+      take: queryParams.show,
+      where: {
+        AND: [
+          {
+            tag: { equals: "standard", mode: "insensitive" },
+            price: {
+              gte: queryParams.min,
+              lte: queryParams.max,
+            },
+          },
+          {
+            productId: { not: null },
+          },
+          {
+            product: {
+              category: {
+                name: { in: queryParams.categories, mode: "insensitive" },
+              },
+              brand: { name: { in: queryParams.brands, mode: "insensitive" } },
+            },
+          },
+        ],
+      },
+      select: {
+        price: true,
+        prevPrice: true,
+        id: true,
+        product: {
+          select: {
+            id: true,
+            name: true,
+            imgUrls: {
+              select: {
+                url: true,
+              },
+              where: {
+                main: true,
+              },
+            },
+            category: {
+              select: {
+                name: true,
+              },
+            },
+            brand: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        price: sortparams?.order as Prisma.SortOrder,
+      },
+    });
+    return productVariantsByPrice.map((productVariantsByPrice) => ({
+      id: productVariantsByPrice.product?.id,
+      name: productVariantsByPrice.product?.name,
+      imgUrls: productVariantsByPrice.product?.imgUrls,
+      category: { name: productVariantsByPrice.product?.category.name },
+      brand: { name: productVariantsByPrice.product?.brand.name },
+      variants: [
+        {
+          price: productVariantsByPrice.price,
+          prevPrice: productVariantsByPrice.prevPrice,
+          id: productVariantsByPrice.id,
+        },
+      ],
+    }));
+  }
+};
+
 export const cartItemsBySessionCart = async (sessionCartId: string) => {
   const cartItems = await prisma.cartItems.findMany({
     where: {
       sesionCart: sessionCartId,
+      active: true,
     },
     select: {
       sesionCart: true,
@@ -238,6 +430,7 @@ export const cartItemsBySessionCart = async (sessionCartId: string) => {
   if (cartItems.length === 0) {
     return [];
   }
+
   const cartProductsArray = cartItems.map((item) => ({
     id: item.product?.id || 0,
     name: item.product?.name || "",
@@ -267,6 +460,12 @@ export const slidesShow = await prisma.slideShow.findMany({
     title: true,
     category: true,
     description: true,
+    imgUrl: true,
+  },
+});
+export const paymentMethods = await prisma.paymentMethods.findMany({
+  select: {
+    name: true,
     imgUrl: true,
   },
 });

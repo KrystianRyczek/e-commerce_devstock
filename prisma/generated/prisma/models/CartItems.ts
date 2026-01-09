@@ -56,6 +56,7 @@ export type CartItemsMinAggregateOutputType = {
   price: number | null
   subtotal: number | null
   comment: string | null
+  active: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -70,6 +71,7 @@ export type CartItemsMaxAggregateOutputType = {
   price: number | null
   subtotal: number | null
   comment: string | null
+  active: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -84,6 +86,7 @@ export type CartItemsCountAggregateOutputType = {
   price: number
   subtotal: number
   comment: number
+  active: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -120,6 +123,7 @@ export type CartItemsMinAggregateInputType = {
   price?: true
   subtotal?: true
   comment?: true
+  active?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -134,6 +138,7 @@ export type CartItemsMaxAggregateInputType = {
   price?: true
   subtotal?: true
   comment?: true
+  active?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -148,6 +153,7 @@ export type CartItemsCountAggregateInputType = {
   price?: true
   subtotal?: true
   comment?: true
+  active?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -249,6 +255,7 @@ export type CartItemsGroupByOutputType = {
   price: number
   subtotal: number
   comment: string | null
+  active: boolean
   createdAt: Date
   updatedAt: Date
   _count: CartItemsCountAggregateOutputType | null
@@ -286,6 +293,7 @@ export type CartItemsWhereInput = {
   price?: Prisma.FloatFilter<"CartItems"> | number
   subtotal?: Prisma.FloatFilter<"CartItems"> | number
   comment?: Prisma.StringNullableFilter<"CartItems"> | string | null
+  active?: Prisma.BoolFilter<"CartItems"> | boolean
   createdAt?: Prisma.DateTimeFilter<"CartItems"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CartItems"> | Date | string
   user?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
@@ -302,6 +310,7 @@ export type CartItemsOrderByWithRelationInput = {
   price?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   comment?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UsersOrderByWithRelationInput
@@ -321,6 +330,7 @@ export type CartItemsWhereUniqueInput = Prisma.AtLeast<{
   price?: Prisma.FloatFilter<"CartItems"> | number
   subtotal?: Prisma.FloatFilter<"CartItems"> | number
   comment?: Prisma.StringNullableFilter<"CartItems"> | string | null
+  active?: Prisma.BoolFilter<"CartItems"> | boolean
   createdAt?: Prisma.DateTimeFilter<"CartItems"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CartItems"> | Date | string
   user?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
@@ -337,6 +347,7 @@ export type CartItemsOrderByWithAggregationInput = {
   price?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   comment?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CartItemsCountOrderByAggregateInput
@@ -359,6 +370,7 @@ export type CartItemsScalarWhereWithAggregatesInput = {
   price?: Prisma.FloatWithAggregatesFilter<"CartItems"> | number
   subtotal?: Prisma.FloatWithAggregatesFilter<"CartItems"> | number
   comment?: Prisma.StringNullableWithAggregatesFilter<"CartItems"> | string | null
+  active?: Prisma.BoolWithAggregatesFilter<"CartItems"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CartItems"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CartItems"> | Date | string
 }
@@ -370,6 +382,7 @@ export type CartItemsCreateInput = {
   price: number
   subtotal: number
   comment?: string | null
+  active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UsersCreateNestedOneWithoutCartItemsInput
@@ -386,6 +399,7 @@ export type CartItemsUncheckedCreateInput = {
   price: number
   subtotal: number
   comment?: string | null
+  active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -397,6 +411,7 @@ export type CartItemsUpdateInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UsersUpdateOneWithoutCartItemsNestedInput
@@ -413,6 +428,7 @@ export type CartItemsUncheckedUpdateInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -427,6 +443,7 @@ export type CartItemsCreateManyInput = {
   price: number
   subtotal: number
   comment?: string | null
+  active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -438,6 +455,7 @@ export type CartItemsUpdateManyMutationInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -452,6 +470,7 @@ export type CartItemsUncheckedUpdateManyInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -476,6 +495,7 @@ export type CartItemsCountOrderByAggregateInput = {
   price?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   comment?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -500,6 +520,7 @@ export type CartItemsMaxOrderByAggregateInput = {
   price?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   comment?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -514,6 +535,7 @@ export type CartItemsMinOrderByAggregateInput = {
   price?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   comment?: Prisma.SortOrder
+  active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -619,6 +641,7 @@ export type CartItemsCreateWithoutProductInput = {
   price: number
   subtotal: number
   comment?: string | null
+  active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UsersCreateNestedOneWithoutCartItemsInput
@@ -633,6 +656,7 @@ export type CartItemsUncheckedCreateWithoutProductInput = {
   price: number
   subtotal: number
   comment?: string | null
+  active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -676,6 +700,7 @@ export type CartItemsScalarWhereInput = {
   price?: Prisma.FloatFilter<"CartItems"> | number
   subtotal?: Prisma.FloatFilter<"CartItems"> | number
   comment?: Prisma.StringNullableFilter<"CartItems"> | string | null
+  active?: Prisma.BoolFilter<"CartItems"> | boolean
   createdAt?: Prisma.DateTimeFilter<"CartItems"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CartItems"> | Date | string
 }
@@ -687,6 +712,7 @@ export type CartItemsCreateWithoutUserInput = {
   price: number
   subtotal: number
   comment?: string | null
+  active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   product?: Prisma.ProductsCreateNestedOneWithoutCartItemsInput
@@ -701,6 +727,7 @@ export type CartItemsUncheckedCreateWithoutUserInput = {
   price: number
   subtotal: number
   comment?: string | null
+  active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -740,6 +767,7 @@ export type CartItemsCreateManyProductInput = {
   price: number
   subtotal: number
   comment?: string | null
+  active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -751,6 +779,7 @@ export type CartItemsUpdateWithoutProductInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UsersUpdateOneWithoutCartItemsNestedInput
@@ -765,6 +794,7 @@ export type CartItemsUncheckedUpdateWithoutProductInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -778,6 +808,7 @@ export type CartItemsUncheckedUpdateManyWithoutProductInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -791,6 +822,7 @@ export type CartItemsCreateManyUserInput = {
   price: number
   subtotal: number
   comment?: string | null
+  active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -802,6 +834,7 @@ export type CartItemsUpdateWithoutUserInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product?: Prisma.ProductsUpdateOneWithoutCartItemsNestedInput
@@ -816,6 +849,7 @@ export type CartItemsUncheckedUpdateWithoutUserInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -829,6 +863,7 @@ export type CartItemsUncheckedUpdateManyWithoutUserInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -845,6 +880,7 @@ export type CartItemsSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   price?: boolean
   subtotal?: boolean
   comment?: boolean
+  active?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.CartItems$userArgs<ExtArgs>
@@ -861,6 +897,7 @@ export type CartItemsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   price?: boolean
   subtotal?: boolean
   comment?: boolean
+  active?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.CartItems$userArgs<ExtArgs>
@@ -877,6 +914,7 @@ export type CartItemsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   price?: boolean
   subtotal?: boolean
   comment?: boolean
+  active?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.CartItems$userArgs<ExtArgs>
@@ -893,11 +931,12 @@ export type CartItemsSelectScalar = {
   price?: boolean
   subtotal?: boolean
   comment?: boolean
+  active?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CartItemsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "sesionCart" | "productId" | "variantId" | "quantity" | "price" | "subtotal" | "comment" | "createdAt" | "updatedAt", ExtArgs["result"]["cartItems"]>
+export type CartItemsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "sesionCart" | "productId" | "variantId" | "quantity" | "price" | "subtotal" | "comment" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["cartItems"]>
 export type CartItemsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.CartItems$userArgs<ExtArgs>
   product?: boolean | Prisma.CartItems$productArgs<ExtArgs>
@@ -927,6 +966,7 @@ export type $CartItemsPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     price: number
     subtotal: number
     comment: string | null
+    active: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["cartItems"]>
@@ -1363,6 +1403,7 @@ export interface CartItemsFieldRefs {
   readonly price: Prisma.FieldRef<"CartItems", 'Float'>
   readonly subtotal: Prisma.FieldRef<"CartItems", 'Float'>
   readonly comment: Prisma.FieldRef<"CartItems", 'String'>
+  readonly active: Prisma.FieldRef<"CartItems", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"CartItems", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CartItems", 'DateTime'>
 }

@@ -58,8 +58,12 @@ export const ModelName = {
   Brands: 'Brands',
   CartItems: 'CartItems',
   Users: 'Users',
+  paymentMethods: 'paymentMethods',
   Auth: 'Auth',
   UsersAddresses: 'UsersAddresses',
+  Account: 'Account',
+  Session: 'Session',
+  VerificationToken: 'VerificationToken',
   CategoriesImgUrls: 'CategoriesImgUrls',
   BrandsImgUrls: 'BrandsImgUrls',
   ProductsImgUrls: 'ProductsImgUrls',
@@ -147,6 +151,7 @@ export const CartItemsScalarFieldEnum = {
   price: 'price',
   subtotal: 'subtotal',
   comment: 'comment',
+  active: 'active',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -156,10 +161,12 @@ export type CartItemsScalarFieldEnum = (typeof CartItemsScalarFieldEnum)[keyof t
 
 export const UsersScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  email: 'email',
+  phone: 'phone',
   avatar: 'avatar',
   role: 'role',
-  status: 'status',
+  active: 'active',
+  password: 'password',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -167,10 +174,18 @@ export const UsersScalarFieldEnum = {
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
 
 
+export const PaymentMethodsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  imgUrl: 'imgUrl'
+} as const
+
+export type PaymentMethodsScalarFieldEnum = (typeof PaymentMethodsScalarFieldEnum)[keyof typeof PaymentMethodsScalarFieldEnum]
+
+
 export const AuthScalarFieldEnum = {
   id: 'id',
   password: 'password',
-  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -187,6 +202,42 @@ export const UsersAddressesScalarFieldEnum = {
 } as const
 
 export type UsersAddressesScalarFieldEnum = (typeof UsersAddressesScalarFieldEnum)[keyof typeof UsersAddressesScalarFieldEnum]
+
+
+export const AccountScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  provider: 'provider',
+  providerAccountId: 'providerAccountId',
+  refresh_token: 'refresh_token',
+  access_token: 'access_token',
+  expires_at: 'expires_at',
+  token_type: 'token_type',
+  scope: 'scope',
+  id_token: 'id_token',
+  session_state: 'session_state'
+} as const
+
+export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
+
+
+export const SessionScalarFieldEnum = {
+  sessionToken: 'sessionToken',
+  userId: 'userId',
+  expires: 'expires'
+} as const
+
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const VerificationTokenScalarFieldEnum = {
+  identifier: 'identifier',
+  token: 'token',
+  expires: 'expires'
+} as const
+
+export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
 
 
 export const CategoriesImgUrlsScalarFieldEnum = {

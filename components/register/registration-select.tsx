@@ -1,6 +1,6 @@
 import ArrowDown from "./svg/arrow-down";
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
-import type { RegistationFormValues } from "./registration-form";
+import type { RegistationFormValuesProps } from "@/util/types";
 
 export default function RegisterSelect({
   label,
@@ -10,10 +10,10 @@ export default function RegisterSelect({
   register,
 }: {
   label: string;
-  name: keyof RegistationFormValues;
+  name: keyof RegistationFormValuesProps;
   countryseArray: string[];
-  errors: FieldErrors<RegistationFormValues> | undefined;
-  register: UseFormRegister<RegistationFormValues>;
+  errors: FieldErrors<RegistationFormValuesProps> | undefined;
+  register: UseFormRegister<RegistationFormValuesProps>;
 }) {
   return (
     <label

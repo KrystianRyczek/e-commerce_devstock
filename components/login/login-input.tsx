@@ -11,15 +11,16 @@ export default function LoginInput({
   name,
   id,
   type,
-  inputRef,
   defaultValue,
+  loginRef,
 }: LoginInputParams) {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible((prevState) => !prevState);
+
   return (
     <label
-      className="relative flex flex-col gap-[16px] w-full mb-[32px]"
+      className={`relative flex flex-col gap-[16px] w-full mb-[32px]`}
       htmlFor={name}
     >
       <p className="flex text-18-28-500">{label}</p>
@@ -29,8 +30,8 @@ export default function LoginInput({
           type={isVisible ? "text" : type}
           id={id}
           name={name}
+          ref={loginRef}
           placeholder={palceholder}
-          ref={inputRef}
           defaultValue={defaultValue}
         />
         {type === "password" &&
@@ -40,11 +41,6 @@ export default function LoginInput({
             <LoginEye toggleVisibility={toggleVisibility} />
           ))}
       </div>
-
-      <button
-        type="button"
-        className="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500"
-      ></button>
     </label>
   );
 }

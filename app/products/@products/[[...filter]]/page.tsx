@@ -34,7 +34,6 @@ export default async function Product({
     sort: currentSearchParams.sort ? currentSearchParams.sort : "Default order",
   };
 
-  console.log("Search Params:", queryParams);
   const count = await totalProductsCount(queryParams);
   const productsArray = await products(queryParams);
   const maxPageNumber = Math.ceil(count / queryParams.show);

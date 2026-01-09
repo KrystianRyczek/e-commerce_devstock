@@ -1,11 +1,13 @@
+import { PrismaClient } from "./generated/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { clearDbDataHandler } from "@/prisma/util/clearDbDataHandler";
 import { createCategoryHandler } from "@/prisma/util/createCategoryHandler";
 import { createBrandsHandler } from "@/prisma/util/createBrandsHandler";
 import { createProductsHandler } from "@/prisma/util/crateProductsHandler";
 import { createRecommendationHandler } from "@/prisma/util/createRecommendation";
-import { PrismaClient } from "./generated/prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
-import createSlideShowHandler from "./util/createSlideShowHandler";
+import { createSlideShowHandler } from "./util/createSlideShowHandler";
+import { createUserHandler } from "./util/createUserHandler";
+import { createPaymentMethodsHandler } from "./util/createPaymentMethodsHandler";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
@@ -18,11 +20,14 @@ async function main() {
   console.log("🧹 Cleaning existing data...");
   await clearDbDataHandler();
   console.log("🚀 Database update started! 🚀");
+
   await createCategoryHandler();
   await createBrandsHandler();
   await createProductsHandler();
   await createRecommendationHandler();
   await createSlideShowHandler();
+  await createUserHandler();
+  await createPaymentMethodsHandler();
 }
 
 main()

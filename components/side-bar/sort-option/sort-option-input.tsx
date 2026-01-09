@@ -31,11 +31,11 @@ export default function SortOptionInput({
           <>
             {sortOptionArray.map((sortOption) => (
               <option
-                key={sortOption}
-                id={`${label}Option${sortOption}`}
-                value={sortOption}
+                key={sortOption.name}
+                id={`${label}Option${sortOption.name}`}
+                value={sortOption.name}
               >
-                {sortOption}
+                {sortOption.name}
               </option>
             ))}
           </>

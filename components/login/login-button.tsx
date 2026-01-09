@@ -1,20 +1,24 @@
-import Link from "next/link";
+"use client";
+import { useFormStatus } from "react-dom";
 
 export default function LoginButton({
   label,
-  href,
+  type,
+  goFowardHandler,
 }: {
   label: string;
-  href: string;
+  type: "submit" | "button";
+  goFowardHandler?: () => void;
 }) {
+  const { pending } = useFormStatus();
   return (
-    <Link href={href}>
-      <button
-        className="w-full h-[54px] rounded-[6px] bg-login-button-background text-login-button-text text-16-26-500"
-        type="button"
-      >
-        <p>{label}</p>
-      </button>
-    </Link>
+    <button
+      className="w-full h-[54px] rounded-[6px] bg-login-button-background text-login-button-text text-16-26-500"
+      type={type}
+      {...(type === "button" ? { onClick: goFowardHandler } : {})}
+      disabled={pending}
+    >
+      <p>{pending ? "Signing In..." : label}</p>
+    </button>
   );
 }

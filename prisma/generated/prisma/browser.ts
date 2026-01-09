@@ -53,6 +53,11 @@ export type CartItems = Prisma.CartItemsModel
  */
 export type Users = Prisma.UsersModel
 /**
+ * Model paymentMethods
+ * 
+ */
+export type paymentMethods = Prisma.paymentMethodsModel
+/**
  * Model Auth
  * 
  */
@@ -62,6 +67,21 @@ export type Auth = Prisma.AuthModel
  * 
  */
 export type UsersAddresses = Prisma.UsersAddressesModel
+/**
+ * Model Account
+ * 
+ */
+export type Account = Prisma.AccountModel
+/**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
+ * Model VerificationToken
+ * 
+ */
+export type VerificationToken = Prisma.VerificationTokenModel
 /**
  * Model CategoriesImgUrls
  * 

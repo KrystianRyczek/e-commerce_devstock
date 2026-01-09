@@ -108,8 +108,8 @@ export type LoginInputParams = {
   name: string;
   id: string;
   type: string;
-  inputRef: React.RefObject<HTMLInputElement | null>;
   defaultValue: string;
+  loginRef?: React.RefObject<HTMLInputElement | null>;
 };
 export type colorRadioParams = {
   index: number;
@@ -185,7 +185,7 @@ export type SortOptionInputParams = {
   label: string;
   name: string;
   itemPerPageArray?: number[];
-  sortOptionArray?: string[];
+  sortOptionArray?: { name: string; filterName: string; order: string }[];
   register: UseFormRegister<FilterFormData>;
 };
 export type SideBarParams = {
@@ -209,4 +209,12 @@ export type QueryParams = {
   show: number;
   page: number;
   sort: string;
+};
+export type RegistationFormValuesProps = {
+  email: string;
+  phone: string;
+  password: string;
+  confirmPassword: string;
+  country: string;
+  conditionsAndPrivancy: boolean;
 };

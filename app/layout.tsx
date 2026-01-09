@@ -9,12 +9,11 @@ export const metadata: Metadata = {
   description: "E-Commerce platform",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log("Rendering RootLayout");
   return (
     <html lang="en">
       <body>

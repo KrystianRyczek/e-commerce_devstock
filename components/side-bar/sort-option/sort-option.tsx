@@ -2,15 +2,9 @@ import FilterContainer from "@/components/side-bar/common-components/filter-cont
 import SortOptionInput from "@/components/side-bar/sort-option/sort-option-input";
 import { FilterFormData } from "@/util/types";
 import { UseFormRegister } from "react-hook-form";
-const itemPerPageArray = [6, 9, 12, 15, 18];
-const sortOptionArray = [
-  "Default order",
-  "Lowest Price",
-  "Highest Price",
-  "Name: A to Z",
-  "Name: Z to A",
-  "Newest Arrivals",
-];
+import { itemPerPageArray } from "@/util/static-data";
+import { sortOptionArray } from "@/util/static-data";
+
 export default function SortOption({
   register,
 }: {
