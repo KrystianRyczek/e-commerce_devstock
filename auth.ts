@@ -4,7 +4,7 @@ import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
-import type { NextAuthConfig, Session } from "next-auth";
+import type { NextAuthOptions, Session } from "next-auth";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
@@ -45,8 +45,8 @@ export const config = {
         const user = await prisma.users.findFirst({
           where: {
             OR: [
-              { email: credentials.email || undefined },
-              { phone: credentials.phone || undefined },
+              { email: credentials?.email || undefined },
+              { phone: credentials?.phone || undefined },
             ],
           },
           select: {
@@ -61,7 +61,7 @@ export const config = {
         console.log("User fetched from database:", user);
         if (user && user.password) {
           const isMatchingPassword = compareSync(
-            credentials.password as string,
+            credentials?.password as string,
             user.password
           );
           if (!isMatchingPassword) {
@@ -96,6 +96,6 @@ export const config = {
       return session;
     },
   },
-} satisfies NextAuthConfig;
+} satisfies NextAuthOptions;
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config);
