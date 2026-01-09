@@ -1,16 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
-
-export default async function middleware(request: NextRequest) {
+import { authApiMiddleware } from "./middlewares/authApiMiddleware";
+export default async function middleware(req: NextRequest, res: NextResponse) {
+  
   console.log("Middleware executed");
+  
+  const url = (await req).url;
+
+  if (url.includes("/api/")) {
+    return authApiMiddleware(req);
+  }
 
   const response = NextResponse.next();
-  const sessionCartId = request.cookies.get("sessionCartId")?.value;
+  const sessionCartId = req.cookies.get("sessionCartId")?.value;
 
   if (!sessionCartId) {
     const newSessionCartId: string = uuidv4();
     response.cookies.set("sessionCartId", newSessionCartId, {
-      path: request.url,
+      path: req.url,
       httpOnly: true,
       secure: true,
       maxAge: 60 * 60 * 24 * 1, // 1 day

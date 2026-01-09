@@ -12,6 +12,8 @@ import dhl from "@/public/shipping-methods/dhl.png";
 import mastercard from "@/public/payment-services/Mastercard.png";
 import paypal from "@/public/payment-services/Paypal.png";
 import visa from "@/public/payment-services/Visa.png";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 const cartProductsArray = [
   {
@@ -153,7 +155,16 @@ export type PaymentMethod = {
   img: StaticImageData;
 };
 
-export default function CheckoutPage() {
+export default async function CheckoutPage(props: {
+  searchParams: Promise<{ callbackUrl: string }>;
+}) {
+  const { callbackUrl } = await props.searchParams;
+
+  const session = await auth();
+
+  if (!session?.user) {
+    redirect(callbackUrl || "/login");
+  }
   return (
     <main className="flex flex-col gap-[32px] w-full min-h-[612px] p-[40px] max-tablet:p-[8px] max-desktop:p-[20px]">
       <NavigationBar />

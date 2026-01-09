@@ -2,6 +2,7 @@ import { PrismaClient, Prisma } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { QueryParams } from "./types";
 import { sortOptionArray } from "./static-data";
+import { tr } from "zod/locales";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
@@ -108,7 +109,46 @@ export const currentProduct = async (productId: number) =>
       },
     },
   });
-
+export const productsArray = async () =>
+  await prisma.products.findMany({
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      imgUrls: {
+        select: {
+          url: true,
+        },
+      },
+      category: {
+        select: {
+          name: true,
+        },
+      },
+      variants: {
+        select: {
+          id: true,
+          color: true,
+          stock: true,
+          price: true,
+          prevPrice: true,
+          tag: true,
+        },
+      },
+    },
+  });
+export const currentUser = async (id: number) =>
+  await prisma.users.findMany({
+    where: { id: id },
+    select: {
+      id: true,
+      email: true,
+      phone: true,
+      role: true,
+      avatar: true,
+      active: true,
+    },
+  });
 export const totalRecommendedCount = async (queryParams: QueryParams) =>
   await prisma.recommendation.count({
     where: {
@@ -304,6 +344,7 @@ export const products = async (queryParams: QueryParams) => {
       name: recommendedProduct.product.name,
       imgUrls: recommendedProduct.product.imgUrls,
       category: { name: recommendedProduct.product.category.name },
+      brand: { name: recommendedProduct.product.brand.name },
       variants: recommendedProduct.product.variants,
     }));
   }
@@ -366,17 +407,18 @@ export const products = async (queryParams: QueryParams) => {
         price: sortparams?.order as Prisma.SortOrder,
       },
     });
-    return productVariantsByPrice.map((productVariantsByPrice) => ({
-      id: productVariantsByPrice.product?.id,
-      name: productVariantsByPrice.product?.name,
-      imgUrls: productVariantsByPrice.product?.imgUrls,
-      category: { name: productVariantsByPrice.product?.category.name },
-      brand: { name: productVariantsByPrice.product?.brand.name },
+
+    return productVariantsByPrice.map((item) => ({
+      id: item.product?.id || 0,
+      name: item.product?.name || "",
+      imgUrls: item.product?.imgUrls || [],
+      category: { name: item.product?.category.name || "" },
+      brand: { name: item.product?.brand.name || "" },
       variants: [
         {
-          price: productVariantsByPrice.price,
-          prevPrice: productVariantsByPrice.prevPrice,
-          id: productVariantsByPrice.id,
+          price: item.price,
+          prevPrice: item.prevPrice,
+          id: item.id,
         },
       ],
     }));
