@@ -12,7 +12,7 @@ export default function Message({
   style: string;
   message: string;
 }) {
-  let portalContainer: HTMLElement | null = document.getElementById("toast");
+  const portalContainer: HTMLElement | null = document.getElementById("toast");
   if (!portalContainer) {
     return null;
   }
