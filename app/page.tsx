@@ -9,8 +9,13 @@ import {
   recommendedProducts,
   slidesShow,
 } from "@/util/fetching-data";
+import MessageContainer from "@/components/home-page/message-container";
 
-export default async function Home() {
+export default async function Home(props: {
+  searchParams: Promise<{ callbackUrl: string }>;
+}) {
+  const { callbackUrl } = await props.searchParams;
+
   const brands = await brandsWithImages;
   const categories = await categoriesWithImages;
   const slides = await slidesShow;
@@ -25,23 +30,28 @@ export default async function Home() {
   }));
 
   return (
-    <main className=" flex flex-col gap-[100px] max-desktop:gap-[50px] px-[40px] max-desktop:px-[20px] pb-[80px]">
-      <SlideShow slides={slides} />
-      {categories ? (
-        <Section title={"Category"} href={undefined}>
-          <CategoryList categories={categories} />
-        </Section>
-      ) : null}
-      {recommended ? (
-        <Section title={"Recommended Products"} href={"/products"}>
-          <RecomendationList recommended={recommended} />
-        </Section>
-      ) : null}
-      {brands ? (
-        <Section title={"Brands"} href={"/brands"}>
-          <BrandList brands={brands} />
-        </Section>
-      ) : null}
-    </main>
+    <>
+      <MessageContainer callbackUrl={callbackUrl} />
+      <main className=" flex flex-col px-[40px] max-desktop:px-[20px] pb-[80px]">
+        <div className="flex flex-col gap-[100px] max-desktop:gap-[50px]">
+          <SlideShow slides={slides} />
+          {categories ? (
+            <Section title={"Category"} href={undefined}>
+              <CategoryList categories={categories} />
+            </Section>
+          ) : null}
+          {recommended ? (
+            <Section title={"Recommended Products"} href={"/products"}>
+              <RecomendationList recommended={recommended} />
+            </Section>
+          ) : null}
+          {brands ? (
+            <Section title={"Brands"} href={"/brands"}>
+              <BrandList brands={brands} />
+            </Section>
+          ) : null}
+        </div>
+      </main>
+    </>
   );
 }

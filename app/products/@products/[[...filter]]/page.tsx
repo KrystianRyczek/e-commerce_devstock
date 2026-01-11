@@ -1,5 +1,6 @@
 import PaginationBar from "@/components/products/pagination-bar";
 import ProductList from "@/components/products/product list";
+import ToastContainerComponent from "@/components/toast/toast-container";
 import {
   categoriesNameList,
   brandsNameList,

@@ -205,8 +205,24 @@
   --color-payment-status-text: #dcfce8;
   --color-payment-button-background: #f29145;
   --color-payment-button-text: #262626;
-
   /* -------------------------------------------------- */
+  --color-toast-success-background: #295b40;
+  --color-toast-success-border: #22c55e;
+  --color-toast-success-h: #fcfcfc;
+  --color-toast-success-text: #e7e7e7;
+  --color-toast-success-icon: #86efad;
+  /* -------------------------------------------------- */
+  --color-toast-error-background: #842626;
+  --color-toast-error-border: #ef4444;
+  --color-toast-error-h: #fcfcfc;
+  --color-toast-error-text: #e7e7e7;
+  --color-toast-error-icon: #fca5a5;
+  /* -------------------------------------------------- */
+  --color-toast-info-background: #96600e;
+  --color-toast-info-border: #eab308;
+  --color-toast-info-h: #fcfcfc;
+  --color-toast-info-text: #e7e7e7;
+  --color-toast-info-icon: #fdd147;
   /* -------------------------------------------------- */
 }
 @layer base {
@@ -372,7 +388,7 @@
   stroke-dasharray: 125.6;
   transform: rotate(-90deg);
 }
-.swiper-button-prev{
+.swiper-button-prev {
   width: 44px;
   height: 74px;
 }

@@ -1,5 +1,6 @@
 import NavigationBar from "@/components/product-details/navigation-bar";
 import ProductDetails from "@/components/product-details/product-details";
+import ToastContainerComponent from "@/components/toast/toast-container";
 import { currentProduct } from "@/util/fetching-data";
 
 type Props = {

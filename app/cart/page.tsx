@@ -1,6 +1,7 @@
 import CartContainer from "@/components/cart/cart-container";
 import EmptyCartContainer from "@/components/cart/epty-cart-container";
 import NavigationBar from "@/components/cart/navigation-bar";
+import ToastContainerComponent from "@/components/toast/toast-container";
 import { cartItemsBySessionCart, cartItemsByUser } from "@/util/fetching-data";
 import { cookies } from "next/headers";
 
@@ -33,7 +34,7 @@ export default async function CartPage() {
     // Merge both carts, and sum duplicate items
   }
 
-  console.log(cartProductsArray.length);
+  console.log(cartProductsArray);
   return (
     <main className="flex flex-col w-full min-h-[612px] text-white p-[40px] max-tablet:p-[8px] max-desktop:p-[20px]">
       <NavigationBar />

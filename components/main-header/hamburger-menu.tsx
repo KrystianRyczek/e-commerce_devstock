@@ -7,8 +7,15 @@ import Avatar from "./svg/avatar";
 import Setings from "./svg/setings";
 import Hamburger from "./svg/hamburger";
 import Close from "./svg/close";
+import UserAvatar from "./user-avatar";
 
-export default function HamburgerMenu() {
+export default function HamburgerMenu({
+  avatarUrl,
+  cartItemsCount,
+}: {
+  avatarUrl: { avatar: string } | null;
+  cartItemsCount: number;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const clickOnHamburgerMenuHandler = () => {
@@ -37,8 +44,25 @@ export default function HamburgerMenu() {
           </button>
         </div>
         <div className="flex w-full justify-between mb-5">
-          <ShoppingCart />
-          <Avatar />
+          <div
+            className={
+              cartItemsCount > 0
+                ? "flex relative text-logoOrange"
+                : "flex text-logoNeutral"
+            }
+          >
+            {cartItemsCount > 0 && (
+              <span className="flex justify-center items-center absolute w-3 h-4 -top-2 right-1 inline-flex items-center justify-center px-2 py-1 text-[10px] font-bold leading-none text-red-100">
+                *
+              </span>
+            )}
+            <ShoppingCart />
+          </div>
+          {avatarUrl !== null ? (
+            <UserAvatar avatarUrl={avatarUrl.avatar} />
+          ) : (
+            <Avatar />
+          )}
           <Setings />
         </div>
         <NavLinksList

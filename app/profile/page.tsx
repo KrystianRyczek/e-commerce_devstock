@@ -1,15 +1,20 @@
 import { auth } from "@/auth";
+import ToastContainerComponent from "@/components/toast/toast-container";
 import { redirect } from "next/navigation";
 
 export default async function ProfilePage(props: {
   searchParams: Promise<{ callbackUrl: string }>;
 }) {
-  const { callbackUrl } = await props.searchParams;
+  // const { callbackUrl } = await props.searchParams;
 
-  const session = await auth();
+  // const session = await auth();
 
-  if (!session?.user) {
-    redirect(callbackUrl || "/login");
-  }
-  return <main>Profile Page</main>;
+  // if (!session?.user) {
+  //   redirect(callbackUrl || "/login");
+  // }
+  return (
+    <main className="text-white">
+      <p className="text-white">Profile Page</p>
+    </main>
+  );
 }

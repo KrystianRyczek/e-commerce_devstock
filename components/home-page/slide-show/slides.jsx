@@ -56,7 +56,7 @@ export default function Slides({ slides }) {
                 <Arrow />
               </Link>
             </div>
-            <div className="w-[422px] h-[852px] ml-20 relative flex justify-center -rotate-35">
+            <div className="w-[422px] h-[852px] ml-20 relative flex justify-center -rotate-35 bg-slide-text shadow-slide-image-shadow">
               <Image
                 loader={(config) => imageLoader(config, "")}
                 src={slide.imgUrl}

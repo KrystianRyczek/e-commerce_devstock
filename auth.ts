@@ -86,7 +86,7 @@ export const config = {
       token,
     }: {
       session: Session;
-      user: { id: string };
+      user: { id: string; email: string };
       trigger?: string;
       token: { sub?: string };
     }) {

@@ -9,7 +9,9 @@ import ProductDetailContainer from "@/components/product-details//common-compone
 import ProductPriceContainer from "@/components/product-details//common-components/product-price-container";
 import ProductNameContainer from "@/components/product-details//common-components/product-name-container";
 import SubtotalContainer from "./subtotal-container";
+import MsgBox from "@/components/toast/message-box";
 import { addToCartAction } from "@/util/server-action";
+import { useEffect, useRef, useState } from "react";
 
 export default function PurchasingContainer({
   id,
@@ -28,7 +30,6 @@ export default function PurchasingContainer({
     variantId: variants[0].id,
     price: variants[0].price,
   };
-
   const {
     formState: { isSubmitting },
     watch,
@@ -41,6 +42,12 @@ export default function PurchasingContainer({
     mode: "onChange",
     defaultValues,
   });
+  const [toast, setToast] = useState({
+    show: false,
+    message: "",
+    type: "success",
+  });
+  const timer = useRef<NodeJS.Timeout | null>(null);
 
   const currentFormData = watch("color");
   const currentQuantity = getValues("quantity");
@@ -63,75 +70,98 @@ export default function PurchasingContainer({
       +(+currentQuantity * (currentVariant?.price || 0)).toFixed(2)
     );
   }
+  useEffect(() => {
+    if (toast.show) {
+      timer.current = setTimeout(() => {
+        setToast({ show: false, message: "", type: "" });
+      }, 3000);
+    }
+    return () => {
+      if (timer.current) {
+        clearTimeout(timer.current);
+      }
+    };
+  }, [toast]);
   return (
-    <div className="flex max-desktop:flex-col w-full gap-[32px]">
-      <div className="w-fit flex flex-col gap-[32px] text-product-description-h ">
-        <ProductNameContainer name={name} category={category} />
-        <ProductPriceContainer
-          price={currentVariant?.price || 0}
-          currency={currency}
-        />
-        <div className="w-full flex flex-col gap-[32px] max-desktop:hidden">
+    <>
+      {toast.show ? <MsgBox type={toast.type} msg={toast.message} /> : null}
+
+      <div className="flex max-desktop:flex-col w-full gap-[32px]">
+        <div className="w-fit flex flex-col gap-[32px] text-product-description-h ">
+          <ProductNameContainer name={name} category={category} />
+          <ProductPriceContainer
+            price={currentVariant?.price || 0}
+            currency={currency}
+          />
+          <div className="w-full flex flex-col gap-[32px] max-desktop:hidden">
+            <ProductDetailContainer description={description} />
+            <ShippingDetailsContainer />
+          </div>
+        </div>
+        <form
+          onSubmit={handleSubmit(async (data) => {
+            const response = await addToCartAction({
+              id: data.id,
+              name: data.name,
+              variantId: data.variantId,
+              price: data.price,
+              quantity: data.quantity,
+              subtotal: data.subtotal,
+            });
+            setToast({
+              show: true,
+              message: response.message,
+              type: response.success ? "success" : "error",
+            });
+          })}
+          className="w-full p-[24px] max-desktop:p-[16px] flex flex-col gap-[32px] max-desktop:gap-[20px] rounded-[6px] border-[1px] border-purchasing-container-border bg-purchasing-container-background text-purchasing-container-h"
+        >
+          <fieldset
+            className="flex flex-wrap gap-[16px] max-desktop:gap-[9px]"
+            name="color"
+          >
+            <legend className="mb-[14px] max-desktop:mb-[8px] text-18-28-500">
+              Color:
+            </legend>
+            {variants &&
+              variants.map((variant: { color: string }, index: number) => (
+                <ColorRadio
+                  key={variant.color + index}
+                  index={index}
+                  label="color"
+                  color={variant.color}
+                  checked={index === 0}
+                  register={register}
+                />
+              ))}
+          </fieldset>
+          <div className="w-full flex flex-wrap gap-[14px] max-desktop:gap-[8px]">
+            <legend className="w-full text-18-28-500">Quantity:</legend>
+            <QuantityInput
+              price={currentVariant?.price || 0}
+              stock={currentVariant?.stock || 0}
+              register={register}
+              setValue={setValue}
+              getValues={getValues}
+            />
+            <span className="ml-[16px] h-[54px] flex items-center text-16-26-500 text-purchasing-container-stock-text">
+              Stock: {currentVariant?.stock || 0}
+            </span>
+          </div>
+          <SubtotalContainer
+            defaultValue={defaultValues.subtotal}
+            currency={"USD"}
+            register={register}
+          />
+          <SubmitButton
+            disabled={isSubmitting || currentVariant?.stock === 0}
+          />
+        </form>
+        <div className="w-full flex flex-col gap-[32px] min-tablet:hidden">
           <ProductDetailContainer description={description} />
           <ShippingDetailsContainer />
         </div>
       </div>
-      <form
-        onSubmit={handleSubmit((data) => {
-          addToCartAction({
-            id: data.id,
-            name: data.name,
-            variantId: data.variantId,
-            price: data.price,
-            quantity: data.quantity,
-            subtotal: data.subtotal,
-          });
-        })}
-        className="w-full p-[24px] max-desktop:p-[16px] flex flex-col gap-[32px] max-desktop:gap-[20px] rounded-[6px] border-[1px] border-purchasing-container-border bg-purchasing-container-background text-purchasing-container-h"
-      >
-        <fieldset
-          className="flex flex-wrap gap-[16px] max-desktop:gap-[9px]"
-          name="color"
-        >
-          <legend className="mb-[14px] max-desktop:mb-[8px] text-18-28-500">
-            Color:
-          </legend>
-          {variants &&
-            variants.map((variant: { color: string }, index: number) => (
-              <ColorRadio
-                key={variant.color + index}
-                index={index}
-                label="color"
-                color={variant.color}
-                checked={index === 0}
-                register={register}
-              />
-            ))}
-        </fieldset>
-        <div className="w-full flex flex-wrap gap-[14px] max-desktop:gap-[8px]">
-          <legend className="w-full text-18-28-500">Quantity:</legend>
-          <QuantityInput
-            price={currentVariant?.price || 0}
-            stock={currentVariant?.stock || 0}
-            register={register}
-            setValue={setValue}
-            getValues={getValues}
-          />
-          <span className="ml-[16px] h-[54px] flex items-center text-16-26-500 text-purchasing-container-stock-text">
-            Stock: {currentVariant?.stock || 0}
-          </span>
-        </div>
-        <SubtotalContainer
-          defaultValue={defaultValues.subtotal}
-          currency={"USD"}
-          register={register}
-        />
-        <SubmitButton disabled={isSubmitting || currentVariant?.stock === 0} />
-      </form>
-      <div className="w-full flex flex-col gap-[32px] min-tablet:hidden">
-        <ProductDetailContainer description={description} />
-        <ShippingDetailsContainer />
-      </div>
-    </div>
+    </>
   );
 }

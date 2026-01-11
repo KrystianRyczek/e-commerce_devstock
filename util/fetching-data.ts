@@ -9,6 +9,17 @@ const adapter = new PrismaPg({
 });
 
 const prisma = new PrismaClient({ adapter });
+export const userAvatar = async (userId: number) =>
+  await prisma.users.findUnique({
+    where: { id: userId },
+    select: {
+      avatar: true,
+    },
+  });
+export const suerItemsCartCount = async (userId: number) =>
+  await prisma.cartItems.count({
+    where: { AND: [{ userId: userId }, { active: true }] },
+  });
 
 export const brandsWithImages = await prisma.brands.findMany({
   select: {
@@ -423,6 +434,15 @@ export const products = async (queryParams: QueryParams) => {
       ],
     }));
   }
+};
+
+export const cartItemsCountBySessionCart = async (sessionCartId: string) => {
+  return await prisma.cartItems.count({
+    where: {
+      sesionCart: sessionCartId,
+      active: true,
+    },
+  });
 };
 
 export const cartItemsBySessionCart = async (sessionCartId: string) => {

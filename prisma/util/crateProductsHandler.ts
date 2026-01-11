@@ -65,7 +65,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/monitor2_sgcl9n",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/monitor2_sgcl9n",
               tag: "gallery0",
               main: true,
             },
@@ -130,7 +130,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/headphone1_htvor8",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/headphone1_htvor8",
               tag: "gallery0",
               main: true,
             },
@@ -195,7 +195,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/headphone2_dwhiyk",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/headphone2_dwhiyk",
               tag: "gallery0",
               main: true,
             },
@@ -260,7 +260,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/maus2_ycyh5h",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/maus2_ycyh5h",
               tag: "gallery0",
               main: true,
             },
@@ -318,7 +318,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/maus2_ycyh5h",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/maus2_ycyh5h",
               tag: "gallery0",
               main: true,
             },
@@ -376,7 +376,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/keyboard2_snct7q",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/keyboard2_snct7q",
               tag: "gallery0",
               main: true,
             },
@@ -434,7 +434,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/kayboard1_qctlug",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/kayboard1_qctlug",
               tag: "gallery0",
               main: true,
             },
@@ -478,7 +478,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/monitor1_i1sr0m",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/monitor1_i1sr0m",
               tag: "gallery0",
               main: true,
             },
@@ -525,7 +525,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/monitor2_sgcl9n",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/monitor2_sgcl9n",
               tag: "gallery0",
               main: true,
             },
@@ -584,7 +584,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/headphone1_htvor8",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/headphone1_htvor8",
               tag: "gallery0",
               main: true,
             },
@@ -649,7 +649,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/headphone2_dwhiyk",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/headphone2_dwhiyk",
               tag: "gallery0",
               main: true,
             },
@@ -714,7 +714,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/maus2_ycyh5h",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/maus2_ycyh5h",
               tag: "gallery0",
               main: true,
             },
@@ -772,7 +772,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/maus2_ycyh5h",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/maus2_ycyh5h",
               tag: "gallery0",
               main: true,
             },
@@ -830,7 +830,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/keyboard2_snct7q",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/keyboard2_snct7q",
               tag: "gallery0",
               main: true,
             },
@@ -876,7 +876,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/kayboard1_qctlug",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/kayboard1_qctlug",
               tag: "gallery0",
               main: true,
             },
@@ -920,7 +920,7 @@ export const createProductsHandler = async () => {
         imgUrls: {
           create: [
             {
-              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:BD1919/monitor1_i1sr0m",
+              url: "https://res.cloudinary.com/dts7qcxky/image/upload/e_upscale/c_limit,h_317,w_398/e_background_removal/b_rgb:#e7e7e7/monitor1_i1sr0m",
               tag: "gallery0",
               main: true,
             },

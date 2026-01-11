@@ -91,10 +91,10 @@ export const addToCartAction = async (product: CartProduct) => {
       },
     });
     console.log(`Product ${product.name} added to cart successfully.`);
-    return { success: true };
+    return { success: true, message: "Product added to cart successfully." };
   } catch (error) {
     console.error("Error adding product to cart:", error);
-    return { success: false };
+    return { success: false, message: "Failed to add product to cart." };
   }
 };
 export const removeFromCartAction = async (
@@ -117,10 +117,13 @@ export const removeFromCartAction = async (
         active: false,
       },
     });
-    return { success: true };
+    return {
+      success: true,
+      message: "Product removed from cart successfully.",
+    };
   } catch (error) {
     console.error("Error removing product from cart:", error);
-    return { success: false };
+    return { success: false, message: "Failed to remove product from cart." };
   }
 };
 
@@ -148,7 +151,7 @@ export const signupAction = async (data: RegistationFormValuesProps) => {
     console.error("Error registering user:", error);
     return { success: false, message: "Registration failed." };
   }
-  redirect("/login");
+  redirect("/login?callbackUrl=/register");
 };
 export const logInWithCredentialsAction = async (
   prevState: unknown,
