@@ -4,7 +4,6 @@ import CartForm from "@/components/cart/cart-form";
 import CheckoutContainer from "@/components/cart/checkout-container";
 import type { CartProduct } from "@/app/cart/page";
 import { useState } from "react";
-import { ca } from "zod/locales";
 
 export default function CartContainer({
   products,

@@ -5,9 +5,10 @@ import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { redirect } from "next/navigation";
 import { hashSync } from "bcrypt-ts-edge";
-import { signIn, signOut } from "@/auth";
+import { auth, signIn, signOut } from "@/auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { success, z } from "zod";
+import { z } from "zod";
+import { revalidatePath } from "next/cache";
 
 const emailSchema = z.object({
   email: z.string().email("Not a valid email!"),
@@ -54,23 +55,37 @@ export const addToCartAction = async (product: CartProduct) => {
   "use server";
   try {
     const sessionCartId = (await cookies()).get("sessionCartId")?.value;
+    const user = await auth();
     if (!sessionCartId) {
       throw new Error("No session cart ID found in cookies.");
     }
-    const userId = null; // Use null for guest carts - replace with actual user ID retrieval logic when user is logged in
-
+    const currentUserId = user ? Number(user.user.id) : null;
+    const item = await prisma.productVariants.findFirst({
+      where: { productId: product.id, id: product.variantId },
+      select: { stock: true },
+    });
+    if (item && item.stock < 1) {
+      return {
+        success: false,
+        message: "Cannot add items due to insufficient stock.",
+      };
+    }
     const cart = await prisma.cartItems.findFirst({
       where: {
-        sesionCart: sessionCartId,
-        productId: product.id,
-        variantId: product.variantId,
+        OR: [{ sessionCart: sessionCartId }, { userId: currentUserId }],
+        AND: [
+          { productId: product.id },
+          { variantId: product.variantId },
+          { active: true },
+          { ordered: false },
+        ],
       },
     });
-    if (!cart) {
+    if (!cart?.id) {
       await prisma.cartItems.create({
         data: {
-          sesionCart: sessionCartId,
-          userId: userId,
+          sessionCart: sessionCartId,
+          userId: currentUserId,
           productId: product.id,
           variantId: product.variantId,
           quantity: product.quantity,
@@ -78,26 +93,42 @@ export const addToCartAction = async (product: CartProduct) => {
           subtotal: product.subtotal,
         },
       });
+      revalidatePath(`/cart`, "layout");
+      return { success: true, message: "Product added to cart successfully." };
+    }
+    if (
+      item?.stock &&
+      cart !== null &&
+      cart.quantity + product.quantity > item.stock
+    ) {
+      return {
+        success: false,
+        message: "Cannot add more items than available in stock.",
+      };
     }
     await prisma.cartItems.updateMany({
       where: {
-        sesionCart: sessionCartId,
-        productId: product.id,
-        variantId: product.variantId,
+        OR: [{ sessionCart: sessionCartId }, { userId: currentUserId }],
+        AND: [
+          { productId: product.id },
+          { variantId: product.variantId },
+          { active: true },
+          { ordered: false },
+        ],
       },
       data: {
         quantity: { increment: product.quantity },
         subtotal: { increment: product.subtotal },
       },
     });
-    console.log(`Product ${product.name} added to cart successfully.`);
+    revalidatePath(`/cart`, "layout");
     return { success: true, message: "Product added to cart successfully." };
   } catch (error) {
     console.error("Error adding product to cart:", error);
     return { success: false, message: "Failed to add product to cart." };
   }
 };
-export const removeFromCartAction = async (
+export const removeItemFromCartAction = async (
   productId: number,
   variantId: number
 ) => {
@@ -107,16 +138,18 @@ export const removeFromCartAction = async (
     if (!sessionCartId) {
       throw new Error("No session cart ID found in cookies.");
     }
+    const user = await auth();
+    const userId = user ? Number(user.user.id) : null;
     await prisma.cartItems.updateMany({
       where: {
-        sesionCart: sessionCartId,
-        productId: productId,
-        variantId: variantId,
+        OR: [{ sessionCart: sessionCartId }, { userId: userId }],
+        AND: [{ productId: productId }, { variantId: variantId }],
       },
       data: {
         active: false,
       },
     });
+    revalidatePath(`/`, "layout");
     return {
       success: true,
       message: "Product removed from cart successfully.",

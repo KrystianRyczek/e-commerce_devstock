@@ -181,7 +181,7 @@
 // export const cartItemsByProductBrand = async (sessionCartId: string) => {
 //   return await prisma.cartItems.findMany({
 //     where: {
-//       sesionCart: sessionCartId,
+//       sessionCart: sessionCartId,
 //       active: true,
 //     },
 //     orderBy: {
@@ -198,7 +198,7 @@
 // export const cartItemsByProductAge = async (sessionCartId: string) => {
 //   return await prisma.cartItems.findMany({
 //     where: {
-//       sesionCart: sessionCartId,
+//       sessionCart: sessionCartId,
 //       active: true,
 //     },
 //     orderBy: {

@@ -61,13 +61,16 @@ export const ModelName = {
   paymentMethods: 'paymentMethods',
   Auth: 'Auth',
   UsersAddresses: 'UsersAddresses',
-  Account: 'Account',
-  Session: 'Session',
-  VerificationToken: 'VerificationToken',
+  shippingMethods: 'shippingMethods',
+  Orders: 'Orders',
+  orderedProduct: 'orderedProduct',
   CategoriesImgUrls: 'CategoriesImgUrls',
   BrandsImgUrls: 'BrandsImgUrls',
   ProductsImgUrls: 'ProductsImgUrls',
-  SlideShow: 'SlideShow'
+  SlideShow: 'SlideShow',
+  Account: 'Account',
+  Session: 'Session',
+  VerificationToken: 'VerificationToken'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -144,7 +147,7 @@ export type BrandsScalarFieldEnum = (typeof BrandsScalarFieldEnum)[keyof typeof 
 export const CartItemsScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  sesionCart: 'sesionCart',
+  sessionCart: 'sessionCart',
   productId: 'productId',
   variantId: 'variantId',
   quantity: 'quantity',
@@ -152,6 +155,7 @@ export const CartItemsScalarFieldEnum = {
   subtotal: 'subtotal',
   comment: 'comment',
   active: 'active',
+  ordered: 'ordered',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -197,6 +201,11 @@ export const UsersAddressesScalarFieldEnum = {
   id: 'id',
   name: 'name',
   userId: 'userId',
+  address: 'address',
+  country: 'country',
+  province: 'province',
+  city: 'city',
+  zip: 'zip',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -204,40 +213,45 @@ export const UsersAddressesScalarFieldEnum = {
 export type UsersAddressesScalarFieldEnum = (typeof UsersAddressesScalarFieldEnum)[keyof typeof UsersAddressesScalarFieldEnum]
 
 
-export const AccountScalarFieldEnum = {
+export const ShippingMethodsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  imgUrl: 'imgUrl',
+  price: 'price'
+} as const
+
+export type ShippingMethodsScalarFieldEnum = (typeof ShippingMethodsScalarFieldEnum)[keyof typeof ShippingMethodsScalarFieldEnum]
+
+
+export const OrdersScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  type: 'type',
-  provider: 'provider',
-  providerAccountId: 'providerAccountId',
-  refresh_token: 'refresh_token',
-  access_token: 'access_token',
-  expires_at: 'expires_at',
-  token_type: 'token_type',
-  scope: 'scope',
-  id_token: 'id_token',
-  session_state: 'session_state'
+  addressId: 'addressId',
+  shippingMethod: 'shippingMethod',
+  paymentStatus: 'paymentStatus',
+  promoCode: 'promoCode',
+  paymentId: 'paymentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
+export type OrdersScalarFieldEnum = (typeof OrdersScalarFieldEnum)[keyof typeof OrdersScalarFieldEnum]
 
 
-export const SessionScalarFieldEnum = {
-  sessionToken: 'sessionToken',
-  userId: 'userId',
-  expires: 'expires'
+export const OrderedProductScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  img: 'img',
+  quantity: 'quantity',
+  price: 'price',
+  color: 'color',
+  brand: 'brand',
+  category: 'category',
+  protection: 'protection',
+  comment: 'comment'
 } as const
 
-export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
-
-
-export const VerificationTokenScalarFieldEnum = {
-  identifier: 'identifier',
-  token: 'token',
-  expires: 'expires'
-} as const
-
-export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
+export type OrderedProductScalarFieldEnum = (typeof OrderedProductScalarFieldEnum)[keyof typeof OrderedProductScalarFieldEnum]
 
 
 export const CategoriesImgUrlsScalarFieldEnum = {
@@ -284,6 +298,42 @@ export const SlideShowScalarFieldEnum = {
 } as const
 
 export type SlideShowScalarFieldEnum = (typeof SlideShowScalarFieldEnum)[keyof typeof SlideShowScalarFieldEnum]
+
+
+export const AccountScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  provider: 'provider',
+  providerAccountId: 'providerAccountId',
+  refresh_token: 'refresh_token',
+  access_token: 'access_token',
+  expires_at: 'expires_at',
+  token_type: 'token_type',
+  scope: 'scope',
+  id_token: 'id_token',
+  session_state: 'session_state'
+} as const
+
+export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
+
+
+export const SessionScalarFieldEnum = {
+  sessionToken: 'sessionToken',
+  userId: 'userId',
+  expires: 'expires'
+} as const
+
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const VerificationTokenScalarFieldEnum = {
+  identifier: 'identifier',
+  token: 'token',
+  expires: 'expires'
+} as const
+
+export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
 
 
 export const SortOrder = {

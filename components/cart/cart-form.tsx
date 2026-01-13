@@ -20,7 +20,7 @@ export default function CartForm({
   };
   return (
     <form className="flex flex-col gap-[32px] w-[889px] max-desktop:w-full">
-      <div className="flex  gap-[16px] w-full max-tablet:pr-[16px] max-tablet:flex-row-reverse">
+      <div className="flex gap-[16px] w-full max-tablet:pr-[16px] max-tablet:flex-row-reverse">
         <CartCheckbox
           label="Select All Items"
           style="flex items-center cursor-pointer"
@@ -31,7 +31,7 @@ export default function CartForm({
       </div>
       {cartProducts.map((product, index) => (
         <CartCard
-          key={index}
+          key={index + product.productId + product.variantId}
           product={product}
           setCartProducts={setCartProducts}
         />

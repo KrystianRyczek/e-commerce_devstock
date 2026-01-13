@@ -8,33 +8,34 @@ import ToastContainerComponent from "../toast/toast-container";
 import { auth } from "@/auth";
 import {
   cartItemsCountBySessionCart,
-  suerItemsCartCount,
   userAvatar,
+  userItemsCartCount,
 } from "@/util/fetching-data";
 import { cookies } from "next/headers";
-import Image from "next/image";
-import { imageLoader } from "@/util/image-loader";
 import UserAvatar from "./user-avatar";
 export default async function MainNavigation() {
   const session = await auth();
   let avatarUrl = null;
-  let catItemsCount = 0;
+  let cartItemsCount = 0;
 
   if (session?.user) {
+    console.log("SESSION USER:", session.user);
     avatarUrl = await userAvatar(Number(session.user.id));
-    catItemsCount = await suerItemsCartCount(Number(session.user.id));
+    cartItemsCount = await userItemsCartCount(Number(session.user.id));
+    console.log("CART ITEMS COUNT FOR USER:", cartItemsCount);
   } else {
     const cookieStore = await cookies();
     const sessionCartId = cookieStore.get("sessionCartId")?.value;
     if (sessionCartId) {
-      catItemsCount = await cartItemsCountBySessionCart(sessionCartId);
+      cartItemsCount = await cartItemsCountBySessionCart(sessionCartId);
+      console.log("CART ITEMS COUNT FOR GUEST:", cartItemsCount);
     }
   }
 
   return (
     <header className="w-full flex flex-col px-[40px] max-desktop:px-[20px] py-[16px]">
       <div className="w-full flex justify-between ">
-        <HamburgerMenu avatarUrl={avatarUrl} cartItemsCount={catItemsCount} />
+        <HamburgerMenu avatarUrl={avatarUrl} cartItemsCount={cartItemsCount} />
         <h1 className="text-logoOrange font-semibold text-[36px] max-tablet:text-[26px] leading-[46px] tracking-[-0.02rem] ">
           Devstock
           <span className="text-logoNeutral">Hub</span>
@@ -46,12 +47,12 @@ export default async function MainNavigation() {
           >
             <div
               className={
-                catItemsCount > 0
+                cartItemsCount > 0
                   ? "flex relative text-logoOrange"
                   : "flex text-logoNeutral"
               }
             >
-              {catItemsCount > 0 && (
+              {cartItemsCount > 0 && (
                 <span className="flex justify-center items-center absolute w-3 h-4 -top-2 right-1 inline-flex items-center justify-center px-2 py-1 text-[10px] font-bold leading-none text-red-100">
                   *
                 </span>

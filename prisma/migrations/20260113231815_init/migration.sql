@@ -57,13 +57,15 @@ CREATE TABLE "Brands" (
 CREATE TABLE "CartItems" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER,
-    "sesionCart" TEXT NOT NULL,
+    "sessionCart" TEXT NOT NULL,
     "productId" INTEGER NOT NULL,
     "variantId" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "subtotal" DOUBLE PRECISION NOT NULL,
     "comment" TEXT,
+    "active" BOOLEAN NOT NULL DEFAULT true,
+    "ordered" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -86,6 +88,15 @@ CREATE TABLE "Users" (
 );
 
 -- CreateTable
+CREATE TABLE "paymentMethods" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "imgUrl" TEXT NOT NULL,
+
+    CONSTRAINT "paymentMethods_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Auth" (
     "id" SERIAL NOT NULL,
     "password" TEXT NOT NULL,
@@ -100,6 +111,11 @@ CREATE TABLE "UsersAddresses" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "userId" INTEGER NOT NULL,
+    "address" TEXT NOT NULL,
+    "country" TEXT NOT NULL,
+    "province" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+    "zip" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -107,37 +123,44 @@ CREATE TABLE "UsersAddresses" (
 );
 
 -- CreateTable
-CREATE TABLE "Account" (
+CREATE TABLE "shippingMethods" (
     "id" SERIAL NOT NULL,
-    "user_id" INTEGER NOT NULL,
-    "type" TEXT NOT NULL,
-    "provider" TEXT NOT NULL,
-    "provider_account_id" TEXT NOT NULL,
-    "refresh_token" TEXT,
-    "access_token" TEXT,
-    "expires_at" INTEGER,
-    "token_type" TEXT,
-    "scope" TEXT,
-    "id_token" TEXT,
-    "session_state" TEXT,
+    "name" TEXT NOT NULL,
+    "imgUrl" TEXT NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
 
-    CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "shippingMethods_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Session" (
-    "sessionToken" TEXT NOT NULL,
-    "user_id" INTEGER NOT NULL,
-    "expires" TIMESTAMP(3) NOT NULL,
+CREATE TABLE "Orders" (
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "addressId" INTEGER NOT NULL,
+    "shippingMethod" TEXT NOT NULL,
+    "paymentStatus" BOOLEAN NOT NULL DEFAULT false,
+    "promoCode" TEXT,
+    "paymentId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Session_pkey" PRIMARY KEY ("sessionToken")
+    CONSTRAINT "Orders_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "VerificationToken" (
-    "identifier" TEXT NOT NULL,
-    "token" TEXT NOT NULL,
-    "expires" TIMESTAMP(3) NOT NULL
+CREATE TABLE "orderedProduct" (
+    "id" SERIAL NOT NULL,
+    "orderId" INTEGER NOT NULL,
+    "img" TEXT NOT NULL,
+    "quantity" INTEGER NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
+    "color" TEXT,
+    "brand" TEXT,
+    "category" TEXT,
+    "protection" BOOLEAN NOT NULL DEFAULT false,
+    "comment" TEXT,
+
+    CONSTRAINT "orderedProduct_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -186,6 +209,40 @@ CREATE TABLE "SlideShow" (
     CONSTRAINT "SlideShow_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Account" (
+    "id" SERIAL NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "type" TEXT NOT NULL,
+    "provider" TEXT NOT NULL,
+    "provider_account_id" TEXT NOT NULL,
+    "refresh_token" TEXT,
+    "access_token" TEXT,
+    "expires_at" INTEGER,
+    "token_type" TEXT,
+    "scope" TEXT,
+    "id_token" TEXT,
+    "session_state" TEXT,
+
+    CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Session" (
+    "sessionToken" TEXT NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "expires" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Session_pkey" PRIMARY KEY ("sessionToken")
+);
+
+-- CreateTable
+CREATE TABLE "VerificationToken" (
+    "identifier" TEXT NOT NULL,
+    "token" TEXT NOT NULL,
+    "expires" TIMESTAMP(3) NOT NULL
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Recommendation_productId_key" ON "Recommendation"("productId");
 
@@ -202,16 +259,22 @@ CREATE UNIQUE INDEX "Users_email_key" ON "Users"("email");
 CREATE UNIQUE INDEX "UsersAddresses_userId_key" ON "UsersAddresses"("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Account_provider_provider_account_id_key" ON "Account"("provider", "provider_account_id");
+CREATE UNIQUE INDEX "Orders_userId_key" ON "Orders"("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
+CREATE UNIQUE INDEX "orderedProduct_orderId_key" ON "orderedProduct"("orderId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "CategoriesImgUrls_categoryId_key" ON "CategoriesImgUrls"("categoryId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "BrandsImgUrls_brandId_key" ON "BrandsImgUrls"("brandId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Account_provider_provider_account_id_key" ON "Account"("provider", "provider_account_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
 
 -- AddForeignKey
 ALTER TABLE "Products" ADD CONSTRAINT "Products_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -235,10 +298,13 @@ ALTER TABLE "CartItems" ADD CONSTRAINT "CartItems_productId_fkey" FOREIGN KEY ("
 ALTER TABLE "UsersAddresses" ADD CONSTRAINT "UsersAddresses_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Account" ADD CONSTRAINT "Account_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "Users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Orders" ADD CONSTRAINT "Orders_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Session" ADD CONSTRAINT "Session_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "Users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Orders" ADD CONSTRAINT "Orders_addressId_fkey" FOREIGN KEY ("addressId") REFERENCES "UsersAddresses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "orderedProduct" ADD CONSTRAINT "orderedProduct_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Orders"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "CategoriesImgUrls" ADD CONSTRAINT "CategoriesImgUrls_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -248,3 +314,9 @@ ALTER TABLE "BrandsImgUrls" ADD CONSTRAINT "BrandsImgUrls_brandId_fkey" FOREIGN 
 
 -- AddForeignKey
 ALTER TABLE "ProductsImgUrls" ADD CONSTRAINT "ProductsImgUrls_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Products"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Account" ADD CONSTRAINT "Account_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "Users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Session" ADD CONSTRAINT "Session_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "Users"("id") ON DELETE CASCADE ON UPDATE CASCADE;

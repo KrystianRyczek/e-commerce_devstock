@@ -16,7 +16,7 @@ export const userAvatar = async (userId: number) =>
       avatar: true,
     },
   });
-export const suerItemsCartCount = async (userId: number) =>
+export const userItemsCartCount = async (userId: number) =>
   await prisma.cartItems.count({
     where: { AND: [{ userId: userId }, { active: true }] },
   });
@@ -439,8 +439,22 @@ export const products = async (queryParams: QueryParams) => {
 export const cartItemsCountBySessionCart = async (sessionCartId: string) => {
   return await prisma.cartItems.count({
     where: {
-      sesionCart: sessionCartId,
+      sessionCart: sessionCartId,
       active: true,
+    },
+  });
+};
+
+export const updateCartItemsBySessionCart = async (
+  sessionCartId: string,
+  userId: number
+) => {
+  return await prisma.cartItems.updateMany({
+    where: {
+      sessionCart: sessionCartId,
+    },
+    data: {
+      userId: userId,
     },
   });
 };
@@ -448,11 +462,11 @@ export const cartItemsCountBySessionCart = async (sessionCartId: string) => {
 export const cartItemsBySessionCart = async (sessionCartId: string) => {
   const cartItems = await prisma.cartItems.findMany({
     where: {
-      sesionCart: sessionCartId,
+      sessionCart: sessionCartId,
       active: true,
     },
     select: {
-      sesionCart: true,
+      sessionCart: true,
       quantity: true,
       variantId: true,
       product: {
@@ -495,7 +509,165 @@ export const cartItemsBySessionCart = async (sessionCartId: string) => {
   }
 
   const cartProductsArray = cartItems.map((item) => ({
-    id: item.product?.id || 0,
+    productId: item.product?.id || 0,
+    name: item.product?.name || "",
+    sessionCartId: item.sessionCart || "",
+    color:
+      item.product?.variants.find((v) => v.id === item.variantId)?.color || "",
+    imgUrls: item.product?.imgUrls[0] || { url: "" },
+    category: item.product?.category.name || "",
+    price:
+      item.product?.variants.find((v) => v.id === item.variantId)?.price || 0,
+    quantity: item.quantity,
+    stock:
+      item.product?.variants.find((v) => v.id === item.variantId)?.stock || 0,
+    variantId: item.variantId,
+    selected: true,
+    comment: "",
+  }));
+  return cartProductsArray;
+};
+
+export const cartItemsByUserAndNotSessionCartID = async (
+  userId: number,
+  sessionCartId: string
+) => {
+  const cartItems = await prisma.cartItems.findMany({
+    where: {
+      userId: userId,
+      NOT: {
+        sessionCart: sessionCartId,
+      },
+      active: true,
+    },
+    orderBy: {
+      id: "desc",
+    },
+    select: {
+      sessionCart: true,
+      quantity: true,
+      variantId: true,
+      product: {
+        select: {
+          id: true,
+          name: true,
+          imgUrls: {
+            select: {
+              url: true,
+            },
+            where: {
+              main: true,
+            },
+          },
+          variants: {
+            select: {
+              id: true,
+              price: true,
+              stock: true,
+              color: true,
+            },
+          },
+          category: {
+            select: {
+              name: true,
+            },
+          },
+          brand: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (cartItems.length === 0) {
+    return [];
+  }
+
+  const cartProductsArray = cartItems.map((item) => ({
+    productId: item.product?.id || 0,
+    name: item.product?.name || "",
+    sessionCartId: item.sessionCart || "",
+    color:
+      item.product?.variants.find((v) => v.id === item.variantId)?.color || "",
+    imgUrls: item.product?.imgUrls[0] || { url: "" },
+    category: item.product?.category.name || "",
+    price:
+      item.product?.variants.find((v) => v.id === item.variantId)?.price || 0,
+    quantity: item.quantity,
+    stock:
+      item.product?.variants.find((v) => v.id === item.variantId)?.stock || 0,
+    variantId: item.variantId,
+    selected: true,
+    comment: "",
+  }));
+  return cartProductsArray;
+};
+
+export const cartByUser = async (userId: number) => {
+  return await prisma.cartItems.findMany({
+    where: {
+      userId: userId,
+      active: true,
+    },
+    select: {
+      sessionCart: true,
+    },
+  });
+};
+export const cartItemsByUser = async (userId: number) => {
+  const cartItems = await prisma.cartItems.findMany({
+    where: {
+      userId: userId,
+      active: true,
+    },
+    select: {
+      sessionCart: true,
+      quantity: true,
+      variantId: true,
+      product: {
+        select: {
+          id: true,
+          name: true,
+          imgUrls: {
+            select: {
+              url: true,
+            },
+            where: {
+              main: true,
+            },
+          },
+          variants: {
+            select: {
+              id: true,
+              price: true,
+              stock: true,
+              color: true,
+            },
+          },
+          category: {
+            select: {
+              name: true,
+            },
+          },
+          brand: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (cartItems.length === 0) {
+    return [];
+  }
+
+  const cartProductsArray = cartItems.map((item) => ({
+    productId: item.product?.id || 0,
     name: item.product?.name || "",
     color:
       item.product?.variants.find((v) => v.id === item.variantId)?.color || "",
@@ -508,15 +680,9 @@ export const cartItemsBySessionCart = async (sessionCartId: string) => {
       item.product?.variants.find((v) => v.id === item.variantId)?.stock || 0,
     selected: true,
     comment: "",
+    variantId: item.variantId,
   }));
   return cartProductsArray;
-};
-export const cartItemsByUser = async (userId: number) => {
-  return await prisma.cartItems.findFirst({
-    where: {
-      userId: userId,
-    },
-  });
 };
 export const slidesShow = await prisma.slideShow.findMany({
   select: {

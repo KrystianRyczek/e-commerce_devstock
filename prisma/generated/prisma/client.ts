@@ -90,20 +90,20 @@ export type Auth = Prisma.AuthModel
  */
 export type UsersAddresses = Prisma.UsersAddressesModel
 /**
- * Model Account
+ * Model shippingMethods
  * 
  */
-export type Account = Prisma.AccountModel
+export type shippingMethods = Prisma.shippingMethodsModel
 /**
- * Model Session
+ * Model Orders
  * 
  */
-export type Session = Prisma.SessionModel
+export type Orders = Prisma.OrdersModel
 /**
- * Model VerificationToken
+ * Model orderedProduct
  * 
  */
-export type VerificationToken = Prisma.VerificationTokenModel
+export type orderedProduct = Prisma.orderedProductModel
 /**
  * Model CategoriesImgUrls
  * 
@@ -124,3 +124,18 @@ export type ProductsImgUrls = Prisma.ProductsImgUrlsModel
  * 
  */
 export type SlideShow = Prisma.SlideShowModel
+/**
+ * Model Account
+ * 
+ */
+export type Account = Prisma.AccountModel
+/**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
+ * Model VerificationToken
+ * 
+ */
+export type VerificationToken = Prisma.VerificationTokenModel

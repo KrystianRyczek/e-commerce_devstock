@@ -4,7 +4,7 @@ export default function ToastContainerComponent({
   children?: React.ReactNode;
 }) {
   return (
-    <div id="toast" className="flex w-full">
+    <div id="toast" className="flex flex-col w-full">
       {children}
     </div>
   );

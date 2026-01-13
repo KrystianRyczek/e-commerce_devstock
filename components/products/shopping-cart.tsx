@@ -6,6 +6,7 @@ import { addToCartAction } from "@/util/server-action";
 import { useEffect, useRef, useState } from "react";
 import MsgBox from "@/components/toast/message-box";
 
+
 export default function ShoppingCart({
   product,
 }: {
@@ -19,7 +20,6 @@ export default function ShoppingCart({
   const timer = useRef<NodeJS.Timeout | null>(null);
 
   const handleAddToCart = async () => {
-    console.log("Add to cart:");
     const response = await addToCartAction({
       id: product.id,
       name: product.name,
