@@ -210,14 +210,12 @@ export const config = {
                   if (index === -1) {
                     await prisma.cartItems.updateMany({
                       where: {
-                        AND: [
-                          { userId: Number(user.id) },
-                          { sessionCart: otherSessionCartItem.sessionCartId },
-                          { productId: otherSessionCartItem.productId },
-                          { variantId: otherSessionCartItem.variantId },
-                          { active: true },
-                          { ordered: false },
-                        ],
+                        userId: Number(user.id),
+                        sessionCart: otherSessionCartItem.sessionCartId,
+                        productId: otherSessionCartItem.productId,
+                        variantId: otherSessionCartItem.variantId,
+                        active: true,
+                        ordered: false,
                       },
                       data: { active: false },
                     });
@@ -238,14 +236,12 @@ export const config = {
                   }
                   await prisma.cartItems.updateMany({
                     where: {
-                      AND: [
-                        { userId: Number(user.id) },
-                        { sessionCart: sessionCartId },
-                        { productId: sessionCartItems[index].productId },
-                        { variantId: sessionCartItems[index].variantId },
-                        { active: true },
-                        { ordered: false },
-                      ],
+                      userId: Number(user.id),
+                      sessionCart: sessionCartId,
+                      productId: sessionCartItems[index].productId,
+                      variantId: sessionCartItems[index].variantId,
+                      active: true,
+                      ordered: false,
                     },
                     data: {
                       quantity:
@@ -255,14 +251,12 @@ export const config = {
                   });
                   await prisma.cartItems.updateMany({
                     where: {
-                      AND: [
-                        { userId: Number(user.id) },
-                        { sessionCart: otherSessionCartItem.sessionCartId },
-                        { productId: otherSessionCartItem.productId },
-                        { variantId: otherSessionCartItem.variantId },
-                        { active: true },
-                        { ordered: false },
-                      ],
+                      userId: Number(user.id),
+                      sessionCart: otherSessionCartItem.sessionCartId,
+                      productId: otherSessionCartItem.productId,
+                      variantId: otherSessionCartItem.variantId,
+                      active: true,
+                      ordered: false,
                     },
                     data: {
                       active: false,
@@ -297,14 +291,12 @@ export const config = {
                 mergedOtherSessionCartItems.map(async (item) => {
                   await prisma.cartItems.updateMany({
                     where: {
-                      AND: [
-                        { userId: Number(user.id) },
-                        { productId: item.productId },
-                        { variantId: item.variantId },
-                        { sessionCart: item.sessionCartId },
-                        { active: true },
-                        { ordered: false },
-                      ],
+                      userId: Number(user.id),
+                      productId: item.productId,
+                      variantId: item.variantId,
+                      sessionCart: item.sessionCartId,
+                      active: true,
+                      ordered: false,
                     },
                     data: {
                       quantity: item.quantity,
