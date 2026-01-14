@@ -33,9 +33,10 @@ export default function LoginInput({
           ref={loginRef}
           placeholder={palceholder}
           defaultValue={
-            name === "login"
-              ? process.env.DEFAULT_ADMIN
-              : process.env.DEFAULT_PASSWORD
+            ""
+            // name === "login"
+            //   ? process.env.DEFAULT_ADMIN
+            //   : process.env.DEFAULT_PASSWORD
           }
         />
         {type === "password" &&

@@ -31,7 +31,7 @@ export default function CartForm({
       </div>
       {cartProducts.map((product, index) => (
         <CartCard
-          key={index + product.productId + product.variantId}
+          key={index}
           product={product}
           setCartProducts={setCartProducts}
         />

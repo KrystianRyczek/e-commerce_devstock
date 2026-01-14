@@ -669,6 +669,7 @@ export const cartItemsByUser = async (userId: number) => {
   const cartProductsArray = cartItems.map((item) => ({
     productId: item.product?.id || 0,
     name: item.product?.name || "",
+    sessionCartId: item.sessionCart || "",
     color:
       item.product?.variants.find((v) => v.id === item.variantId)?.color || "",
     imgUrls: item.product?.imgUrls[0] || { url: "" },

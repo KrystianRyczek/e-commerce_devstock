@@ -5,9 +5,6 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
 import type { NextAuthConfig, Session } from "next-auth";
-import type { AdapterUser } from "next-auth/adapters";
-import type { JWT } from "next-auth/jwt";
-import { NextRequest, NextResponse } from "next/server";
 import { authConfig } from "./auth.config";
 import { cookies } from "next/headers";
 import {
@@ -43,17 +40,6 @@ declare module "next-auth/jwt" {
     sub: string;
     name?: string | null;
     email: string;
-    avatar?: string | null;
-    sessionCartId?: string | null;
-    role?: string | null;
-  }
-}
-
-declare module "next-auth/adapters" {
-  interface AdapterUser {
-    id: string;
-    email: string;
-    name?: string | null;
     avatar?: string | null;
     sessionCartId?: string | null;
     role?: string | null;
@@ -199,113 +185,113 @@ export const config = {
                 sessionCartId,
                 Number(user.id)
               );
-              await Promise.all(
-                otherSessionCartItems.map(async (otherSessionCartItem) => {
-                  const index = sessionCartItems.findIndex(
-                    (sessionCartItem) =>
-                      sessionCartItem.productId ===
-                        otherSessionCartItem.productId &&
-                      sessionCartItem.color === otherSessionCartItem.color
-                  );
-                  if (index === -1) {
-                    await prisma.cartItems.updateMany({
-                      where: {
-                        userId: Number(user.id),
-                        sessionCart: otherSessionCartItem.sessionCartId,
-                        productId: otherSessionCartItem.productId,
-                        variantId: otherSessionCartItem.variantId,
-                        active: true,
-                        ordered: false,
-                      },
-                      data: { active: false },
-                    });
-                    await prisma.cartItems.create({
-                      data: {
-                        sessionCart: sessionCartId,
-                        userId: Number(user.id),
-                        productId: otherSessionCartItem.productId,
-                        variantId: otherSessionCartItem.variantId,
-                        quantity: otherSessionCartItem.quantity,
-                        price: otherSessionCartItem.price,
-                        subtotal:
-                          otherSessionCartItem.price *
-                          otherSessionCartItem.quantity,
-                      },
-                    });
-                    return;
-                  }
-                  await prisma.cartItems.updateMany({
-                    where: {
-                      userId: Number(user.id),
-                      sessionCart: sessionCartId,
-                      productId: sessionCartItems[index].productId,
-                      variantId: sessionCartItems[index].variantId,
-                      active: true,
-                      ordered: false,
-                    },
-                    data: {
-                      quantity:
-                        sessionCartItems[index].quantity +
-                        otherSessionCartItem.quantity,
-                    },
-                  });
-                  await prisma.cartItems.updateMany({
-                    where: {
-                      userId: Number(user.id),
-                      sessionCart: otherSessionCartItem.sessionCartId,
-                      productId: otherSessionCartItem.productId,
-                      variantId: otherSessionCartItem.variantId,
-                      active: true,
-                      ordered: false,
-                    },
-                    data: {
-                      active: false,
-                    },
-                  });
-                })
-              );
+              // await Promise.all(
+              //   otherSessionCartItems.map(async (otherSessionCartItem) => {
+              //     const index = sessionCartItems.findIndex(
+              //       (sessionCartItem) =>
+              //         sessionCartItem.productId ===
+              //           otherSessionCartItem.productId &&
+              //         sessionCartItem.color === otherSessionCartItem.color
+              //     );
+              //     if (index === -1) {
+              //       await prisma.cartItems.updateMany({
+              //         where: {
+              //           userId: Number(user.id),
+              //           sessionCart: otherSessionCartItem.sessionCartId,
+              //           productId: otherSessionCartItem.productId,
+              //           variantId: otherSessionCartItem.variantId,
+              //           active: true,
+              //           ordered: false,
+              //         },
+              //         data: { active: false },
+              //       });
+              //       await prisma.cartItems.create({
+              //         data: {
+              //           sessionCart: sessionCartId,
+              //           userId: Number(user.id),
+              //           productId: otherSessionCartItem.productId,
+              //           variantId: otherSessionCartItem.variantId,
+              //           quantity: otherSessionCartItem.quantity,
+              //           price: otherSessionCartItem.price,
+              //           subtotal:
+              //             otherSessionCartItem.price *
+              //             otherSessionCartItem.quantity,
+              //         },
+              //       });
+              //       return;
+              //     }
+              //     await prisma.cartItems.updateMany({
+              //       where: {
+              //         userId: Number(user.id),
+              //         sessionCart: sessionCartId,
+              //         productId: sessionCartItems[index].productId,
+              //         variantId: sessionCartItems[index].variantId,
+              //         active: true,
+              //         ordered: false,
+              //       },
+              //       data: {
+              //         quantity:
+              //           sessionCartItems[index].quantity +
+              //           otherSessionCartItem.quantity,
+              //       },
+              //     });
+              //     await prisma.cartItems.updateMany({
+              //       where: {
+              //         userId: Number(user.id),
+              //         sessionCart: otherSessionCartItem.sessionCartId,
+              //         productId: otherSessionCartItem.productId,
+              //         variantId: otherSessionCartItem.variantId,
+              //         active: true,
+              //         ordered: false,
+              //       },
+              //       data: {
+              //         active: false,
+              //       },
+              //     });
+              //   })
+              // );
             }
-            if (
-              sessionCartItems.length === 0 &&
-              otherSessionCartItems.length > 0
-            ) {
-              cookiesObject.set(
-                "sessionCartId",
-                otherSessionCartItems[0].sessionCartId
-              );
+            // if (
+            //   sessionCartItems.length === 0 &&
+            //   otherSessionCartItems.length > 0
+            // ) {
+            //   cookiesObject.set(
+            //     "sessionCartId",
+            //     otherSessionCartItems[0].sessionCartId
+            //   );
 
-              const map = new Map<string, (typeof otherSessionCartItems)[0]>();
+            //   const map = new Map<string, (typeof otherSessionCartItems)[0]>();
 
-              otherSessionCartItems.forEach((item) => {
-                const existing = map.get(item.name);
-                if (existing) {
-                  existing.quantity += item.quantity;
-                } else {
-                  map.set(item.name, {
-                    ...item,
-                  });
-                }
-              });
-              const mergedOtherSessionCartItems = Array.from(map.values());
-              await Promise.all(
-                mergedOtherSessionCartItems.map(async (item) => {
-                  await prisma.cartItems.updateMany({
-                    where: {
-                      userId: Number(user.id),
-                      productId: item.productId,
-                      variantId: item.variantId,
-                      sessionCart: item.sessionCartId,
-                      active: true,
-                      ordered: false,
-                    },
-                    data: {
-                      quantity: item.quantity,
-                      sessionCart: cookiesObject.get("sessionCartId")?.value,
-                    },
-                  });
-                })
-              );
-            }
+            //   otherSessionCartItems.forEach((item) => {
+            //     const existing = map.get(item.name);
+            //     if (existing) {
+            //       existing.quantity += item.quantity;
+            //     } else {
+            //       map.set(item.name, {
+            //         ...item,
+            //       });
+            //     }
+            //   });
+            //   const mergedOtherSessionCartItems = Array.from(map.values());
+            //   await Promise.all(
+            //     mergedOtherSessionCartItems.map(async (item) => {
+            //       await prisma.cartItems.updateMany({
+            //         where: {
+            //           userId: Number(user.id),
+            //           productId: item.productId,
+            //           variantId: item.variantId,
+            //           sessionCart: item.sessionCartId,
+            //           active: true,
+            //           ordered: false,
+            //         },
+            //         data: {
+            //           quantity: item.quantity,
+            //           sessionCart: cookiesObject.get("sessionCartId")?.value,
+            //         },
+            //       });
+            //     })
+            //   );
+            // }
           }
           token.sessionCartId = cookiesObject.get("sessionCartId")?.value;
         }

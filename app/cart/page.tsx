@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 
 export type CartProduct = {
   productId: number;
+  sessionCartId: string;
   name: string;
   color: string;
   imgUrls: { url: string };
