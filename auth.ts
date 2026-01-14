@@ -5,6 +5,9 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
 import type { NextAuthConfig, Session } from "next-auth";
+import type { AdapterUser } from "next-auth/adapters";
+import type { JWT } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
 import { authConfig } from "./auth.config";
 import { cookies } from "next/headers";
 import {
@@ -40,6 +43,17 @@ declare module "next-auth/jwt" {
     sub: string;
     name?: string | null;
     email: string;
+    avatar?: string | null;
+    sessionCartId?: string | null;
+    role?: string | null;
+  }
+}
+
+declare module "next-auth/adapters" {
+  interface AdapterUser {
+    id: string;
+    email: string;
+    name?: string | null;
     avatar?: string | null;
     sessionCartId?: string | null;
     role?: string | null;
@@ -196,12 +210,13 @@ export const config = {
                   if (index === -1) {
                     await prisma.cartItems.updateMany({
                       where: {
-                        userId: Number(user.id),
-                        sessionCart: otherSessionCartItem.sessionCartId,
-                        productId: otherSessionCartItem.productId,
-                        variantId: otherSessionCartItem.variantId,
-                        active: true,
-                        ordered: false,
+                        AND: [
+                          { userId: Number(user.id) },
+                          { productId: otherSessionCartItem.productId },
+                          { variantId: otherSessionCartItem.variantId },
+                          { active: true },
+                          { ordered: false },
+                        ],
                       },
                       data: { active: false },
                     });
@@ -222,12 +237,14 @@ export const config = {
                   }
                   await prisma.cartItems.updateMany({
                     where: {
-                      userId: Number(user.id),
-                      sessionCart: sessionCartId,
-                      productId: sessionCartItems[index].productId,
-                      variantId: sessionCartItems[index].variantId,
-                      active: true,
-                      ordered: false,
+                      AND: [
+                        { userId: Number(user.id) },
+                        { sessionCart: sessionCartId },
+                        { productId: sessionCartItems[index].productId },
+                        { variantId: sessionCartItems[index].variantId },
+                        { active: true },
+                        { ordered: false },
+                      ],
                     },
                     data: {
                       quantity:
@@ -237,12 +254,14 @@ export const config = {
                   });
                   await prisma.cartItems.updateMany({
                     where: {
-                      userId: Number(user.id),
-                      sessionCart: otherSessionCartItem.sessionCartId,
-                      productId: otherSessionCartItem.productId,
-                      variantId: otherSessionCartItem.variantId,
-                      active: true,
-                      ordered: false,
+                      AND: [
+                        { userId: Number(user.id) },
+                        { sessionCart: otherSessionCartItem.sessionCartId },
+                        { productId: otherSessionCartItem.productId },
+                        { variantId: otherSessionCartItem.variantId },
+                        { active: true },
+                        { ordered: false },
+                      ],
                     },
                     data: {
                       active: false,
@@ -277,12 +296,14 @@ export const config = {
                 mergedOtherSessionCartItems.map(async (item) => {
                   await prisma.cartItems.updateMany({
                     where: {
-                      userId: Number(user.id),
-                      productId: item.productId,
-                      variantId: item.variantId,
-                      sessionCart: item.sessionCartId,
-                      active: true,
-                      ordered: false,
+                      AND: [
+                        { userId: Number(user.id) },
+                        { productId: item.productId },
+                        { variantId: item.variantId },
+                        { sessionCart: item.sessionCartId },
+                        { active: true },
+                        { ordered: false },
+                      ],
                     },
                     data: {
                       quantity: item.quantity,
