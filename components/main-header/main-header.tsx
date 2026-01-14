@@ -19,16 +19,13 @@ export default async function MainNavigation() {
   let cartItemsCount = 0;
 
   if (session?.user) {
-    console.log("SESSION USER:", session.user);
     avatarUrl = await userAvatar(Number(session.user.id));
     cartItemsCount = await userItemsCartCount(Number(session.user.id));
-    console.log("CART ITEMS COUNT FOR USER:", cartItemsCount);
   } else {
     const cookieStore = await cookies();
     const sessionCartId = cookieStore.get("sessionCartId")?.value;
     if (sessionCartId) {
       cartItemsCount = await cartItemsCountBySessionCart(sessionCartId);
-      console.log("CART ITEMS COUNT FOR GUEST:", cartItemsCount);
     }
   }
 

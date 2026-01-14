@@ -1,15 +1,19 @@
+import { UseFormRegister } from "react-hook-form";
+import { CartFormData } from "./cart-form";
 import CheckMark from "./svg/check-mark";
 
 export default function CartCheckbox({
   label,
-  checked,
+  name,
   style,
-  onChange,
+  register,
+  onClickHandler,
 }: {
   label: string;
-  checked: boolean;
+  name: string;
   style: string;
-  onChange: () => void;
+  register: UseFormRegister<CartFormData>;
+  onClickHandler: () => void;
 }) {
   return (
     <label htmlFor={label} className={style}>
@@ -18,9 +22,8 @@ export default function CartCheckbox({
           className="peer h-full w-full cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border bg-login-checkbox-background border-login-checkbox-border checked:bg-login-checkbox-background-checked"
           type="checkbox"
           id={label}
-          name={label}
-          checked={checked}
-          onChange={onChange}
+          {...register(name)}
+          onClick={onClickHandler}
         />
         <CheckMark />
       </div>

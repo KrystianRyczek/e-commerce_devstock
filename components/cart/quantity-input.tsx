@@ -1,20 +1,49 @@
+import { CartFormData } from "./cart-form";
+import {
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormGetValues,
+} from "react-hook-form";
 export default function QuantityInput({
-  defautlValue,
+  name,
   stock,
-  quantityRef,
-  subtractHandler,
-  addHandler,
+  register,
+  getValues,
+  setValue,
 }: {
-  defautlValue: number;
+  name: string;
   stock: number;
-  quantityRef?: React.RefObject<HTMLInputElement | null>;
-  subtractHandler: () => void;
-  addHandler: () => void;
+  register: UseFormRegister<CartFormData>;
+  setValue: UseFormSetValue<CartFormData>;
+  getValues: UseFormGetValues<CartFormData>;
 }) {
+  const subtractHandler = () => {
+    const currentValue = getValues(name);
+    if (currentValue > 1) {
+      setValue(name, +currentValue - 1);
+      const totalItems = getValues("totalItems");
+      setValue("totalItems", totalItems - 1);
+      const subtotal = Number(getValues("subtotal"));
+      const itemPrice = Number(getValues(`items.${name.split(".")[1]}.price`));
+      setValue("subtotal", Number((subtotal - itemPrice).toFixed(2)));
+    }
+  };
+  const addHandler = () => {
+    const currentValue = getValues(name);
+    if (currentValue < stock) {
+      setValue(name, +currentValue + 1);
+      const totalItems = getValues("totalItems");
+      setValue("totalItems", totalItems + 1);
+      const subtotal = Number(getValues("subtotal"));
+      const itemPrice = Number(getValues(`items.${name.split(".")[1]}.price`));
+      setValue("subtotal", Number((subtotal + itemPrice).toFixed(2)));
+    }
+  };
+
   return (
     <div className="flex flex-col gap-[8px]">
       <label
-        htmlFor="quantity"
+        htmlFor={name}
         className="flex w-[142px] h-[54px] rounded-[6px] border-[1px] border-purchasing-container-stock-border text-purchasing-container-stock-text "
       >
         <button
@@ -24,15 +53,13 @@ export default function QuantityInput({
         >
           -
         </button>
-        <input      
-          className="w-1/2 flex justify-center text-center outline-none text-[24px] font-[500]"
-          id="quantity"
-          name="quantity"
+        <input
+          className="w-1/2 flex justify-center text-center outline-none text-24-36-500"
+          id={name}
+          {...register(name)}
           type="number"
           min={1}
           max={stock}
-          ref={quantityRef}
-          defaultValue={defautlValue > stock ? stock : defautlValue}
           disabled
         />
         <button
@@ -43,7 +70,6 @@ export default function QuantityInput({
           +
         </button>
       </label>
-      <p>Stock: {stock}</p>
     </div>
   );
 }
