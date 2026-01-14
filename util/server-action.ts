@@ -73,12 +73,11 @@ export const addToCartAction = async (product: CartProduct) => {
     const cart = await prisma.cartItems.findFirst({
       where: {
         OR: [{ sessionCart: sessionCartId }, { userId: currentUserId }],
-        AND: [
-          { productId: product.id },
-          { variantId: product.variantId },
-          { active: true },
-          { ordered: false },
-        ],
+
+        productId: product.id,
+        variantId: product.variantId,
+        active: true,
+        ordered: false,
       },
     });
     if (!cart?.id) {
@@ -109,12 +108,10 @@ export const addToCartAction = async (product: CartProduct) => {
     await prisma.cartItems.updateMany({
       where: {
         OR: [{ sessionCart: sessionCartId }, { userId: currentUserId }],
-        AND: [
-          { productId: product.id },
-          { variantId: product.variantId },
-          { active: true },
-          { ordered: false },
-        ],
+        productId: product.id,
+        variantId: product.variantId,
+        active: true,
+        ordered: false,
       },
       data: {
         quantity: { increment: product.quantity },
