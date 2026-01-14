@@ -10,7 +10,7 @@ import LoginCheckbox from "./login-checkbox";
 export default function SignInUser() {
   const loginRef = useRef<HTMLInputElement>(null);
   const [logInValueError, setLogInValueError] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const goFowardHandler = () => {
     if (loginRef.current) {
