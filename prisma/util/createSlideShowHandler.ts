@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/prisma/generated/prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({
@@ -55,4 +55,4 @@ export const createSlideShowHandler = async () => {
     console.log("💥 Failed to fetch brands after creation! 💥");
     console.log("🔍 Error details:", e);
   }
-}
+};
