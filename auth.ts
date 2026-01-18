@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@/prisma/generated/prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
