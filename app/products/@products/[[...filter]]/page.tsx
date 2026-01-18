@@ -15,8 +15,8 @@ export default async function Product({
   searchParams: Promise<{ [key: string]: string }>;
 }) {
   const currentSearchParams = await searchParams;
-  const categoriesArray = await categoriesNameList;
-  const brandsArray = await brandsNameList;
+  const categoriesArray = await categoriesNameList();
+  const brandsArray = await brandsNameList();
 
   const queryParams: QueryParams = {
     ...(await searchParams),
