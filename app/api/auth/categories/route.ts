@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
-    const categories = categoriesNameList;
+    const categories = await categoriesNameList();
     console.log("CATEGORIES:", categories);
 
     if (!categories) {

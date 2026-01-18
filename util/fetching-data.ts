@@ -79,18 +79,19 @@ export const recommendedProducts = await prisma.recommendation.findMany({
   where: { status: true },
 });
 
-export const categoriesNameList = await prisma.categories.findMany({
-  select: {
-    name: true,
-  },
-});
+export const categoriesNameList = async () => 
+  await prisma.categories.findMany({
+    select: {
+      name: true,
+    },
+  });
 
-export const brandsNameList = await prisma.brands.findMany({
-  select: {
-    name: true,
-  },
-});
-
+export const brandsNameList = async () =>
+  await prisma.brands.findMany({
+    select: {
+      name: true,
+    },
+  });
 export const currentProduct = async (productId: number) =>
   await prisma.products.findUnique({
     where: { id: productId },
