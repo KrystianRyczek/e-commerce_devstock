@@ -19,7 +19,6 @@ export default function Slides({ slides }) {
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
 
-  console.log("slides:", slides);
   return (
     <Swiper
       style={{

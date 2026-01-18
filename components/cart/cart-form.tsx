@@ -126,7 +126,7 @@ export default function CartForm({
       return;
     }
     const response = await submitCartAction(data);
-    console.log("Checkout response:", response);
+
     if (response?.success) {
       setToast({
         show: true,

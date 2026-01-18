@@ -38,7 +38,7 @@ export default async function Product({
   const count = await totalProductsCount(queryParams);
   const productsArray = (await products(queryParams)) || [];
   const maxPageNumber = Math.ceil(count / queryParams.show);
-  console.log("Products Array:", !productsArray);
+
   return (
     <main className="w-full">
       {productsArray.length > 0 ? (

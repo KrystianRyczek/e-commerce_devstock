@@ -17,7 +17,7 @@ export default async function PaymentPage({
   }>;
 }) {
   const { method, ordersId } = await searchParams;
-  console.log("Payment method:", method, ordersId);
+
   const session = await auth();
 
   if (!session?.user) {
@@ -33,7 +33,7 @@ export default async function PaymentPage({
     ordersIdArray,
     Number(session.user.id)
   );
-  console.log("Total price data:", totalPriceData + 15 + 0.5 + 0.5);
+  // console.log("Total price data:", totalPriceData + 15 + 0.5 + 0.5);
   // // Redirect the user if they don't own the order
   // if (order.userId !== session?.user.id && session?.user.role !== "admin") {
   //   return redirect("/unauthorized");

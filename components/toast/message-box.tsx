@@ -7,8 +7,6 @@ export default function MessageBox({
   type: string;
   msg: string;
 }) {
-  console.log("Rendering MessageBox with msg:", msg);
-
   return (
     <>
       {type === "success" && (

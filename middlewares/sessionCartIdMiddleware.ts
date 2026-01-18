@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
 export async function sessionCartIdMiddleware(req: NextRequest) {
-  console.log("Session Cart ID Middleware executed");
-
   let sessionCartId = req.cookies.get("sessionCartId")?.value;
   const response = NextResponse.next();
 

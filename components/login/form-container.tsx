@@ -35,7 +35,7 @@ export default function LoginForm({
     success: false,
     message: "",
   });
-  console.log("Login Form Action State:", formData);
+
   useEffect(() => {
     if (formData && formData.message?.length > 0 && !formData.success) {
       setIsVisible(true);

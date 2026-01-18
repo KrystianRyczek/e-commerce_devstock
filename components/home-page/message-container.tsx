@@ -12,7 +12,7 @@ export default function MessageContainer({
     message: "",
     type: "",
   });
-  console.log("callbackUrl:", callbackUrl);
+
   const timer = useRef<NodeJS.Timeout | null>(null);
   if (callbackUrl === "/login") {
     setToast({

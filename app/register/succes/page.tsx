@@ -10,7 +10,7 @@ export default function SuccesPage() {
         <p className="flex text-24-36-500">You have succesfully register</p>
       </div>
       <div className="flex flex-col gap-[19px] items-center text-register-text-secondary text-18-28-400">
-        <p>
+        <p className="text-center max-w-[480px]">
           Please check your e-mail for further information. Let’s exploring our
           products and enjoy many gifts.
         </p>

@@ -146,9 +146,9 @@ export const signupAction = async (data: RegistationFormValuesProps) => {
     console.error("Error registering user:", error);
     return { success: false, message: "Registration failed." };
   }
-  redirect("/login?callbackUrl=/register");
+  redirect("/register/succes");
 };
-
+//"/login?callbackUrl=/register"
 export const logInWithCredentialsAction = async (
   prevState: unknown,
   formData: FormData
@@ -264,7 +264,6 @@ export const submitOrderAction = async (formData: any) => {
   "use server";
 
   try {
-    console.log("Submitting order with data:", formData);
     formData.orders.forEach(async (order: any) => {
       if (formData.ordersId.includes(order[0].orderId)) {
         order.forEach(async (product: any, index: number) => {
@@ -279,7 +278,7 @@ export const submitOrderAction = async (formData: any) => {
               },
             });
           }
-          console.log("Processing product:", product);
+
           await prisma.orderedProduct.updateMany({
             where: {
               orderId: +product.orderId,
@@ -299,15 +298,7 @@ export const submitOrderAction = async (formData: any) => {
               })
             )?.price || 0;
           const protectionCost = product.protection ? 1 : 0;
-          console.log(
-            "Shipping method:",
-            shippingMethodPrice +
-              product.quantity *
-                (protectionCost +
-                  +product.price +
-                  shippingInsuranceCost +
-                  serviceFees)
-          );
+
           await prisma.orders.updateMany({
             where: { id: +product.orderId },
             data: {
