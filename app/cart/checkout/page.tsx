@@ -19,8 +19,8 @@ export default async function CheckoutPage(props: {
     redirect(callbackUrl || "/login");
   }
   const userId = Number(session.user.id);
-  const shippingMethodsArray = shippingMethods || [];
-  const paymentMethodsArray = paymentMethods || [];
+  const shippingMethodsArray = (await shippingMethods()) || [];
+  const paymentMethodsArray = (await paymentMethods()) || [];
   const userAddressArray = (await addressesByUser(Number(userId))) || [];
   const userOrders = (await ordersByUser(Number(userId))) || [];
 

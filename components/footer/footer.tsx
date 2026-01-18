@@ -2,14 +2,13 @@ import PaymentListItem from "./payment-list-item";
 import ContentList from "./content-list";
 import { paymentMethods } from "@/util/fetching-data";
 
-const paymentMethodsArray: {
-  id: number;
-  name: string;
-  imgUrl: string;
-  type: string;
-}[] = paymentMethods;
-
 export default async function Footer() {
+  const paymentMethodsArray: {
+    id: number;
+    name: string;
+    imgUrl: string;
+    type: string;
+  }[] = await paymentMethods();
   return (
     <footer className="w-full min-h-[474px] bg-footer-background mt-auto flex max-desktop:flex-col max-desktop:gap-10 max-desktop:px-10 justify-center items-center pb-20">
       <div className="w-[532px] max-desktop:w-full flex flex-col gap-[24px]">

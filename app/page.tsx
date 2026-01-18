@@ -16,10 +16,10 @@ export default async function Home(props: {
 }) {
   const { callbackUrl } = await props.searchParams;
 
-  const brands = await brandsWithImages;
-  const categories = await categoriesWithImages;
-  const slides = await slidesShow;
-  const recommended = await recommendedProducts.map((item) => ({
+  const brands = await brandsWithImages();
+  const categories = await categoriesWithImages();
+  const slides = await slidesShow();
+  const recommended = (await recommendedProducts()).map((item) => ({
     id: item.product.id,
     name: item.product.name,
     variantId: item.product.variants[0].id,

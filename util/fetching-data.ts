@@ -21,65 +21,68 @@ export const userItemsCartCount = async (userId: number) =>
     where: { AND: [{ userId: userId }, { active: true }] },
   });
 
-export const brandsWithImages = await prisma.brands.findMany({
-  select: {
-    id: true,
-    name: true,
-    imgUrl: {
-      select: {
-        url: true,
+export const brandsWithImages = async () =>
+  await prisma.brands.findMany({
+    select: {
+      id: true,
+      name: true,
+      imgUrl: {
+        select: {
+          url: true,
+        },
       },
     },
-  },
-});
+  });
 
-export const categoriesWithImages = await prisma.categories.findMany({
-  select: {
-    id: true,
-    name: true,
-    imgUrl: {
-      select: {
-        url: true,
-      },
-    },
-  },
-});
-export const recommendedProducts = await prisma.recommendation.findMany({
-  select: {
-    product: {
-      select: {
-        id: true,
-        name: true,
-        imgUrls: {
-          select: {
-            url: true,
-          },
-          where: {
-            main: true,
-          },
-        },
-        category: {
-          select: {
-            name: true,
-          },
-        },
-        variants: {
-          select: {
-            id: true,
-            price: true,
-            prevPrice: true,
-          },
-          where: {
-            tag: { equals: "standard", mode: "insensitive" },
-          },
+export const categoriesWithImages = async () =>
+  await prisma.categories.findMany({
+    select: {
+      id: true,
+      name: true,
+      imgUrl: {
+        select: {
+          url: true,
         },
       },
     },
-  },
-  where: { status: true },
-});
+  });
+export const recommendedProducts = async () =>
+  await prisma.recommendation.findMany({
+    select: {
+      product: {
+        select: {
+          id: true,
+          name: true,
+          imgUrls: {
+            select: {
+              url: true,
+            },
+            where: {
+              main: true,
+            },
+          },
+          category: {
+            select: {
+              name: true,
+            },
+          },
+          variants: {
+            select: {
+              id: true,
+              price: true,
+              prevPrice: true,
+            },
+            where: {
+              tag: { equals: "standard", mode: "insensitive" },
+            },
+          },
+        },
+      },
+    },
+    where: { status: true },
+  });
 
-export const categoriesNameList = async () => 
+export const categoriesNameList = async () =>
   await prisma.categories.findMany({
     select: {
       name: true,
@@ -688,30 +691,33 @@ export const cartItemsByUser = async (userId: number) => {
   }));
   return cartProductsArray;
 };
-export const slidesShow = await prisma.slideShow.findMany({
-  select: {
-    title: true,
-    category: true,
-    description: true,
-    imgUrl: true,
-  },
-});
-export const paymentMethods = await prisma.paymentMethods.findMany({
-  select: {
-    id: true,
-    name: true,
-    type: true,
-    imgUrl: true,
-  },
-});
-export const shippingMethods = await prisma.shippingMethods.findMany({
-  select: {
-    id: true,
-    name: true,
-    imgUrl: true,
-    price: true,
-  },
-});
+export const slidesShow = async () =>
+  await prisma.slideShow.findMany({
+    select: {
+      title: true,
+      category: true,
+      description: true,
+      imgUrl: true,
+    },
+  });
+export const paymentMethods = async () =>
+  await prisma.paymentMethods.findMany({
+    select: {
+      id: true,
+      name: true,
+      type: true,
+      imgUrl: true,
+    },
+  });
+export const shippingMethods = async () =>
+  await prisma.shippingMethods.findMany({
+    select: {
+      id: true,
+      name: true,
+      imgUrl: true,
+      price: true,
+    },
+  });
 export const addressesByUser = async (userId: number) => {
   return await prisma.usersAddresses.findMany({
     where: {
@@ -831,11 +837,9 @@ export const getTotalPriceById = async (ordersId: string[], userId: number) => {
   });
   const shippingPrices = 0;
 
-  let totalPrice =shippingPrices||0;
+  let totalPrice = shippingPrices || 0;
   orders.forEach((order) => {
     totalPrice += order.totalPrice ? order.totalPrice : 0;
   });
   return totalPrice;
-  
-
 };
