@@ -2,7 +2,6 @@ import { PrismaClient, Prisma } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { QueryParams } from "./types";
 import { sortOptionArray } from "./static-data";
-import { tr } from "zod/locales";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
