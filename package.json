@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "docker-compose up -d && next dev",
-    "build": "npm install prisma generate && prisma migrate deploy && tsx prisma/seed.ts && next build",
+    "build": "prisma generate && prisma migrate deploy && tsx prisma/seed.ts && next build",
     "start": "next start",
     "lint": "eslint",
     "prisma:generate": "prisma generate",
