@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -41,6 +41,7 @@ export type UsersAddressesSumAggregateOutputType = {
 export type UsersAddressesMinAggregateOutputType = {
   id: number | null
   name: string | null
+  main: boolean | null
   userId: number | null
   address: string | null
   country: string | null
@@ -54,6 +55,7 @@ export type UsersAddressesMinAggregateOutputType = {
 export type UsersAddressesMaxAggregateOutputType = {
   id: number | null
   name: string | null
+  main: boolean | null
   userId: number | null
   address: string | null
   country: string | null
@@ -67,6 +69,7 @@ export type UsersAddressesMaxAggregateOutputType = {
 export type UsersAddressesCountAggregateOutputType = {
   id: number
   name: number
+  main: number
   userId: number
   address: number
   country: number
@@ -94,6 +97,7 @@ export type UsersAddressesSumAggregateInputType = {
 export type UsersAddressesMinAggregateInputType = {
   id?: true
   name?: true
+  main?: true
   userId?: true
   address?: true
   country?: true
@@ -107,6 +111,7 @@ export type UsersAddressesMinAggregateInputType = {
 export type UsersAddressesMaxAggregateInputType = {
   id?: true
   name?: true
+  main?: true
   userId?: true
   address?: true
   country?: true
@@ -120,6 +125,7 @@ export type UsersAddressesMaxAggregateInputType = {
 export type UsersAddressesCountAggregateInputType = {
   id?: true
   name?: true
+  main?: true
   userId?: true
   address?: true
   country?: true
@@ -220,6 +226,7 @@ export type UsersAddressesGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type UsersAddressesGroupByOutputType = {
   id: number
   name: string
+  main: boolean
   userId: number
   address: string
   country: string
@@ -256,6 +263,7 @@ export type UsersAddressesWhereInput = {
   NOT?: Prisma.UsersAddressesWhereInput | Prisma.UsersAddressesWhereInput[]
   id?: Prisma.IntFilter<"UsersAddresses"> | number
   name?: Prisma.StringFilter<"UsersAddresses"> | string
+  main?: Prisma.BoolFilter<"UsersAddresses"> | boolean
   userId?: Prisma.IntFilter<"UsersAddresses"> | number
   address?: Prisma.StringFilter<"UsersAddresses"> | string
   country?: Prisma.StringFilter<"UsersAddresses"> | string
@@ -271,6 +279,7 @@ export type UsersAddressesWhereInput = {
 export type UsersAddressesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  main?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   address?: Prisma.SortOrder
   country?: Prisma.SortOrder
@@ -285,11 +294,12 @@ export type UsersAddressesOrderByWithRelationInput = {
 
 export type UsersAddressesWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  userId?: number
   AND?: Prisma.UsersAddressesWhereInput | Prisma.UsersAddressesWhereInput[]
   OR?: Prisma.UsersAddressesWhereInput[]
   NOT?: Prisma.UsersAddressesWhereInput | Prisma.UsersAddressesWhereInput[]
   name?: Prisma.StringFilter<"UsersAddresses"> | string
+  main?: Prisma.BoolFilter<"UsersAddresses"> | boolean
+  userId?: Prisma.IntFilter<"UsersAddresses"> | number
   address?: Prisma.StringFilter<"UsersAddresses"> | string
   country?: Prisma.StringFilter<"UsersAddresses"> | string
   province?: Prisma.StringFilter<"UsersAddresses"> | string
@@ -299,11 +309,12 @@ export type UsersAddressesWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"UsersAddresses"> | Date | string
   user?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   orders?: Prisma.OrdersListRelationFilter
-}, "id" | "userId">
+}, "id">
 
 export type UsersAddressesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  main?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   address?: Prisma.SortOrder
   country?: Prisma.SortOrder
@@ -325,6 +336,7 @@ export type UsersAddressesScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UsersAddressesScalarWhereWithAggregatesInput | Prisma.UsersAddressesScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"UsersAddresses"> | number
   name?: Prisma.StringWithAggregatesFilter<"UsersAddresses"> | string
+  main?: Prisma.BoolWithAggregatesFilter<"UsersAddresses"> | boolean
   userId?: Prisma.IntWithAggregatesFilter<"UsersAddresses"> | number
   address?: Prisma.StringWithAggregatesFilter<"UsersAddresses"> | string
   country?: Prisma.StringWithAggregatesFilter<"UsersAddresses"> | string
@@ -337,6 +349,7 @@ export type UsersAddressesScalarWhereWithAggregatesInput = {
 
 export type UsersAddressesCreateInput = {
   name: string
+  main?: boolean
   address: string
   country: string
   province: string
@@ -351,6 +364,7 @@ export type UsersAddressesCreateInput = {
 export type UsersAddressesUncheckedCreateInput = {
   id?: number
   name: string
+  main?: boolean
   userId: number
   address: string
   country: string
@@ -364,6 +378,7 @@ export type UsersAddressesUncheckedCreateInput = {
 
 export type UsersAddressesUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  main?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
@@ -378,6 +393,7 @@ export type UsersAddressesUpdateInput = {
 export type UsersAddressesUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  main?: Prisma.BoolFieldUpdateOperationsInput | boolean
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   address?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
@@ -392,6 +408,7 @@ export type UsersAddressesUncheckedUpdateInput = {
 export type UsersAddressesCreateManyInput = {
   id?: number
   name: string
+  main?: boolean
   userId: number
   address: string
   country: string
@@ -404,6 +421,7 @@ export type UsersAddressesCreateManyInput = {
 
 export type UsersAddressesUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  main?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
@@ -416,6 +434,7 @@ export type UsersAddressesUpdateManyMutationInput = {
 export type UsersAddressesUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  main?: Prisma.BoolFieldUpdateOperationsInput | boolean
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   address?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
@@ -439,6 +458,7 @@ export type UsersAddressesOrderByRelationAggregateInput = {
 export type UsersAddressesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  main?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   address?: Prisma.SortOrder
   country?: Prisma.SortOrder
@@ -458,6 +478,7 @@ export type UsersAddressesAvgOrderByAggregateInput = {
 export type UsersAddressesMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  main?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   address?: Prisma.SortOrder
   country?: Prisma.SortOrder
@@ -471,6 +492,7 @@ export type UsersAddressesMaxOrderByAggregateInput = {
 export type UsersAddressesMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  main?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   address?: Prisma.SortOrder
   country?: Prisma.SortOrder
@@ -552,6 +574,7 @@ export type UsersAddressesUpdateOneWithoutOrdersNestedInput = {
 
 export type UsersAddressesCreateWithoutUserInput = {
   name: string
+  main?: boolean
   address: string
   country: string
   province: string
@@ -565,6 +588,7 @@ export type UsersAddressesCreateWithoutUserInput = {
 export type UsersAddressesUncheckedCreateWithoutUserInput = {
   id?: number
   name: string
+  main?: boolean
   address: string
   country: string
   province: string
@@ -607,6 +631,7 @@ export type UsersAddressesScalarWhereInput = {
   NOT?: Prisma.UsersAddressesScalarWhereInput | Prisma.UsersAddressesScalarWhereInput[]
   id?: Prisma.IntFilter<"UsersAddresses"> | number
   name?: Prisma.StringFilter<"UsersAddresses"> | string
+  main?: Prisma.BoolFilter<"UsersAddresses"> | boolean
   userId?: Prisma.IntFilter<"UsersAddresses"> | number
   address?: Prisma.StringFilter<"UsersAddresses"> | string
   country?: Prisma.StringFilter<"UsersAddresses"> | string
@@ -619,6 +644,7 @@ export type UsersAddressesScalarWhereInput = {
 
 export type UsersAddressesCreateWithoutOrdersInput = {
   name: string
+  main?: boolean
   address: string
   country: string
   province: string
@@ -632,6 +658,7 @@ export type UsersAddressesCreateWithoutOrdersInput = {
 export type UsersAddressesUncheckedCreateWithoutOrdersInput = {
   id?: number
   name: string
+  main?: boolean
   userId: number
   address: string
   country: string
@@ -660,6 +687,7 @@ export type UsersAddressesUpdateToOneWithWhereWithoutOrdersInput = {
 
 export type UsersAddressesUpdateWithoutOrdersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  main?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
@@ -673,6 +701,7 @@ export type UsersAddressesUpdateWithoutOrdersInput = {
 export type UsersAddressesUncheckedUpdateWithoutOrdersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  main?: Prisma.BoolFieldUpdateOperationsInput | boolean
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   address?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
@@ -686,6 +715,7 @@ export type UsersAddressesUncheckedUpdateWithoutOrdersInput = {
 export type UsersAddressesCreateManyUserInput = {
   id?: number
   name: string
+  main?: boolean
   address: string
   country: string
   province: string
@@ -697,6 +727,7 @@ export type UsersAddressesCreateManyUserInput = {
 
 export type UsersAddressesUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  main?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
@@ -710,6 +741,7 @@ export type UsersAddressesUpdateWithoutUserInput = {
 export type UsersAddressesUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  main?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
@@ -723,6 +755,7 @@ export type UsersAddressesUncheckedUpdateWithoutUserInput = {
 export type UsersAddressesUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  main?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.StringFieldUpdateOperationsInput | string
@@ -766,6 +799,7 @@ export type UsersAddressesCountOutputTypeCountOrdersArgs<ExtArgs extends runtime
 export type UsersAddressesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  main?: boolean
   userId?: boolean
   address?: boolean
   country?: boolean
@@ -782,6 +816,7 @@ export type UsersAddressesSelect<ExtArgs extends runtime.Types.Extensions.Intern
 export type UsersAddressesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  main?: boolean
   userId?: boolean
   address?: boolean
   country?: boolean
@@ -796,6 +831,7 @@ export type UsersAddressesSelectCreateManyAndReturn<ExtArgs extends runtime.Type
 export type UsersAddressesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  main?: boolean
   userId?: boolean
   address?: boolean
   country?: boolean
@@ -810,6 +846,7 @@ export type UsersAddressesSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
 export type UsersAddressesSelectScalar = {
   id?: boolean
   name?: boolean
+  main?: boolean
   userId?: boolean
   address?: boolean
   country?: boolean
@@ -820,7 +857,7 @@ export type UsersAddressesSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UsersAddressesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "userId" | "address" | "country" | "province" | "city" | "zip" | "createdAt" | "updatedAt", ExtArgs["result"]["usersAddresses"]>
+export type UsersAddressesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "main" | "userId" | "address" | "country" | "province" | "city" | "zip" | "createdAt" | "updatedAt", ExtArgs["result"]["usersAddresses"]>
 export type UsersAddressesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   orders?: boolean | Prisma.UsersAddresses$ordersArgs<ExtArgs>
@@ -842,6 +879,7 @@ export type $UsersAddressesPayload<ExtArgs extends runtime.Types.Extensions.Inte
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
+    main: boolean
     userId: number
     address: string
     country: string
@@ -1277,6 +1315,7 @@ export interface Prisma__UsersAddressesClient<T, Null = never, ExtArgs extends r
 export interface UsersAddressesFieldRefs {
   readonly id: Prisma.FieldRef<"UsersAddresses", 'Int'>
   readonly name: Prisma.FieldRef<"UsersAddresses", 'String'>
+  readonly main: Prisma.FieldRef<"UsersAddresses", 'Boolean'>
   readonly userId: Prisma.FieldRef<"UsersAddresses", 'Int'>
   readonly address: Prisma.FieldRef<"UsersAddresses", 'String'>
   readonly country: Prisma.FieldRef<"UsersAddresses", 'String'>

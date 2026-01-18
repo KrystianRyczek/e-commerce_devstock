@@ -41,12 +41,15 @@ export default async function Home(props: {
             </Section>
           ) : null}
           {recommended ? (
-            <Section title={"Recommended Products"} href={"/products"}>
+            <Section
+              title={"Recommended Products"}
+              href={"/products?sort=Recommended"}
+            >
               <RecomendationList recommended={recommended} />
             </Section>
           ) : null}
           {brands ? (
-            <Section title={"Brands"} href={"/brands"}>
+            <Section title={"Brands"} href={"/products"}>
               <BrandList brands={brands} />
             </Section>
           ) : null}

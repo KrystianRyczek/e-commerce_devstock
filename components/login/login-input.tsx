@@ -7,7 +7,7 @@ import { LoginInputParams } from "@/util/types";
 
 export default function LoginInput({
   label,
-  palceholder,
+  placeholder,
   name,
   id,
   type,
@@ -21,7 +21,7 @@ export default function LoginInput({
   return (
     <label
       className={`relative flex flex-col gap-[16px] w-full mb-[32px]`}
-      htmlFor={name}
+      htmlFor={id}
     >
       <p className="flex text-18-28-500">{label}</p>
       <div className="flex relative w-full h-[48px]">
@@ -31,13 +31,7 @@ export default function LoginInput({
           id={id}
           name={name}
           ref={loginRef}
-          placeholder={palceholder}
-          defaultValue={
-            ""
-            // name === "login"
-            //   ? process.env.DEFAULT_ADMIN
-            //   : process.env.DEFAULT_PASSWORD
-          }
+          placeholder={placeholder}
         />
         {type === "password" &&
           (isVisible ? (

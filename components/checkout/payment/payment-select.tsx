@@ -1,10 +1,10 @@
-import type { PaymentMethod } from "@/app/cart/checkout/page";
+import type { PaymentMethod, CheckoutFormData } from "@/util/types";
 import { useRef, useState, useEffect } from "react";
 import CheckoutModal from "../common-components/modal";
 import Image from "next/image";
 import SelectContainer from "../common-components/select-container";
-import { UseFormRegister, FieldValues, UseFormSetValue } from "react-hook-form";
-import { CheckoutFormData } from "../checout-form";
+import { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { imageLoader } from "@/util/image-loader";
 
 export default function PaymentSelect({
   paymentMethodsArray,
@@ -45,7 +45,8 @@ export default function PaymentSelect({
               >
                 <div className="flex relative w-[26px] h-[full]">
                   <Image
-                    src={method.img}
+                    loader={(config) => imageLoader(config, "")}
+                    src={method.imgUrl}
                     alt={method.name}
                     fill
                     className="object-contain"
@@ -64,7 +65,7 @@ export default function PaymentSelect({
         <SelectContainer
           openModal={openModal}
           register={register}
-          img={paymentMethod.img}
+          img={paymentMethod.imgUrl}
           label={paymentMethod.name}
         />
       </div>

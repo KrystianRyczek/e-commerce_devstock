@@ -1,5 +1,5 @@
 "use client";
-import { UserAddress } from "@/app/cart/checkout/page";
+
 import { useEffect, useState } from "react";
 import Address from "./address";
 import AddressSwitch from "./address-switch";
@@ -10,7 +10,7 @@ import {
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
-import { CheckoutFormData } from "../checout-form";
+import { CheckoutFormData, UserAddress } from "@/util/types";
 
 export default function AddressContainer({
   userAddressArray,
@@ -34,7 +34,8 @@ export default function AddressContainer({
   useEffect(() => {
     if (!newAddressSelected) {
       setLabel(selectedAddress.name);
-      setValue("address.0.street", selectedAddress.street);
+      setValue("address.0.id", selectedAddress.id);
+      setValue("address.0.address", selectedAddress.address);
       setValue("address.0.country", selectedAddress.country);
       setValue("address.0.province", selectedAddress.province);
       setValue("address.0.city", selectedAddress.city);

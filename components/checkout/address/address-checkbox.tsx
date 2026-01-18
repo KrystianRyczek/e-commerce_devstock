@@ -1,6 +1,6 @@
 import CheckMark from "../product/svg/check-mark";
-import { UseFormRegister, FieldValues } from "react-hook-form";
-import { CheckoutFormData } from "../checout-form";
+import { UseFormRegister } from "react-hook-form";
+import { CheckoutFormData } from "@/util/types";
 export default function AddressCheckbox({
   name,
   index,

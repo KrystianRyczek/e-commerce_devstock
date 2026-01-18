@@ -7,7 +7,9 @@ import { createProductsHandler } from "@/prisma/util/crateProductsHandler";
 import { createRecommendationHandler } from "@/prisma/util/createRecommendation";
 import { createSlideShowHandler } from "./util/createSlideShowHandler";
 import { createUserHandler } from "./util/createUserHandler";
+import { createShippingMethodsHandler } from "./util/createShippingMethodsHandler";
 import { createPaymentMethodsHandler } from "./util/createPaymentMethodsHandler";
+import { createAddressesHandler } from "./util/createUserAddressesHandler";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
@@ -27,7 +29,9 @@ async function main() {
   await createRecommendationHandler();
   await createSlideShowHandler();
   await createUserHandler();
+  await createShippingMethodsHandler();
   await createPaymentMethodsHandler();
+  await createAddressesHandler();
 }
 
 main()

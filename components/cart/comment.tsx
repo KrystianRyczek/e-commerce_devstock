@@ -6,14 +6,12 @@ export default function Comment({
   defaultValue?: string;
 }) {
   return (
-    <label htmlFor={`comment+${name}`}>
-      <input
-        name={name}
-        placeholder="Add a comment about your order..."
-        type="hidden"
-        id={`comment+${name}`}
-        defaultValue={defaultValue}
-      />
-    </label>
+    <input
+      name={name}
+      placeholder="Add a comment about your order..."
+      type="hidden"
+      id={`comment+${name}`}
+      defaultValue={defaultValue}
+    />
   );
 }

@@ -1,13 +1,9 @@
 "use client";
-
 import { useState } from "react";
 import NavLinksList from "./nav-links-list";
-import ShoppingCart from "./svg/shopping-cart";
-import Avatar from "./svg/avatar";
-import Setings from "./svg/setings";
 import Hamburger from "./svg/hamburger";
 import Close from "./svg/close";
-import UserAvatar from "./user-avatar";
+import IconMenu from "./icon-menu";
 
 export default function HamburgerMenu({
   avatarUrl,
@@ -33,7 +29,7 @@ export default function HamburgerMenu({
       <div
         className={`${
           isOpen ? "is-open" : "hidden"
-        } p-10 absolute -top-3 -left-10 w-80 h-screen bg-foreground z-999`}
+        } p-10 absolute -top-3 -left-5 w-[320px] h-screen bg-foreground z-999`}
       >
         <div className="flex w-full h-10 justify-between mb-5">
           <button
@@ -43,28 +39,7 @@ export default function HamburgerMenu({
             <Close />
           </button>
         </div>
-        <div className="flex w-full justify-between mb-5">
-          <div
-            className={
-              cartItemsCount > 0
-                ? "flex relative text-logoOrange"
-                : "flex text-logoNeutral"
-            }
-          >
-            {cartItemsCount > 0 && (
-              <span className="flex justify-center items-center absolute w-3 h-4 -top-2 right-1 inline-flex items-center justify-center px-2 py-1 text-[10px] font-bold leading-none text-red-100">
-                *
-              </span>
-            )}
-            <ShoppingCart />
-          </div>
-          {avatarUrl !== null ? (
-            <UserAvatar avatarUrl={avatarUrl.avatar} />
-          ) : (
-            <Avatar />
-          )}
-          <Setings />
-        </div>
+        <IconMenu avatarUrl={avatarUrl} cartItemsCount={cartItemsCount} />
         <NavLinksList
           className="flex flex-col gap-2"
           clickOnHamburgerMenuHandler={clickOnHamburgerMenuHandler}

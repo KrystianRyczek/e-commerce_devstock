@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-import type * as runtime from "@prisma/client/runtime/client"
+import type * as runtime from "@prisma/client/runtime/library"
 import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
@@ -212,6 +212,7 @@ export type shippingMethodsWhereInput = {
   name?: Prisma.StringFilter<"shippingMethods"> | string
   imgUrl?: Prisma.StringFilter<"shippingMethods"> | string
   price?: Prisma.FloatFilter<"shippingMethods"> | number
+  orders?: Prisma.OrdersListRelationFilter
 }
 
 export type shippingMethodsOrderByWithRelationInput = {
@@ -219,6 +220,7 @@ export type shippingMethodsOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   imgUrl?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  orders?: Prisma.OrdersOrderByRelationAggregateInput
 }
 
 export type shippingMethodsWhereUniqueInput = Prisma.AtLeast<{
@@ -229,6 +231,7 @@ export type shippingMethodsWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"shippingMethods"> | string
   imgUrl?: Prisma.StringFilter<"shippingMethods"> | string
   price?: Prisma.FloatFilter<"shippingMethods"> | number
+  orders?: Prisma.OrdersListRelationFilter
 }, "id">
 
 export type shippingMethodsOrderByWithAggregationInput = {
@@ -257,6 +260,7 @@ export type shippingMethodsCreateInput = {
   name: string
   imgUrl: string
   price: number
+  orders?: Prisma.OrdersCreateNestedManyWithoutShippingMethodInput
 }
 
 export type shippingMethodsUncheckedCreateInput = {
@@ -264,12 +268,14 @@ export type shippingMethodsUncheckedCreateInput = {
   name: string
   imgUrl: string
   price: number
+  orders?: Prisma.OrdersUncheckedCreateNestedManyWithoutShippingMethodInput
 }
 
 export type shippingMethodsUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   imgUrl?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  orders?: Prisma.OrdersUpdateManyWithoutShippingMethodNestedInput
 }
 
 export type shippingMethodsUncheckedUpdateInput = {
@@ -277,6 +283,7 @@ export type shippingMethodsUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   imgUrl?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  orders?: Prisma.OrdersUncheckedUpdateManyWithoutShippingMethodNestedInput
 }
 
 export type shippingMethodsCreateManyInput = {
@@ -330,6 +337,98 @@ export type shippingMethodsSumOrderByAggregateInput = {
   price?: Prisma.SortOrder
 }
 
+export type ShippingMethodsNullableScalarRelationFilter = {
+  is?: Prisma.shippingMethodsWhereInput | null
+  isNot?: Prisma.shippingMethodsWhereInput | null
+}
+
+export type shippingMethodsCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<Prisma.shippingMethodsCreateWithoutOrdersInput, Prisma.shippingMethodsUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.shippingMethodsCreateOrConnectWithoutOrdersInput
+  connect?: Prisma.shippingMethodsWhereUniqueInput
+}
+
+export type shippingMethodsUpdateOneWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.shippingMethodsCreateWithoutOrdersInput, Prisma.shippingMethodsUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.shippingMethodsCreateOrConnectWithoutOrdersInput
+  upsert?: Prisma.shippingMethodsUpsertWithoutOrdersInput
+  disconnect?: Prisma.shippingMethodsWhereInput | boolean
+  delete?: Prisma.shippingMethodsWhereInput | boolean
+  connect?: Prisma.shippingMethodsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.shippingMethodsUpdateToOneWithWhereWithoutOrdersInput, Prisma.shippingMethodsUpdateWithoutOrdersInput>, Prisma.shippingMethodsUncheckedUpdateWithoutOrdersInput>
+}
+
+export type shippingMethodsCreateWithoutOrdersInput = {
+  name: string
+  imgUrl: string
+  price: number
+}
+
+export type shippingMethodsUncheckedCreateWithoutOrdersInput = {
+  id?: number
+  name: string
+  imgUrl: string
+  price: number
+}
+
+export type shippingMethodsCreateOrConnectWithoutOrdersInput = {
+  where: Prisma.shippingMethodsWhereUniqueInput
+  create: Prisma.XOR<Prisma.shippingMethodsCreateWithoutOrdersInput, Prisma.shippingMethodsUncheckedCreateWithoutOrdersInput>
+}
+
+export type shippingMethodsUpsertWithoutOrdersInput = {
+  update: Prisma.XOR<Prisma.shippingMethodsUpdateWithoutOrdersInput, Prisma.shippingMethodsUncheckedUpdateWithoutOrdersInput>
+  create: Prisma.XOR<Prisma.shippingMethodsCreateWithoutOrdersInput, Prisma.shippingMethodsUncheckedCreateWithoutOrdersInput>
+  where?: Prisma.shippingMethodsWhereInput
+}
+
+export type shippingMethodsUpdateToOneWithWhereWithoutOrdersInput = {
+  where?: Prisma.shippingMethodsWhereInput
+  data: Prisma.XOR<Prisma.shippingMethodsUpdateWithoutOrdersInput, Prisma.shippingMethodsUncheckedUpdateWithoutOrdersInput>
+}
+
+export type shippingMethodsUpdateWithoutOrdersInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  imgUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+}
+
+export type shippingMethodsUncheckedUpdateWithoutOrdersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  imgUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+}
+
+
+/**
+ * Count Type ShippingMethodsCountOutputType
+ */
+
+export type ShippingMethodsCountOutputType = {
+  orders: number
+}
+
+export type ShippingMethodsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  orders?: boolean | ShippingMethodsCountOutputTypeCountOrdersArgs
+}
+
+/**
+ * ShippingMethodsCountOutputType without action
+ */
+export type ShippingMethodsCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ShippingMethodsCountOutputType
+   */
+  select?: Prisma.ShippingMethodsCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ShippingMethodsCountOutputType without action
+ */
+export type ShippingMethodsCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrdersWhereInput
+}
 
 
 export type shippingMethodsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -337,6 +436,8 @@ export type shippingMethodsSelect<ExtArgs extends runtime.Types.Extensions.Inter
   name?: boolean
   imgUrl?: boolean
   price?: boolean
+  orders?: boolean | Prisma.shippingMethods$ordersArgs<ExtArgs>
+  _count?: boolean | Prisma.ShippingMethodsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shippingMethods"]>
 
 export type shippingMethodsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -361,10 +462,18 @@ export type shippingMethodsSelectScalar = {
 }
 
 export type shippingMethodsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "imgUrl" | "price", ExtArgs["result"]["shippingMethods"]>
+export type shippingMethodsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  orders?: boolean | Prisma.shippingMethods$ordersArgs<ExtArgs>
+  _count?: boolean | Prisma.ShippingMethodsCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type shippingMethodsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type shippingMethodsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $shippingMethodsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "shippingMethods"
-  objects: {}
+  objects: {
+    orders: Prisma.$OrdersPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
@@ -764,6 +873,7 @@ readonly fields: shippingMethodsFieldRefs;
  */
 export interface Prisma__shippingMethodsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  orders<T extends Prisma.shippingMethods$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.shippingMethods$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrdersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -814,6 +924,10 @@ export type shippingMethodsFindUniqueArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.shippingMethodsOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.shippingMethodsInclude<ExtArgs> | null
+  /**
    * Filter, which shippingMethods to fetch.
    */
   where: Prisma.shippingMethodsWhereUniqueInput
@@ -832,6 +946,10 @@ export type shippingMethodsFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.E
    */
   omit?: Prisma.shippingMethodsOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.shippingMethodsInclude<ExtArgs> | null
+  /**
    * Filter, which shippingMethods to fetch.
    */
   where: Prisma.shippingMethodsWhereUniqueInput
@@ -849,6 +967,10 @@ export type shippingMethodsFindFirstArgs<ExtArgs extends runtime.Types.Extension
    * Omit specific fields from the shippingMethods
    */
   omit?: Prisma.shippingMethodsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.shippingMethodsInclude<ExtArgs> | null
   /**
    * Filter, which shippingMethods to fetch.
    */
@@ -898,6 +1020,10 @@ export type shippingMethodsFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Ex
    */
   omit?: Prisma.shippingMethodsOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.shippingMethodsInclude<ExtArgs> | null
+  /**
    * Filter, which shippingMethods to fetch.
    */
   where?: Prisma.shippingMethodsWhereInput
@@ -946,6 +1072,10 @@ export type shippingMethodsFindManyArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.shippingMethodsOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.shippingMethodsInclude<ExtArgs> | null
+  /**
    * Filter, which shippingMethods to fetch.
    */
   where?: Prisma.shippingMethodsWhereInput
@@ -988,6 +1118,10 @@ export type shippingMethodsCreateArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the shippingMethods
    */
   omit?: Prisma.shippingMethodsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.shippingMethodsInclude<ExtArgs> | null
   /**
    * The data needed to create a shippingMethods.
    */
@@ -1036,6 +1170,10 @@ export type shippingMethodsUpdateArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the shippingMethods
    */
   omit?: Prisma.shippingMethodsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.shippingMethodsInclude<ExtArgs> | null
   /**
    * The data needed to update a shippingMethods.
    */
@@ -1103,6 +1241,10 @@ export type shippingMethodsUpsertArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.shippingMethodsOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.shippingMethodsInclude<ExtArgs> | null
+  /**
    * The filter to search for the shippingMethods to update in case it exists.
    */
   where: Prisma.shippingMethodsWhereUniqueInput
@@ -1129,6 +1271,10 @@ export type shippingMethodsDeleteArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.shippingMethodsOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.shippingMethodsInclude<ExtArgs> | null
+  /**
    * Filter which shippingMethods to delete.
    */
   where: Prisma.shippingMethodsWhereUniqueInput
@@ -1149,6 +1295,30 @@ export type shippingMethodsDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
+ * shippingMethods.orders
+ */
+export type shippingMethods$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Orders
+   */
+  select?: Prisma.OrdersSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Orders
+   */
+  omit?: Prisma.OrdersOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrdersInclude<ExtArgs> | null
+  where?: Prisma.OrdersWhereInput
+  orderBy?: Prisma.OrdersOrderByWithRelationInput | Prisma.OrdersOrderByWithRelationInput[]
+  cursor?: Prisma.OrdersWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrdersScalarFieldEnum | Prisma.OrdersScalarFieldEnum[]
+}
+
+/**
  * shippingMethods without action
  */
 export type shippingMethodsDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1160,4 +1330,8 @@ export type shippingMethodsDefaultArgs<ExtArgs extends runtime.Types.Extensions.
    * Omit specific fields from the shippingMethods
    */
   omit?: Prisma.shippingMethodsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.shippingMethodsInclude<ExtArgs> | null
 }

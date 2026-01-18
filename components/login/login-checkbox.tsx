@@ -9,7 +9,7 @@ export default function LoginCheckbox({
 }) {
   return (
     <label
-      htmlFor={label.toLocaleLowerCase()}
+      htmlFor={label.toLocaleLowerCase().replace(" ", "")}
       className="flex items-center cursor-pointer"
     >
       <div className="relative h-5 w-5">

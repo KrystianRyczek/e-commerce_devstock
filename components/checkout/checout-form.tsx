@@ -1,31 +1,26 @@
 "use client";
-import ShippingSelect from "./shipping/shipping-select";
-import { useForm, useFieldArray } from "react-hook-form";
 import type {
-  CartProduct,
+  Order,
   PaymentMethod,
   ShippingMethod,
   UserAddress,
-} from "@/app/cart/checkout/page";
+  CheckoutFormData,
+} from "@/util/types";
+import ShippingSelect from "./shipping/shipping-select";
 import AddressContainer from "./address/address-container";
 import ProductContainer from "./product/product-container";
 import PaymentSelect from "./payment/payment-select";
 import SummaryContainer from "./summary-container";
-
-export type CheckoutFormData = {
-  products: { [key: string]: string | number | boolean }[];
-  address: { [key: string]: string | number }[];
-  shipping: number;
-  payment: number;
-};
+import { useForm, useFieldArray } from "react-hook-form";
+import { submitOrderAction } from "@/util/server-action";
 
 export default function CheckoutForm({
-  cartProductsArray,
+  userOrders,
   userAddressArray,
   shippingMethodsArray,
   paymentMethodsArray,
 }: {
-  cartProductsArray: CartProduct[];
+  userOrders: Order[];
   userAddressArray: UserAddress[];
   shippingMethodsArray: ShippingMethod[];
   paymentMethodsArray: PaymentMethod[];
@@ -41,15 +36,19 @@ export default function CheckoutForm({
   } = useForm<CheckoutFormData>({
     mode: "onChange",
     defaultValues: {
-      products: [],
+      ordersId: userOrders.map((order) => String(order.id)),
+      orders: [],
       address: [],
-      shipping: 1,
-      payment: 1,
+      shipping: shippingMethodsArray[0]?.id || 1,
+      payment: paymentMethodsArray[0]?.id || 1,
     },
   });
+
   const { remove, insert } = useFieldArray({ control, name: "address" });
 
-  const onSubmit = handleSubmit((data): void => alert(JSON.stringify(data)));
+  const onSubmit = handleSubmit((data: CheckoutFormData): void => {
+    submitOrderAction(data);
+  });
 
   return (
     <div className="flex w-full">
@@ -59,7 +58,7 @@ export default function CheckoutForm({
       >
         <div className="flex flex-col gap-[40px] w-2/3 max-desktop:w-full">
           <ProductContainer
-            productsArray={cartProductsArray}
+            userOrders={userOrders}
             register={register}
             setValue={setValue}
             getValues={getValues}
@@ -85,7 +84,10 @@ export default function CheckoutForm({
             setValue={setValue}
           />
         </div>
-        <SummaryContainer watch={watch} />
+        <SummaryContainer
+          watch={watch}
+          shippingMethodsArray={shippingMethodsArray}
+        />
       </form>
     </div>
   );

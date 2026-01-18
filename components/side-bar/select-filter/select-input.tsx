@@ -42,14 +42,14 @@ export default function SelectInput({
 
   return (
     <label
-      htmlFor={label.toLocaleLowerCase()}
+      htmlFor={label.toLocaleLowerCase() + name}
       className="flex items-center cursor-pointer py-1"
     >
       <div className="relative h-5 w-5">
         <input
           type="checkbox"
           value={label.toLocaleLowerCase()}
-          id={label.toLocaleLowerCase()}
+          id={label.toLocaleLowerCase() + name}
           {...register(name as keyof FilterFormData, {
             onChange: label === "All" ? selectAllHandler : deselectAllHandler,
           })}

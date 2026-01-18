@@ -2,7 +2,7 @@ import { FilterFormData, CurrencySelectParams } from "@/util/types";
 
 export default function CurrencySelect({
   label,
-  curencyNameArray,
+  curencyArray,
   register,
   getValues,
   setValue,
@@ -11,9 +11,12 @@ export default function CurrencySelect({
     const currentCurrenty = getValues(
       `currencys.${label.toLocaleLowerCase()}Currency` as keyof FilterFormData
     );
+    const currencySymbol = curencyArray.find(
+      (currency) => currency.name === currentCurrenty
+    )?.symbol;
     setValue(
       `currencys.${label.toLocaleLowerCase()}CurrencyIcon` as keyof FilterFormData,
-      currentCurrenty
+      currencySymbol || currentCurrenty
     );
   };
   return (
@@ -27,8 +30,8 @@ export default function CurrencySelect({
         )}
         className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pr-7 pl-1 text-base text-filter-input-currency placeholder:text-filter-input-currency focus:outline-none"
       >
-        {curencyNameArray.map((currency) => (
-          <option key={currency}>{currency}</option>
+        {curencyArray.map((currency) => (
+          <option key={currency.name}>{currency.name}</option>
         ))}
       </select>
       <svg

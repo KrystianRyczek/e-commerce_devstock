@@ -14,9 +14,6 @@ import {
   UseFormSetValue,
   UseFormRegister,
 } from "react-hook-form";
-import { boolean, set } from "zod";
-import { get } from "http";
-import { fa } from "zod/locales";
 
 export default function CartCard({
   product,
@@ -34,7 +31,7 @@ export default function CartCard({
   const quantityRef = useRef<HTMLInputElement | null>(null);
 
   const deleteHandler = () => {
-    setValue(`items.[${index}].deleted`, true);
+    removeItemFromCartAction(product.productId, product.variantId);
   };
 
   const checkBocxClikkHandler = () => {
@@ -70,7 +67,7 @@ export default function CartCard({
   const hidden = getValues(`items.[${index}].deleted`) ? true : false;
 
   return (
-    <label
+    <div
       className={`w-full flex items-center gap-[16px] relative ${
         hidden ? "hidden" : ""
       }`}
@@ -78,6 +75,7 @@ export default function CartCard({
       <input type="hidden" {...register(`items.[${index}].productId`)} />
       <input type="hidden" {...register(`items.[${index}].variantId`)} />
       <input type="hidden" {...register(`items.[${index}].price`)} />
+      <input type="hidden" {...register(`items.[${index}].name`)} />
       <CartCheckbox
         label={`select${product.productId + product.color}`}
         name={`items.[${index}].selected`}
@@ -152,6 +150,6 @@ export default function CartCard({
           </div>
         </div>
       </div>
-    </label>
+    </div>
   );
 }

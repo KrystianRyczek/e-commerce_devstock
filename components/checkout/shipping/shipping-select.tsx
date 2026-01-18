@@ -1,11 +1,11 @@
 "use client";
-import type { ShippingMethod } from "@/app/cart/checkout/page";
+import type { ShippingMethod, CheckoutFormData } from "@/util/types";
 import { useRef, useState, useEffect } from "react";
 import CheckoutModal from "../common-components/modal";
 import Image from "next/image";
 import SelectContainer from "../common-components/select-container";
-import { UseFormRegister, FieldValues, UseFormSetValue } from "react-hook-form";
-import { CheckoutFormData } from "../checout-form";
+import { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { imageLoader } from "@/util/image-loader";
 export default function ShippingSelect({
   shippingMethodsArray,
   register,
@@ -16,14 +16,14 @@ export default function ShippingSelect({
   setValue: UseFormSetValue<CheckoutFormData>;
 }) {
   const modalRef = useRef<HTMLDialogElement>(null);
-  const [sippingMethod, setShippingMethod] = useState(shippingMethodsArray[0]);
+  const [shippingMethod, setShippingMethod] = useState(shippingMethodsArray[0]);
 
   const openModal = () => {
     modalRef.current?.showModal();
   };
 
   useEffect(() => {
-    setValue("shipping", sippingMethod.id);
+    setValue("shipping", shippingMethod.id);
   }, []);
 
   return (
@@ -45,7 +45,8 @@ export default function ShippingSelect({
               >
                 <div className="flex relative w-[26px] h-[full]">
                   <Image
-                    src={method.img}
+                    loader={(config) => imageLoader(config, "")}
+                    src={method.imgUrl}
                     alt={method.name}
                     fill
                     className="object-contain"
@@ -53,7 +54,7 @@ export default function ShippingSelect({
                 </div>
                 <div className="flex w-full justify-between text-18-28-500">
                   <p>{method.name}</p>
-                  <p>${method.cost}</p>
+                  <p>${method.price}</p>
                 </div>
               </button>
             </li>
@@ -65,8 +66,8 @@ export default function ShippingSelect({
         <SelectContainer
           openModal={openModal}
           register={register}
-          img={sippingMethod.img}
-          label={sippingMethod.name}
+          img={shippingMethod.imgUrl}
+          label={shippingMethod.name}
         />
       </div>
     </>

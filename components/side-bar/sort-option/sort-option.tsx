@@ -4,6 +4,7 @@ import { FilterFormData } from "@/util/types";
 import { UseFormRegister } from "react-hook-form";
 import { itemPerPageArray } from "@/util/static-data";
 import { sortOptionArray } from "@/util/static-data";
+import ApplyFilterButton from "../common-components/apply-filter-button";
 
 export default function SortOption({
   register,
@@ -32,6 +33,7 @@ export default function SortOption({
           />
         </li>
       </ul>
+      <ApplyFilterButton />
     </FilterContainer>
   );
 }

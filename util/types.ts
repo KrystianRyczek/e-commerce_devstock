@@ -8,6 +8,14 @@ import {
 
 import { StaticImageData } from "next/image";
 
+export type NavLinksListProps = {
+  clickOnHamburgerMenuHandler?: () => void;
+  className: string;
+};
+export type NavLinkItem = {
+  [key: string]: string;
+};
+
 export type RecommendedProduct = {
   id: number;
   name: string;
@@ -104,7 +112,7 @@ export type SectionParams = {
 };
 export type LoginInputParams = {
   label: string;
-  palceholder: string;
+  placeholder: string;
   name: string;
   id: string;
   type: string;
@@ -145,7 +153,7 @@ export type FilterContainerParams = {
 };
 export type CurrencySelectParams = {
   label: string;
-  curencyNameArray: string[];
+  curencyArray: { name: string; rate: number; symbol: string }[];
   register: UseFormRegister<FilterFormData>;
   getValues: UseFormGetValues<FilterFormData>;
   setValue: UseFormSetValue<FilterFormData>;
@@ -159,7 +167,7 @@ export type PriceFilterParams = {
 };
 
 export type PriceInputParams = {
-  curencyNameArray: string[];
+  curencyArray: { name: string; rate: number; symbol: string }[];
   currencyIcon: string;
   label: string;
   register: UseFormRegister<FilterFormData>;
@@ -217,4 +225,70 @@ export type RegistationFormValuesProps = {
   confirmPassword: string;
   country: string;
   conditionsAndPrivancy: boolean;
+};
+export type CheckoutCartProduct = {
+  price: number;
+  productId: number;
+  productName: string;
+  variantId: number;
+  img: string;
+  quantity: number;
+  color: string | null;
+  brand: string | null;
+  category: string | null;
+  protection: boolean;
+  comment: string | null;
+};
+export type UserAddress = {
+  id: number;
+  name: string;
+  main: boolean;
+  country: string;
+  province: string;
+  city: string;
+  zip: number;
+  address: string;
+};
+export type ShippingMethod = {
+  id: number;
+  name: string;
+  imgUrl: string;
+  price: number;
+};
+export type PaymentMethod = {
+  id: number;
+  name: string;
+  type: string;
+  imgUrl: string;
+};
+export type Order = {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  paymentStatus: String | null;
+  paymentMethod: {
+    id: number;
+    name: string;
+    type: string;
+  } | null;
+  orderedProducts: {
+    price: number;
+    productId: number;
+    productName: string;
+    variantId: number;
+    img: string;
+    quantity: number;
+    color: string | null;
+    brand: string | null;
+    category: string | null;
+    protection: boolean;
+    comment: string | null;
+  }[];
+};
+export type CheckoutFormData = {
+  ordersId: string[];
+  orders: { [key: string]: string | number | boolean }[];
+  address: { [key: string]: string | number }[];
+  shipping: number;
+  payment: number;
 };

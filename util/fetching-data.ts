@@ -516,6 +516,7 @@ export const cartItemsBySessionCart = async (sessionCartId: string) => {
       item.product?.variants.find((v) => v.id === item.variantId)?.color || "",
     imgUrls: item.product?.imgUrls[0] || { url: "" },
     category: item.product?.category.name || "",
+    brand: item.product?.brand.name || "",
     price:
       item.product?.variants.find((v) => v.id === item.variantId)?.price || 0,
     quantity: item.quantity,
@@ -674,6 +675,7 @@ export const cartItemsByUser = async (userId: number) => {
       item.product?.variants.find((v) => v.id === item.variantId)?.color || "",
     imgUrls: item.product?.imgUrls[0] || { url: "" },
     category: item.product?.category.name || "",
+    brand: item.product?.brand.name || "",
     price:
       item.product?.variants.find((v) => v.id === item.variantId)?.price || 0,
     quantity: item.quantity,
@@ -695,7 +697,144 @@ export const slidesShow = await prisma.slideShow.findMany({
 });
 export const paymentMethods = await prisma.paymentMethods.findMany({
   select: {
+    id: true,
     name: true,
+    type: true,
     imgUrl: true,
   },
 });
+export const shippingMethods = await prisma.shippingMethods.findMany({
+  select: {
+    id: true,
+    name: true,
+    imgUrl: true,
+    price: true,
+  },
+});
+export const addressesByUser = async (userId: number) => {
+  return await prisma.usersAddresses.findMany({
+    where: {
+      userId: userId,
+    },
+    select: {
+      id: true,
+      name: true,
+      main: true,
+      address: true,
+      country: true,
+      province: true,
+      city: true,
+      zip: true,
+    },
+  });
+};
+export const ordersByUser = async (userId: number) => {
+  return await prisma.orders.findMany({
+    where: { userId: userId, paymentStatus: null },
+    select: {
+      id: true,
+      paymentMethod: {
+        select: {
+          id: true,
+          name: true,
+          type: true,
+        },
+      },
+      paymentStatus: true,
+      createdAt: true,
+      updatedAt: true,
+      orderedProducts: {
+        select: {
+          productId: true,
+          productName: true,
+          variantId: true,
+          quantity: true,
+          price: true,
+          color: true,
+          img: true,
+          protection: true,
+          comment: true,
+          brand: true,
+          category: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "asc",
+    },
+  });
+};
+export const ordersByUserWithProductsId = async (userId: number) => {
+  return await prisma.orders.findMany({
+    where: { userId: userId, paymentStatus: { not: null } },
+    select: {
+      id: true,
+      paymentStatus: true,
+      createdAt: true,
+      orderedProducts: {
+        select: {
+          productId: true,
+          productName: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+};
+export const ordersByIds = async (ordersId: number[]) => {
+  return await prisma.orders.findMany({
+    where: { id: { in: ordersId } },
+    select: {
+      id: true,
+      paymentMethod: {
+        select: { name: true },
+      },
+      shippingMethod: {
+        select: { name: true, price: true },
+      },
+      createdAt: true,
+      paymentStatus: true,
+      totalPrice: true,
+      updatedAt: true,
+      orderedProducts: {
+        select: {
+          productName: true,
+          quantity: true,
+          protection: true,
+          price: true,
+        },
+      },
+    },
+  });
+};
+
+export const getTotalPriceById = async (ordersId: string[], userId: number) => {
+  const ordersIdNum = ordersId.map((id) => Number(id));
+  const orders = await prisma.orders.findMany({
+    where: {
+      id: { in: ordersIdNum },
+      userId: userId,
+      paymentStatus: "pending",
+    },
+    select: {
+      totalPrice: true,
+      id: true,
+      shippingMethod: {
+        select: {
+          price: true,
+        },
+      },
+    },
+  });
+  const shippingPrices = 0;
+
+  let totalPrice =shippingPrices||0;
+  orders.forEach((order) => {
+    totalPrice += order.totalPrice ? order.totalPrice : 0;
+  });
+  return totalPrice;
+  
+
+};

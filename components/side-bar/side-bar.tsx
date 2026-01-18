@@ -105,10 +105,6 @@ export default function SideBar({
         getValues={getValues}
         setValue={setValue}
       />
-
-      <button type="submit" className="btn-primary w-full mt-4 cursor-pointer">
-        Apply Filters
-      </button>
     </form>
   );
 }

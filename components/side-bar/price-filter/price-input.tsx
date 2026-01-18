@@ -2,7 +2,7 @@ import CurrencySelect from "@/components/side-bar/price-filter/currency-select";
 import { FilterFormData, PriceInputParams } from "@/util/types";
 
 export default function PriceInput({
-  curencyNameArray,
+  curencyArray,
   currencyIcon,
   label,
   register,
@@ -49,7 +49,7 @@ export default function PriceInput({
 
           <CurrencySelect
             label={label}
-            curencyNameArray={curencyNameArray}
+            curencyArray={curencyArray}
             register={register}
             getValues={getValues}
             setValue={setValue}

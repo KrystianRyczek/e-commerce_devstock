@@ -2,7 +2,12 @@ import PaymentListItem from "./payment-list-item";
 import ContentList from "./content-list";
 import { paymentMethods } from "@/util/fetching-data";
 
-const paymentMethodsArray: { [key: string]: string }[] = await paymentMethods;
+const paymentMethodsArray: {
+  id: number;
+  name: string;
+  imgUrl: string;
+  type: string;
+}[] = paymentMethods;
 
 export default async function Footer() {
   return (
@@ -23,12 +28,6 @@ export default async function Footer() {
               alt={`${method.name} payment service`}
             />
           ))}
-          {/* 
-          <PaymentListItem img={Visa} alt="Visa payment service" />
-          <PaymentListItem img={MasterCard} alt="MasterCard payment service" />
-          <PaymentListItem img={PayPal} alt="PayPal payment service" />
-          <PaymentListItem img={ApplePay} alt="ApplePay payment service" />
-          <PaymentListItem img={GooglePay} alt="GooglePay payment service" /> */}
         </ul>
       </div>
       <ul className="flex min-desktop:gap-[8px] max-desktop:w-full max-desktop:justify-between max-tablet:flex-wrap text-footer-h max-tablet:gap-y-[40px]">

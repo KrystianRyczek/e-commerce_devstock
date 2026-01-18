@@ -7,45 +7,10 @@ import { redirect } from "next/navigation";
 import { hashSync } from "bcrypt-ts-edge";
 import { auth, signIn, signOut } from "@/auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { z } from "zod";
 import { revalidatePath } from "next/cache";
-
-const emailSchema = z.object({
-  email: z.string().email("Not a valid email!"),
-});
-const phoneSchema = z.object({
-  phone: z
-    .string()
-    .regex(/.$/, "Numer telefonu jest wymagany!")
-    .regex(
-      /[+]{1}[(]{1}[0-9]{2,}[)]{1}[0-9]{1,}$/,
-      "Invalid phone number format! Example: +(Code country) 9 digit mobile number"
-    )
-    .min(14, "Podany numer jest zbyt krótki!")
-    .max(14, "Podany numer jest zbyt długi!"),
-});
-const passwordSchema = z.object({
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters long")
-    .regex(
-      /\d+/,
-      "Password at least 8 characters and includes at least upper case letter, lower case letter and number."
-    )
-    .regex(
-      /\W+/,
-      "Password at least 8 characters and includes at least upper case letter, lower case letter and number."
-    )
-    .regex(
-      /[A-Z]+/,
-      "Password at least 8 characters and includes at least upper case letter, lower case letter and number."
-    )
-    .regex(
-      /[a-z]+/,
-      "Password at least 8 characters and includes at least upper case letter, lower case letter and number."
-    ),
-});
-
+import { emailSchema, phoneSchema, passwordSchema } from "@/util/resolver";
+import { CartFormData } from "@/components/cart/cart-form";
+import { serviceFees, shippingInsuranceCost } from "./static-data";
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
 });
@@ -183,6 +148,7 @@ export const signupAction = async (data: RegistationFormValuesProps) => {
   }
   redirect("/login?callbackUrl=/register");
 };
+
 export const logInWithCredentialsAction = async (
   prevState: unknown,
   formData: FormData
@@ -233,5 +199,168 @@ export const logOutAction = async () => {
       throw error;
     }
     return { success: false, message: "Logout failed." };
+  }
+};
+export const submitCartAction = async (formData: CartFormData) => {
+  "use server";
+  try {
+    const user = await auth();
+    if (!user) {
+      redirect("/login?callbackUrl=/cart");
+    }
+    const cookiesList = await cookies();
+    const sessionCartId = cookiesList.get("sessionCartId")?.value;
+
+    const order = await prisma.orders.createManyAndReturn({
+      data: {
+        userId: Number(user.user.id),
+      },
+    });
+    formData.items.forEach(async (item: CartFormData) => {
+      if (item.selected) {
+        await prisma.orderedProduct.createMany({
+          data: {
+            orderId: order[0].id,
+            productId: item.productId,
+            productName: item.name,
+            variantId: item.variantId,
+            img: item.imgUrl,
+            quantity: item.quantity,
+            price: item.price,
+            color: item.color,
+            brand: item.brand,
+            category: item.category,
+            comment: item.comment,
+          },
+        });
+        await prisma.cartItems.updateMany({
+          where: {
+            sessionCart: sessionCartId,
+            productId: item.productId,
+            variantId: item.variantId,
+            active: true,
+            ordered: false,
+          },
+          data: {
+            active: false,
+            ordered: true,
+          },
+        });
+      }
+      return;
+    });
+    revalidatePath(`/cart`, "layout");
+    redirect("/cart/checkout");
+  } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
+    console.error("Error submitting cart:", error);
+    return { success: false, message: "Failed to submit cart." };
+  }
+};
+
+export const submitOrderAction = async (formData: any) => {
+  "use server";
+
+  try {
+    console.log("Submitting order with data:", formData);
+    formData.orders.forEach(async (order: any) => {
+      if (formData.ordersId.includes(order[0].orderId)) {
+        order.forEach(async (product: any, index: number) => {
+          if (index === 0) {
+            await prisma.orders.updateMany({
+              where: { id: +product.orderId },
+              data: {
+                shippingMethodId: +formData.shipping,
+                paymentMethodId: +formData.payment,
+                addressId: formData.address[0]?.id || null,
+                paymentStatus: "pending",
+              },
+            });
+          }
+          console.log("Processing product:", product);
+          await prisma.orderedProduct.updateMany({
+            where: {
+              orderId: +product.orderId,
+              productId: +product.productId,
+              variantId: +product.variantId,
+            },
+            data: {
+              quantity: +product.quantity,
+              comment: product.comment || "",
+              protection: product.protection || false,
+            },
+          });
+          const shippingMethodPrice =
+            (
+              await prisma.shippingMethods.findUnique({
+                where: { id: formData.shipping },
+              })
+            )?.price || 0;
+          const protectionCost = product.protection ? 1 : 0;
+          console.log(
+            "Shipping method:",
+            shippingMethodPrice +
+              product.quantity *
+                (protectionCost +
+                  +product.price +
+                  shippingInsuranceCost +
+                  serviceFees)
+          );
+          await prisma.orders.updateMany({
+            where: { id: +product.orderId },
+            data: {
+              totalPrice:
+                shippingMethodPrice +
+                product.quantity *
+                  (protectionCost +
+                    +product.price +
+                    shippingInsuranceCost +
+                    serviceFees),
+            },
+          });
+        });
+      }
+    });
+    const paymentMethod = await prisma.paymentMethods.findUnique({
+      where: { id: formData.payment },
+      select: { type: true },
+    });
+    const ordersParams = formData.ordersId
+      .reduce((acc: string, orderId: any) => {
+        acc += `${orderId}$`;
+        return acc;
+      }, "ordersId=")
+      .slice(0, -1);
+
+    redirect(
+      "/cart/checkout/payment?method=" +
+        paymentMethod?.type +
+        "&" +
+        ordersParams
+    );
+  } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
+    console.error("Error submitting order:", error);
+
+    return { success: false, message: "Failed to submit order." };
+  }
+};
+export const orderStatusChangeAction = async (orders: number[]) => {
+  "use server";
+  try {
+    await prisma.orders.updateMany({
+      where: { id: { in: orders } },
+      data: {
+        paymentStatus: "paid",
+      },
+    });
+    return { success: true, message: "Order status updated successfully." };
+  } catch (error) {
+    console.error("Error changing order status:", error);
+    return { success: false, message: "Failed to change order status." };
   }
 };

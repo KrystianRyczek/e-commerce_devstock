@@ -1,6 +1,7 @@
-import Image, { StaticImageData } from "next/image";
-import { UseFormRegister, FieldValues } from "react-hook-form";
-import { CheckoutFormData } from "../checout-form";
+import Image from "next/image";
+import { UseFormRegister } from "react-hook-form";
+import { CheckoutFormData } from "@/util/types";
+import { imageLoader } from "@/util/image-loader";
 export default function SelectContainer({
   openModal,
   register,
@@ -9,7 +10,7 @@ export default function SelectContainer({
 }: {
   openModal: () => void;
   register: UseFormRegister<CheckoutFormData>;
-  img: StaticImageData;
+  img: string;
   label: string;
 }) {
   return (
@@ -20,7 +21,13 @@ export default function SelectContainer({
         onClick={openModal}
       >
         <div className="flex relative object-contain w-[calc(76px-28px)] h-[calc(76px-28px)]">
-          <Image src={img} alt={label} fill className="object-contain" />
+          <Image
+            loader={(config) => imageLoader(config, "")}
+            src={img}
+            alt={label}
+            fill
+            className="object-contain"
+          />
         </div>
         <p className="flex text-18-28-500">{label}</p>
       </button>

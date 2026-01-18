@@ -1,12 +1,8 @@
 import PriceInput from "@/components/side-bar/price-filter/price-input";
 import FilterContainer from "@/components/side-bar/common-components/filter-container";
 import { PriceFilterParams } from "@/util/types";
-
-const currencys: { [key: string]: string }[] = [
-  { name: "PLN", symbol: "PLN" },
-  { name: "USD", symbol: "$" },
-  { name: "EUR", symbol: "€" },
-];
+import { currencys } from "@/util/static-data";
+import ApplyFilterButton from "../common-components/apply-filter-button";
 
 export default function PriceFilter({
   currentCurrency,
@@ -22,7 +18,7 @@ export default function PriceFilter({
           <PriceInput
             currencyIcon={"currencys.minCurrency"}
             label="Min"
-            curencyNameArray={["PLN", "USD", "EUR"]}
+            curencyArray={currencys}
             register={register}
             getValues={getValues}
             setValue={setValue}
@@ -32,7 +28,7 @@ export default function PriceFilter({
           <PriceInput
             currencyIcon={"currencys.maxCurrency"}
             label="Max"
-            curencyNameArray={["PLN", "USD", "EUR"]}
+            curencyArray={currencys}
             register={register}
             getValues={getValues}
             setValue={setValue}
@@ -44,6 +40,7 @@ export default function PriceFilter({
         {errors?.price?.max && <p>{errors.price.max.message}</p>}
         {errors?.price?.message && <p>{errors.price.message}</p>}
       </div>
+      <ApplyFilterButton />
     </FilterContainer>
   );
 }

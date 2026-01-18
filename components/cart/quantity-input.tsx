@@ -43,7 +43,7 @@ export default function QuantityInput({
   return (
     <div className="flex flex-col gap-[8px]">
       <label
-        htmlFor={name}
+        htmlFor={name.replace(/[[\].]/g, "-")}
         className="flex w-[142px] h-[54px] rounded-[6px] border-[1px] border-purchasing-container-stock-border text-purchasing-container-stock-text "
       >
         <button
@@ -55,7 +55,7 @@ export default function QuantityInput({
         </button>
         <input
           className="w-1/2 flex justify-center text-center outline-none text-24-36-500"
-          id={name}
+          id={name.replace(/[[\].]/g, "-")}
           {...register(name)}
           type="number"
           min={1}

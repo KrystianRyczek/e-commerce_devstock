@@ -1,6 +1,7 @@
 import SelectInput from "./select-input";
 import FilterContainer from "../common-components/filter-container";
 import { SelectFilterParams } from "@/util/types";
+import ApplyFilterButton from "../common-components/apply-filter-button";
 
 export default function SelectFilter({
   label,
@@ -31,6 +32,7 @@ export default function SelectFilter({
           />
         ))}
       </fieldset>
+      <ApplyFilterButton />
     </FilterContainer>
   );
 }

@@ -1,5 +1,5 @@
 import Logo from "@/components/login/logo";
-import SignInUser from "@/components/login/sign-in";
+import LoginUser from "@/components/login/login-user";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 
@@ -22,7 +22,7 @@ export default async function SignInPage(props: {
     <main className="flex w-full h-[612px] ">
       <div className="w-[448px] flex flex-col gap-[32px] m-auto justify-center items-center">
         <Logo />
-        <SignInUser />
+        <LoginUser />
       </div>
     </main>
   );

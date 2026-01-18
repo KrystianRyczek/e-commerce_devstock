@@ -116,4 +116,32 @@ export const clearDbDataHandler = async () => {
     console.log("ℹ️  No payment methods to delete (table may not exist yet)");
     console.log("🔍 Error details:", e);
   }
+  try {
+    await prisma.productVariants.deleteMany();
+    console.log("✅ Existing product variants deleted");
+  } catch (e) {
+    console.log("ℹ️  No product variants to delete (table may not exist yet)");
+    console.log("🔍 Error details:", e);
+  }
+  try {
+    await prisma.shippingMethods.deleteMany();
+    console.log("✅ Existing shipping methods deleted");
+  } catch (e) {
+    console.log("ℹ️  No shipping methods to delete (table may not exist yet)");
+    console.log("🔍 Error details:", e);
+  }
+  try {
+    await prisma.orderedProduct.deleteMany();
+    console.log("✅ Existing ordered products deleted");
+  } catch (e) {
+    console.log("ℹ️  No ordered products to delete (table may not exist yet)");
+    console.log("🔍 Error details:", e);
+  }
+  try {
+    await prisma.orders.deleteMany();
+    console.log("✅ Existing orders deleted");
+  } catch (e) {
+    console.log("ℹ️  No orders to delete (table may not exist yet)");
+    console.log("🔍 Error details:", e);
+  }
 };

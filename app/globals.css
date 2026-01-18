@@ -53,6 +53,8 @@
   --color-filter-border: #616674;
   --color-filter-error-text: #ff4d4f;
   --color-filter-error-text1: #f87171;
+  --color-filter-button-background: #f29145;
+  --color-filter-button-text: #262626;
   /* --------------------------------------------------- */
   --color-filter-checkbox-text: #fcfcfc;
   --color-filter-checkbox-background: #1a1a1a;
@@ -218,12 +220,18 @@
   --color-toast-error-text: #e7e7e7;
   --color-toast-error-icon: #fca5a5;
   /* -------------------------------------------------- */
-  --color-toast-info-background: #96600e;
-  --color-toast-info-border: #eab308;
+  --color-toast-info-background: #262626;
+  --color-toast-info-border: #383b42;
   --color-toast-info-h: #fcfcfc;
   --color-toast-info-text: #e7e7e7;
   --color-toast-info-icon: #fdd147;
   /* -------------------------------------------------- */
+  --color-profile-background: #262626;
+  --color-profile-border: #383b42;
+  --color-profile-h: #fcfcfc;
+  --color-profile-text: #e7e7e7;
+  --color-profile-text-secondary: #f29145;
+  --color-profile-link: #e7e7e7;
 }
 @layer base {
   * {

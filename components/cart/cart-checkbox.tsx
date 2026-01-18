@@ -16,7 +16,7 @@ export default function CartCheckbox({
   onClickHandler: () => void;
 }) {
   return (
-    <label htmlFor={label} className={style}>
+    <div className={style}>
       <div className="relative w-[26px] h-[26px]">
         <input
           className="peer h-full w-full cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border bg-login-checkbox-background border-login-checkbox-border checked:bg-login-checkbox-background-checked"
@@ -27,6 +27,6 @@ export default function CartCheckbox({
         />
         <CheckMark />
       </div>
-    </label>
+    </div>
   );
 }

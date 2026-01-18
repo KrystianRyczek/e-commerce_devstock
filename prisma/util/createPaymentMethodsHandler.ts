@@ -12,6 +12,7 @@ export const createPaymentMethodsHandler = async () => {
     const Visa = await prisma.paymentMethods.create({
       data: {
         name: "Visa",
+        type: "card",
         imgUrl:
           "https://res.cloudinary.com/dts7qcxky/image/upload/v1766957175/Visa_hh1ghl.png",
       },
@@ -19,6 +20,7 @@ export const createPaymentMethodsHandler = async () => {
     const MasterCard = await prisma.paymentMethods.create({
       data: {
         name: "MasterCard",
+        type: "card",
         imgUrl:
           "https://res.cloudinary.com/dts7qcxky/image/upload/v1766957173/Mastercard_n6nwop.png",
       },
@@ -26,6 +28,7 @@ export const createPaymentMethodsHandler = async () => {
     const PayPal = await prisma.paymentMethods.create({
       data: {
         name: "PayPal",
+        type: "paypal",
         imgUrl:
           "https://res.cloudinary.com/dts7qcxky/image/upload/v1766957174/Paypal_bdj8rd.png",
       },
@@ -33,6 +36,7 @@ export const createPaymentMethodsHandler = async () => {
     const ApplePay = await prisma.paymentMethods.create({
       data: {
         name: "Apple Pay",
+        type: "apple_pay",
         imgUrl:
           "https://res.cloudinary.com/dts7qcxky/image/upload/v1766957171/APay_gz8grf.png",
       },
@@ -40,6 +44,7 @@ export const createPaymentMethodsHandler = async () => {
     const GooglePay = await prisma.paymentMethods.create({
       data: {
         name: "Google Pay",
+        type: "google_pay",
         imgUrl:
           "https://res.cloudinary.com/dts7qcxky/image/upload/v1766957172/GPay_acexoe.png",
       },
@@ -47,7 +52,7 @@ export const createPaymentMethodsHandler = async () => {
 
     console.log(`🎯 Payment methods created successfully`);
   } catch (e) {
-    console.log("💥 Failed to create Admin! 💥");
+    console.log("💥 Failed to create Payment methods! 💥");
     console.log("🔍 Error details:", e);
   }
   try {

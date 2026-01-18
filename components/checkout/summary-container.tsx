@@ -1,45 +1,47 @@
 "use client";
 
-import { CheckoutFormData } from "./checout-form";
+import { CheckoutFormData, Order, ShippingMethod } from "@/util/types";
 import Cupon from "./svg/cupon";
-
-const shippingCost = [
-  { id: 1, cost: 5.99 },
-  { id: 2, cost: 12.99 },
-  { id: 3, cost: 24.99 },
-];
+import {
+  protectionCost,
+  serviceFees,
+  shippingInsuranceCost,
+} from "@/util/static-data";
+import { UseFormWatch } from "react-hook-form";
 
 export default function SummaryContainer({
+  shippingMethodsArray,
   watch,
 }: {
-  watch: () => CheckoutFormData;
+  shippingMethodsArray: ShippingMethod[];
+  watch: UseFormWatch<CheckoutFormData>;
 }) {
-  const watchedValues = watch();
-  console.log("Watched Values in SummaryContainer:", watchedValues);
-  const quantity = watchedValues.products
-    ? watchedValues.products.reduce(
-        (total: number, product: { quantity?: number }) =>
-          +(product.quantity || 0) + total,
-        0
-      )
-    : 0;
-  const price = watchedValues.products
-    ? watchedValues.products.reduce(
-        (total: number, product: { price?: number; quantity?: number }) =>
-          +(product.price || 0) * +(product.quantity || 0) + total,
-        0
-      )
-    : 0;
-  const protection = watchedValues.products
-    ? watchedValues.products.reduce(
-        (total: number, product: { protection?: boolean; quantity?: number }) =>
-          product.protection ? total + 1 * +(product.quantity || 0) : total,
-        0
-      )
-    : 0;
-  const shipping = shippingCost.find(
-    (method) => method.id === +watchedValues.shipping
-  )?.cost;
+  const watchedValues: CheckoutFormData = watch();
+
+  let quantity = 0;
+  let price = 0;
+  let protection = 0;
+
+  watchedValues.orders.forEach((order: { [key: string]: any }) => {
+    order.forEach(
+      (product: { quantity: number; price: number; protection: boolean }) => {
+        quantity += +product.quantity;
+        price += +product.quantity * product.price;
+        if (product.protection) {
+          protection += +product.quantity * protectionCost;
+        }
+      }
+    );
+  });
+
+  const shipping =
+    shippingMethodsArray.find((method) => method.id === +watchedValues.shipping)
+      ?.price || 0;
+  const totlShippingPrice = shipping;
+  const shippingInsurance = quantity * shippingInsuranceCost;
+  const grandTotal =
+    price + shippingInsurance + shipping + protection + serviceFees;
+
   return (
     <div className="flex flex-col gap-[24px] w-1/3 max-desktop:w-full h-fit mt-[52px] bg-summary-background border-[1px] border-summary-border p-[24px] rounded-[6px] min-desktop:sticky min-desktop:top-[50px]">
       <div className="flex flex-col gap-[8px] w-full mx-auto ">
@@ -74,14 +76,13 @@ export default function SummaryContainer({
           Total Product Price ({quantity})<span>${price.toFixed(2)}</span>
         </p>
         <p className="flex w-full justify-between">
-          Total Product Protection{" "}
-          <span>${(protection * 3.55).toFixed(2)}</span>
+          Total Product Protection <span>${protection}</span>
         </p>
         <p className="flex w-full justify-between">
-          Total Shipping Price <span>${shipping?.toFixed(2)}</span>
+          Total Shipping Price <span>${totlShippingPrice?.toFixed(2)}</span>
         </p>
         <p className="flex w-full justify-between">
-          Shipping Insurance <span>${(protection * 2.67).toFixed(2)}</span>
+          Shipping Insurance <span>${shippingInsurance.toFixed(2)}</span>
         </p>
       </div>
       <hr className="border-[1px] border-summary-border"></hr>
@@ -90,7 +91,7 @@ export default function SummaryContainer({
           Transaction Fees
         </p>
         <p className="flex w-full justify-between">
-          Service Fees <span>$0.5</span>
+          Service Fees <span>${serviceFees.toFixed(2)}</span>
         </p>
       </div>
       <hr className="border-[1px] border-summary-border"></hr>
@@ -98,14 +99,7 @@ export default function SummaryContainer({
         <p className="flex w-full justify-between text-18-28-500 text-summary-h">
           Grand total{" "}
           <span className="text-28-40-500 text-summary-h">
-            $
-            {(
-              price +
-              protection * 3.55 +
-              (shipping ?? 0) +
-              protection * 2.67 +
-              0.5
-            ).toFixed(2)}
+            ${grandTotal.toFixed(2)}
           </span>
         </p>
         <button

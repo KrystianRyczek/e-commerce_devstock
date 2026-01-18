@@ -1,8 +1,7 @@
-import { UserAddress } from "@/app/cart/checkout/page";
 import { useRef } from "react";
 import CheckoutModal from "../common-components/modal";
 import Link from "next/link";
-import { CheckoutFormData } from "../checout-form";
+import { CheckoutFormData, UserAddress } from "@/util/types";
 import { UseFormSetValue } from "react-hook-form";
 
 export default function UserAddressSelector({
@@ -26,7 +25,7 @@ export default function UserAddressSelector({
 
   const addressSelectHandler = (address: UserAddress) => {
     setLabel(address.name);
-    setValue("address.0.street", address.street);
+    setValue("address.0.address", address.address);
     setValue("address.0.country", address.country);
     setValue("address.0.province", address.province);
     setValue("address.0.city", address.city);
@@ -38,7 +37,7 @@ export default function UserAddressSelector({
     <div className="flex relative gap-[10px]">
       <CheckoutModal ref={modalRef}>
         <h2 className=" text-modal-h text-24-36-500 -tracking-[0.02rem]">
-          Select Shippring Address
+          Select Shipping Address
         </h2>
         <hr className="border-1px border-modal-border"></hr>
         <ul className="flex flex-col gap-[16px]">
@@ -60,7 +59,7 @@ export default function UserAddressSelector({
                         {address.name}
                       </p>
                     </div>
-                    <p className="flex w-full">{address.street}</p>
+                    <p className="flex w-full">{address.address}</p>
                   </div>
                   <div className="flex w-full gap-[8px]">
                     <div className="flex flex-col w-1/4">

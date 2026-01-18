@@ -1,12 +1,6 @@
 import SideBar from "@/components/side-bar/side-bar";
 import { brandsNameList, categoriesNameList } from "@/util/fetching-data";
-
-const currencys = [
-  { name: "PLN", rate: 1 },
-  { name: "USD", rate: 4.0 },
-  { name: "EUR", rate: 4.5 },
-];
-
+import { currencys } from "@/util/static-data";
 export default async function SideBarPage() {
   const categories = await categoriesNameList;
   const brands = await brandsNameList;
