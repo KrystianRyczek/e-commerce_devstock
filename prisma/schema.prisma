@@ -3,8 +3,8 @@
 
 generator client {
  provider = "prisma-client"
-  output        = "../../ROOT/prisma/generated/prisma"
-  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+ output   = "./generated/prisma"
+binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
