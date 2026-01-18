@@ -3,12 +3,20 @@ import ContentList from "./content-list";
 import { paymentMethods } from "@/util/fetching-data";
 
 export default async function Footer() {
-  const paymentMethodsArray: {
+  let paymentMethodsArray: {
     id: number;
     name: string;
     imgUrl: string;
     type: string;
-  }[] = await paymentMethods();
+  }[] = [];
+
+  try {
+    paymentMethodsArray = await paymentMethods();
+  } catch (error) {
+    console.error("Error fetching payment methods:", error);
+    // Return a fallback footer or empty array
+  }
+
   return (
     <footer className="w-full min-h-[474px] bg-footer-background mt-auto flex max-desktop:flex-col max-desktop:gap-10 max-desktop:px-10 justify-center items-center pb-20">
       <div className="w-[532px] max-desktop:w-full flex flex-col gap-[24px]">
