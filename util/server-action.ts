@@ -1,7 +1,7 @@
 "use server";
 import { CartProduct, RegistationFormValuesProps } from "./types";
 import { cookies } from "next/headers";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { redirect } from "next/navigation";
 import { hashSync } from "bcrypt-ts-edge";
