@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({
@@ -44,15 +44,15 @@ export const createSlideShowHandler = async () => {
     console.log("💥 Failed to create brands! 💥");
     console.log("🔍 Error details:", e);
   }
-  try {
-    console.log("🔍 Fetching slides with image URLs...");
-    const slidesWithImages = await prisma.slideShow.findMany({});
-    console.log("📋 Slides with images:");
-    slidesWithImages.forEach((slide) => {
-      console.log(`   🏷️  ${slide.title} - ${slide.imgUrl || "No image"}`);
-    });
-  } catch (e) {
-    console.log("💥 Failed to fetch brands after creation! 💥");
-    console.log("🔍 Error details:", e);
-  }
+  // try {
+  //   console.log("🔍 Fetching slides with image URLs...");
+  //   const slidesWithImages = await prisma.slideShow.findMany({});
+  //   console.log("📋 Slides with images:");
+  //   slidesWithImages.forEach((slide) => {
+  //     console.log(`   🏷️  ${slide.title} - ${slide.imgUrl || "No image"}`);
+  //   });
+  // } catch (e) {
+  //   console.log("💥 Failed to fetch brands after creation! 💥");
+  //   console.log("🔍 Error details:", e);
+  // }
 };

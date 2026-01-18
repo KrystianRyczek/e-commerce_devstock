@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({
@@ -63,22 +63,22 @@ export const createCategoryHandler = async () => {
     console.log("💥 Failed to create categories! 💥");
     console.log("🔍 Error details:", e);
   }
-  try {
-    console.log("🔍 Fetching categories with image URLs...");
-    const categoriesWithImages = await prisma.categories.findMany({
-      include: {
-        imgUrl: true,
-      },
-    });
+  // try {
+  //   console.log("🔍 Fetching categories with image URLs...");
+  //   const categoriesWithImages = await prisma.categories.findMany({
+  //     include: {
+  //       imgUrl: true,
+  //     },
+  //   });
 
-    console.log("📋 Categories with images:");
-    categoriesWithImages.forEach((category) => {
-      console.log(
-        `   📂 ${category.name} - ${category.imgUrl?.url || "No image"}`
-      );
-    });
-  } catch (e) {
-    console.log("💥 Failed to fetch categories after creation! 💥");
-    console.log("🔍 Error details:", e);
-  }
+  //   console.log("📋 Categories with images:");
+  //   categoriesWithImages.forEach((category) => {
+  //     console.log(
+  //       `   📂 ${category.name} - ${category.imgUrl?.url || "No image"}`
+  //     );
+  //   });
+  // } catch (e) {
+  //   console.log("💥 Failed to fetch categories after creation! 💥");
+  //   console.log("🔍 Error details:", e);
+  // }
 };

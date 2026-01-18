@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({
@@ -49,15 +49,15 @@ export const createAddressesHandler = async () => {
     console.log("💥 Failed to create User addresses! 💥");
     console.log("🔍 Error details:", e);
   }
-  try {
-    console.log("🔍 Fetching created user addresses...");
-    const userAddresses = await prisma.usersAddresses.findMany({});
-    console.log("📋 User Addresses:");
-    userAddresses.forEach((address) => {
-      console.log(`   🏷️  ${address.name} | ${address.address} |`);
-    });
-  } catch (e) {
-    console.log("💥 Failed to fetch user addresses after creation! 💥");
-    console.log("🔍 Error details:", e);
-  }
+  // try {
+  //   console.log("🔍 Fetching created user addresses...");
+  //   const userAddresses = await prisma.usersAddresses.findMany({});
+  //   console.log("📋 User Addresses:");
+  //   userAddresses.forEach((address) => {
+  //     console.log(`   🏷️  ${address.name} | ${address.address} |`);
+  //   });
+  // } catch (e) {
+  //   console.log("💥 Failed to fetch user addresses after creation! 💥");
+  //   console.log("🔍 Error details:", e);
+  // }
 };

@@ -139,10 +139,10 @@ CREATE TABLE "Orders" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
     "addressId" INTEGER,
-    "shippingMethod" TEXT,
+    "shippingMethodId" INTEGER,
     "paymentStatus" TEXT,
     "promoCode" TEXT,
-    "paymentId" TEXT,
+    "paymentMethodId" INTEGER,
     "totalPrice" DOUBLE PRECISION,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -299,6 +299,12 @@ ALTER TABLE "Orders" ADD CONSTRAINT "Orders_userId_fkey" FOREIGN KEY ("userId") 
 
 -- AddForeignKey
 ALTER TABLE "Orders" ADD CONSTRAINT "Orders_addressId_fkey" FOREIGN KEY ("addressId") REFERENCES "UsersAddresses"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Orders" ADD CONSTRAINT "Orders_shippingMethodId_fkey" FOREIGN KEY ("shippingMethodId") REFERENCES "shippingMethods"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Orders" ADD CONSTRAINT "Orders_paymentMethodId_fkey" FOREIGN KEY ("paymentMethodId") REFERENCES "paymentMethods"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "orderedProduct" ADD CONSTRAINT "orderedProduct_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Orders"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

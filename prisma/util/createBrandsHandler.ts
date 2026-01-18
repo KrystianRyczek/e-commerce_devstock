@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({
@@ -73,19 +73,19 @@ export const createBrandsHandler = async () => {
     console.log("💥 Failed to create brands! 💥");
     console.log("🔍 Error details:", e);
   }
-  try {
-    console.log("🔍 Fetching brands with image URLs...");
-    const brandsWithImages = await prisma.brands.findMany({
-      include: {
-        imgUrl: true,
-      },
-    });
-    console.log("📋 Brands with images:");
-    brandsWithImages.forEach((brand) => {
-      console.log(`   🏷️  ${brand.name} - ${brand.imgUrl?.url || "No image"}`);
-    });
-  } catch (e) {
-    console.log("💥 Failed to fetch brands after creation! 💥");
-    console.log("🔍 Error details:", e);
-  }
+  // try {
+  //   console.log("🔍 Fetching brands with image URLs...");
+  //   const brandsWithImages = await prisma.brands.findMany({
+  //     include: {
+  //       imgUrl: true,
+  //     },
+  //   });
+  //   console.log("📋 Brands with images:");
+  //   brandsWithImages.forEach((brand) => {
+  //     console.log(`   🏷️  ${brand.name} - ${brand.imgUrl?.url || "No image"}`);
+  //   });
+  // } catch (e) {
+  //   console.log("💥 Failed to fetch brands after creation! 💥");
+  //   console.log("🔍 Error details:", e);
+  // }
 };

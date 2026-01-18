@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { hashSync } from "bcrypt-ts-edge";
 
@@ -55,15 +55,15 @@ export const createPaymentMethodsHandler = async () => {
     console.log("💥 Failed to create Payment methods! 💥");
     console.log("🔍 Error details:", e);
   }
-  try {
-    console.log("🔍 Fetching created payment methods...");
-    const paymentMethods = await prisma.paymentMethods.findMany({});
-    console.log("📋 Payment Methods:");
-    paymentMethods.forEach((method) => {
-      console.log(`   🏷️  ${method.name} | ${method.imgUrl} |`);
-    });
-  } catch (e) {
-    console.log("💥 Failed to fetch payment methods after creation! 💥");
-    console.log("🔍 Error details:", e);
-  }
+  // try {
+  //   console.log("🔍 Fetching created payment methods...");
+  //   const paymentMethods = await prisma.paymentMethods.findMany({});
+  //   console.log("📋 Payment Methods:");
+  //   paymentMethods.forEach((method) => {
+  //     console.log(`   🏷️  ${method.name} | ${method.imgUrl} |`);
+  //   });
+  // } catch (e) {
+  //   console.log("💥 Failed to fetch payment methods after creation! 💥");
+  //   console.log("🔍 Error details:", e);
+  // }
 };

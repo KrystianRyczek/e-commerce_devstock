@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({
@@ -949,39 +949,39 @@ export const createProductsHandler = async () => {
     console.log("🔍 Error details:", e);
   }
 
-  try {
-    const products = await prisma.products.findMany({
-      include: {
-        imgUrls: true,
-        variants: true,
-        category: true,
-        brand: true,
-      },
-    });
-    console.log("📋 Products list with variants and images:");
-    products.forEach((product) => {
-      console.log(
-        `🏷️  ${product.name} | ${product.category.name} | ${
-          product.brand.name
-        }  \n- ImgURLs:\n   ${
-          product.imgUrls
-            ?.map(
-              (img) =>
-                img.url + "; tag: " + img.tag + (img.main ? " (main)" : "")
-            )
-            .join(",\n   ") || "No image"
-        } \n-Variants:\n   ${
-          product.variants
-            ?.map(
-              (variant) =>
-                "Color: " + variant.color + " (stock: " + variant.stock + ")"
-            )
-            .join(",\n   ") || "No variants"
-        }`
-      );
-    });
-  } catch (e) {
-    console.log("💥 Failed to fetch products after creation! 💥");
-    console.log("🔍 Error details:", e);
-  }
+  // try {
+  //   const products = await prisma.products.findMany({
+  //     include: {
+  //       imgUrls: true,
+  //       variants: true,
+  //       category: true,
+  //       brand: true,
+  //     },
+  //   });
+  //   console.log("📋 Products list with variants and images:");
+  //   products.forEach((product) => {
+  //     console.log(
+  //       `🏷️  ${product.name} | ${product.category.name} | ${
+  //         product.brand.name
+  //       }  \n- ImgURLs:\n   ${
+  //         product.imgUrls
+  //           ?.map(
+  //             (img) =>
+  //               img.url + "; tag: " + img.tag + (img.main ? " (main)" : "")
+  //           )
+  //           .join(",\n   ") || "No image"
+  //       } \n-Variants:\n   ${
+  //         product.variants
+  //           ?.map(
+  //             (variant) =>
+  //               "Color: " + variant.color + " (stock: " + variant.stock + ")"
+  //           )
+  //           .join(",\n   ") || "No variants"
+  //       }`
+  //     );
+  //   });
+  // } catch (e) {
+  //   console.log("💥 Failed to fetch products after creation! 💥");
+  //   console.log("🔍 Error details:", e);
+  // }
 };

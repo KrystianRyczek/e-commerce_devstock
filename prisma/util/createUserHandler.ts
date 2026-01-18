@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { hashSync } from "bcrypt-ts-edge";
 
@@ -38,15 +38,15 @@ export const createUserHandler = async () => {
     console.log("💥 Failed to create Admin! 💥");
     console.log("🔍 Error details:", e);
   }
-  try {
-    console.log("🔍 Fetching created user...");
-    const users = await prisma.users.findMany({});
-    console.log("📋 Users:");
-    users.forEach((user) => {
-      console.log(`   🏷️  ${user.email} | ${user.role} | ${user.phone} |`);
-    });
-  } catch (e) {
-    console.log("💥 Failed to fetch users after creation! 💥");
-    console.log("🔍 Error details:", e);
-  }
+  // try {
+  //   console.log("🔍 Fetching created user...");
+  //   const users = await prisma.users.findMany({});
+  //   console.log("📋 Users:");
+  //   users.forEach((user) => {
+  //     console.log(`   🏷️  ${user.email} | ${user.role} | ${user.phone} |`);
+  //   });
+  // } catch (e) {
+  //   console.log("💥 Failed to fetch users after creation! 💥");
+  //   console.log("🔍 Error details:", e);
+  // }
 };

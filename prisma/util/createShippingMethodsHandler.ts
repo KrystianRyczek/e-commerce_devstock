@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/prisma/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({
@@ -38,15 +38,15 @@ export const createShippingMethodsHandler = async () => {
     console.log("💥 Failed to create Shipping methods! 💥");
     console.log("🔍 Error details:", e);
   }
-  try {
-    console.log("🔍 Fetching created shipping methods...");
-    const shippingMethods = await prisma.shippingMethods.findMany({});
-    console.log("📋 Shipping Methods:");
-    shippingMethods.forEach((method) => {
-      console.log(`   🏷️  ${method.name} | ${method.imgUrl} |`);
-    });
-  } catch (e) {
-    console.log("💥 Failed to fetch shipping methods after creation! 💥");
-    console.log("🔍 Error details:", e);
-  }
+  // try {
+  //   console.log("🔍 Fetching created shipping methods...");
+  //   const shippingMethods = await prisma.shippingMethods.findMany({});
+  //   console.log("📋 Shipping Methods:");
+  //   shippingMethods.forEach((method) => {
+  //     console.log(`   🏷️  ${method.name} | ${method.imgUrl} |`);
+  //   });
+  // } catch (e) {
+  //   console.log("💥 Failed to fetch shipping methods after creation! 💥");
+  //   console.log("🔍 Error details:", e);
+  // }
 };
