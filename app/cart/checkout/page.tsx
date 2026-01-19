@@ -8,6 +8,26 @@ import {
   paymentMethods,
   shippingMethods,
 } from "@/util/fetching-data";
+import { Suspense } from "react";
+
+const CheckoutPageContent = async ({ userId }: { userId: number }) => {
+  const shippingMethodsArray = (await shippingMethods()) || [];
+  const paymentMethodsArray = (await paymentMethods()) || [];
+  const userAddressArray = (await addressesByUser(userId)) || [];
+  const userOrders = (await ordersByUser(userId)) || [];
+
+  if (userOrders.length === 0) {
+    redirect("/cart");
+  }
+  return (
+    <CheckoutForm
+      userOrders={userOrders}
+      userAddressArray={userAddressArray}
+      shippingMethodsArray={shippingMethodsArray}
+      paymentMethodsArray={paymentMethodsArray}
+    />
+  );
+};
 
 export default async function CheckoutPage(props: {
   searchParams: Promise<{ callbackUrl: string }>;
@@ -18,24 +38,19 @@ export default async function CheckoutPage(props: {
   if (!session?.user) {
     redirect(callbackUrl || "/login");
   }
-  const userId = Number(session.user.id);
-  const shippingMethodsArray = (await shippingMethods()) || [];
-  const paymentMethodsArray = (await paymentMethods()) || [];
-  const userAddressArray = (await addressesByUser(Number(userId))) || [];
-  const userOrders = (await ordersByUser(Number(userId))) || [];
 
-  if (userOrders.length === 0) {
-    redirect("/cart");
-  }
   return (
     <main className="flex flex-col gap-[32px] w-full min-h-[612px] p-[40px] max-tablet:p-[8px] max-desktop:p-[20px]">
       <NavigationBar />
-      <CheckoutForm
-        userOrders={userOrders}
-        userAddressArray={userAddressArray}
-        shippingMethodsArray={shippingMethodsArray}
-        paymentMethodsArray={paymentMethodsArray}
-      />
+      <Suspense
+        fallback={
+          <div className="flex mx-auto my-50">
+            <span className="loader"></span>
+          </div>
+        }
+      >
+        <CheckoutPageContent userId={Number(session.user.id)} />
+      </Suspense>
     </main>
   );
 }

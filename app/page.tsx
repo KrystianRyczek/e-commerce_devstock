@@ -9,13 +9,10 @@ import {
   recommendedProducts,
   slidesShow,
 } from "@/util/fetching-data";
+import { Suspense } from "react";
 import MessageContainer from "@/components/home-page/message-container";
 
-export default async function Home(props: {
-  searchParams: Promise<{ callbackUrl: string }>;
-}) {
-  const { callbackUrl } = await props.searchParams;
-
+const HomePageCompotnent = async () => {
   const brands = await brandsWithImages();
   const categories = await categoriesWithImages();
   const slides = await slidesShow();
@@ -28,32 +25,49 @@ export default async function Home(props: {
     category: item.product.category.name,
     imgUrls: item.product.imgUrls[0].url,
   }));
+  return (
+    <div className="flex flex-col gap-[100px] max-desktop:gap-[50px]">
+      <SlideShow slides={slides} />
+      {categories ? (
+        <Section title={"Category"} href={undefined}>
+          <CategoryList categories={categories} />
+        </Section>
+      ) : null}
+      {recommended ? (
+        <Section
+          title={"Recommended Products"}
+          href={"/products?sort=Recommended"}
+        >
+          <RecomendationList recommended={recommended} />
+        </Section>
+      ) : null}
+      {brands ? (
+        <Section title={"Brands"} href={"/products"}>
+          <BrandList brands={brands} />
+        </Section>
+      ) : null}
+    </div>
+  );
+};
+
+export default async function Home(props: {
+  searchParams: Promise<{ callbackUrl: string }>;
+}) {
+  const { callbackUrl } = await props.searchParams;
 
   return (
     <>
       <MessageContainer callbackUrl={callbackUrl} />
       <main className=" flex flex-col px-[40px] max-desktop:px-[20px] pb-[80px]">
-        <div className="flex flex-col gap-[100px] max-desktop:gap-[50px]">
-          <SlideShow slides={slides} />
-          {categories ? (
-            <Section title={"Category"} href={undefined}>
-              <CategoryList categories={categories} />
-            </Section>
-          ) : null}
-          {recommended ? (
-            <Section
-              title={"Recommended Products"}
-              href={"/products?sort=Recommended"}
-            >
-              <RecomendationList recommended={recommended} />
-            </Section>
-          ) : null}
-          {brands ? (
-            <Section title={"Brands"} href={"/products"}>
-              <BrandList brands={brands} />
-            </Section>
-          ) : null}
-        </div>
+        <Suspense
+          fallback={
+            <div className="flex mx-auto my-50">
+              <span className="loader"></span>
+            </div>
+          }
+        >
+          <HomePageCompotnent />
+        </Suspense>
       </main>
     </>
   );

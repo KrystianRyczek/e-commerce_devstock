@@ -1,23 +1,22 @@
 import PaginationBar from "@/components/products/pagination-bar";
 import ProductList from "@/components/products/product list";
-import ToastContainerComponent from "@/components/toast/toast-container";
 import {
   categoriesNameList,
   brandsNameList,
   totalProductsCount,
   products,
 } from "@/util/fetching-data";
-import type { ProductsPageProductCard, QueryParams } from "@/util/types";
+import type { QueryParams } from "@/util/types";
+import { Suspense } from "react";
 
-export default async function Product({
+const ProductPageContent = async ({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string }>;
-}) {
+}) => {
   const currentSearchParams = await searchParams;
   const categoriesArray = await categoriesNameList();
   const brandsArray = await brandsNameList();
-
   const queryParams: QueryParams = {
     ...(await searchParams),
     categories: currentSearchParams.categories
@@ -38,9 +37,8 @@ export default async function Product({
   const count = await totalProductsCount(queryParams);
   const productsArray = (await products(queryParams)) || [];
   const maxPageNumber = Math.ceil(count / queryParams.show);
-
   return (
-    <main className="w-full">
+    <>
       {productsArray.length > 0 ? (
         <ProductList productsArray={productsArray} />
       ) : (
@@ -51,6 +49,26 @@ export default async function Product({
       {maxPageNumber ? (
         <PaginationBar maxPageNnumber={maxPageNumber} page={queryParams.page} />
       ) : null}
+    </>
+  );
+};
+
+export default function Product({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
+  return (
+    <main className="flex flex-col w-full">
+      <Suspense
+        fallback={
+          <div className="flex mx-auto my-50">
+            <span className="loader"></span>
+          </div>
+        }
+      >
+        <ProductPageContent searchParams={searchParams} />
+      </Suspense>
     </main>
   );
 }

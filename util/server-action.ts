@@ -92,7 +92,7 @@ export const addToCartAction = async (product: CartProduct) => {
 };
 export const removeItemFromCartAction = async (
   productId: number,
-  variantId: number
+  variantId: number,
 ) => {
   "use server";
   try {
@@ -137,7 +137,7 @@ export const signupAction = async (data: RegistationFormValuesProps) => {
         phone: data.phone,
         password: hashSync(
           data.password,
-          process.env.SALT ? parseInt(process.env.SALT) : 10
+          process.env.SALT ? parseInt(process.env.SALT) : 10,
         ),
         active: true,
       },
@@ -151,7 +151,7 @@ export const signupAction = async (data: RegistationFormValuesProps) => {
 //"/login?callbackUrl=/register"
 export const logInWithCredentialsAction = async (
   prevState: unknown,
-  formData: FormData
+  formData: FormData,
 ) => {
   "use server";
   try {
@@ -324,12 +324,12 @@ export const submitOrderAction = async (formData: any) => {
         return acc;
       }, "ordersId=")
       .slice(0, -1);
-
+    revalidatePath(`/cart`, "layout");
     redirect(
       "/cart/checkout/payment?method=" +
         paymentMethod?.type +
         "&" +
-        ordersParams
+        ordersParams,
     );
   } catch (error) {
     if (isRedirectError(error)) {

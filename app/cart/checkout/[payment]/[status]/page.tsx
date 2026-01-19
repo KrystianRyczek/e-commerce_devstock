@@ -3,6 +3,33 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { orderStatusChangeAction } from "@/util/server-action";
 import { ordersByIds } from "@/util/fetching-data";
+import { Suspense } from "react";
+
+const SuccessPageContent = async ({
+  ordersId,
+  redirect_status,
+}: {
+  ordersId: number[];
+  redirect_status: string;
+}) => {
+  await orderStatusChangeAction(ordersId);
+  const ordersArray = await ordersByIds(ordersId);
+  return (
+    <>
+      {" "}
+      {redirect_status === "succeeded" && (
+        <SuccessContainer orders={ordersArray} />
+      )}
+      {redirect_status !== "succeeded" && (
+        <div className="flex flex-col gap-[24px] mx-auto justify-center items-center">
+          <h1 className="flex mx-auto text-28-40-500 -tracking-[0.02em]  text-payment-h">
+            Payment failed. Please try again later...
+          </h1>
+        </div>
+      )}{" "}
+    </>
+  );
+};
 
 export default async function SuccessPage({
   params,
@@ -27,20 +54,20 @@ export default async function SuccessPage({
   if (!payment_intent) {
     redirect("/cart");
   }
-  await orderStatusChangeAction(ordersId);
-  const ordersArray = await ordersByIds(ordersId);
   return (
     <main className="flex flex-col gap-[32px] w-full min-h-[612px] p-[40px] max-tablet:p-[8px] max-desktop:p-[20px] text-white">
-      {redirect_status === "succeeded" && (
-        <SuccessContainer orders={ordersArray} />
-      )}
-      {redirect_status !== "succeeded" && (
-        <div className="flex flex-col gap-[24px] mx-auto justify-center items-center">
-          <h1 className="flex mx-auto text-28-40-500 -tracking-[0.02em]  text-payment-h">
-            Payment failed. Please try again later...
-          </h1>
-        </div>
-      )}
+      <Suspense
+        fallback={
+          <div className="flex mx-auto my-50">
+            <span className="loader"></span>
+          </div>
+        }
+      >
+        <SuccessPageContent
+          ordersId={ordersId}
+          redirect_status={redirect_status}
+        />
+      </Suspense>
     </main>
   );
 }
